@@ -1,0 +1,82 @@
+---
+interface Props {
+  level?: 1 | 2 | 3 | 4 | 5 | 6;
+  size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl';
+  weight?: 'normal' | 'medium' | 'semibold' | 'bold';
+  color?: 'primary' | 'secondary' | 'muted' | 'default';
+  class?: string;
+}
+
+const { 
+  level = 2,
+  size,
+  weight = 'semibold',
+  color = 'default',
+  class: className = '' 
+} = Astro.props;
+
+// Auto-size based on heading level if no size specified
+const defaultSizes = {
+  1: '4xl',   // h1 -> text-4xl (like your 3rem example)
+  2: '2xl',   // h2 -> text-2xl  
+  3: 'xl',    // h3 -> text-xl
+  4: 'lg',    // h4 -> text-lg (like your JobCard)
+  5: 'base',  // h5 -> text-base
+  6: 'sm'     // h6 -> text-sm
+} as const;
+
+const finalSize = size || defaultSizes[level];
+
+const Tag = `h${level}` as keyof HTMLElementTagNameMap;
+
+const sizeClasses: Record<string, string> = {
+  xs: 'text-xs',
+  sm: 'text-sm',
+  base: 'text-base', 
+  lg: 'text-lg',
+  xl: 'text-xl',
+  '2xl': 'text-2xl',
+  '3xl': 'text-3xl',
+  '4xl': 'text-4xl',
+  '5xl': 'text-5xl',
+  '6xl': 'text-6xl'
+};
+
+const weightClasses: Record<NonNullable<Props['weight']>, string> = {
+  normal: 'font-normal',
+  medium: 'font-medium',
+  semibold: 'font-semibold',
+  bold: 'font-bold'
+};
+
+const colorClasses: Record<NonNullable<Props['color']>, string> = {
+  default: 'text-black',
+  primary: 'text-[var(--color-text)]',
+  secondary: 'text-gray-600',
+  muted: 'text-[var(--color-description)]'
+};
+
+// Add proper line height for readability
+const lineHeightClasses = {
+  xs: 'leading-normal',
+  sm: 'leading-normal',
+  base: 'leading-normal',
+  lg: 'leading-normal',
+  xl: 'leading-relaxed',
+  '2xl': 'leading-tight',
+  '3xl': 'leading-tight',
+  '4xl': 'leading-tight',
+  '5xl': 'leading-tight',
+  '6xl': 'leading-tight'
+};
+---
+
+<Tag class:list={[
+  sizeClasses[finalSize], 
+  weightClasses[weight], 
+  colorClasses[color],
+  lineHeightClasses[finalSize],
+  className
+]}>
+  <slot />
+</Tag>

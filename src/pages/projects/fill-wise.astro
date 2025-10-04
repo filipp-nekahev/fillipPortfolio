@@ -1,5 +1,7 @@
 ---
 import Layout from "@/layouts/Project.astro";
+import Heading from "@/components/ui/Heading.astro";
+import Text from "@/components/ui/Text.astro";
 
 const title = "FillWise.ai";
 const years = "Side Project 2025";
@@ -7,7 +9,42 @@ const description = "AI-powered Chrome extension for intelligent form filling";
 ---
 
 <Layout {title} {years} {description}>
-  <!-- Your page content goes here -->
-   uep
+  <Heading level={2} size="xl" weight="semibold">Problem Statement</Heading>
+  <Text class="mb-[1.562rem]"
+    >Professionals across HR, travel management, and sales face repetitive data
+    entry tasks when transferring information from CRM systems, documents, or
+    physical forms into web interfaces - a process that consumes significant
+    time and introduces human error.</Text
+  >
+  <Heading level={2} size="xl" weight="semibold">Solution</Heading>
+  <Text class="mb-[1.562rem]"
+    >Developed an intelligent Chrome extension that automates form filling using
+    AI text recognition and computer vision. Users can copy data from any source
+    or upload document photos (including passports and IDs), and the tool
+    automatically populates corresponding web form fields.</Text
+  >
+  <Heading level={2} size="xl" weight="semibold">Technical Approach</Heading>
+  <Text class="mb-[1.562rem]"
+    >Built initial prototype using AI tools for rapid validation, then
+    collaborated with a developer to create a production-ready extension with
+    robust browser integration and enhanced AI capabilities. The landing page
+    was also AI-generated and refined for optimal conversion.</Text
+  >
 
+  <Heading level={2} size="xl" weight="semibold">Business Impact</Heading>
+  <Text>
+    The extension has attracted several paying customers across HR and travel
+    management sectors, reducing typical 10-minute form completion tasks to 30
+    seconds. Key use cases include passport data extraction for travel bookings
+    and bulk passenger processing for group flights.
+  </Text>
+  <Text>
+    TikTok marketing campaigns have increased product visibility, while user
+    feedback drives continued feature development.</Text
+  >
+  <Text>
+    Launched on Product Hunt to gain exposure and gather user insights - while
+    it didn't generate significant traction, the experience provided valuable
+    lessons in product positioning and community engagement.
+  </Text>
 </Layout>
