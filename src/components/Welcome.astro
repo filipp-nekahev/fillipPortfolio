@@ -1,3 +1,84 @@
+---
+import PortfolioCard from "@/components/PortfolioCard.astro";
+// Images
+import travelImg from "@/assets/travle.jpg";
+import mtsImg from "@/assets/mts.jpg";
+import alohaImg from "@/assets/aloha.jpg";
+import smartaviaImg from "@/assets/smart_avia.jpg";
+import poezdomImg from "@/assets/poezdom.jpg";
+import mnfstImg from "@/assets/mnfst.jpg";
+import fillWiseImg from "@/assets/fillWise.jpg";
+import aiHairStylerImg from "@/assets/aihairstyle.jpg";
+import reWriteImg from "@/assets/re_writing.jpg";
+
+const works = [
+  {
+    href: "/projects/alfa-travel",
+    title: "Alfa-Travel",
+    years: "2023–2025",
+    image: travelImg,
+  },
+  {
+    href: "/projects/mts",
+    title: "MTS",
+    years: "2022–2023",
+    image: mtsImg,
+  },
+  {
+    href: "/projects/aloha-mobile",
+    title: "Aloha Mobile",
+    years: "2020–2022",
+    image: alohaImg,
+  },
+  {
+    href: "/projects/smartavia",
+    title: "SmartAvia",
+    years: "Freelance 2019",
+    image: smartaviaImg,
+  },
+  {
+    href: "/projects/poezdom-ios-app",
+    title: "Poezdom iOS app",
+    years: "Freelance 2019",
+    image: poezdomImg,
+  },
+  {
+    href: "/projects/mnfst",
+    title: "MNFST",
+    years: "Freelance 2018",
+    image: mnfstImg,
+  },
+];
+
+const sideProjects = [
+  {
+    href: "https://www.producthunt.com/posts/instapage-2-0?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-instapage-2-0",
+    title: "FillWise",
+    years: "Side Project 2025",
+    image: fillWiseImg,
+  },
+  {
+    href: "https://www.producthunt.com/posts/instapage-2-0?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-instapage-2-0",
+    title: "Instapage 2.0",
+    years: "2021",
+    image: aiHairStylerImg,
+  },
+  {
+    href: "https://www.producthunt.com/posts/instapage-2-0?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-instapage-2-0",
+    title: "Instapage 2.0",
+    years: "2021",
+    image: reWriteImg,
+  },
+];
+
+const spanForIndex = (i: number) => {
+  const p = i % 6;
+  if (p === 0) return ["col-span-full"]; // full width
+  if (p === 1) return ["lg:col-span-2"]; // 2/3
+  return ["lg:col-span-1"];
+};
+---
+
 <main>
   <section
     id="hero"
@@ -10,7 +91,7 @@
       <p class="opacity-20">Web Designer</p>
     </div>
   </section>
-  <section class="flex flex-col justify-center px-[var(--container-padding)]">
+  <section class="flex flex-col justify-center px-[var(--container-padding)] pb-[10rem]">
     <div class="flex flex-col items-center">
       <div
         class="text-[1.125rem] text-[var(--color-text)] max-w-[452px] pb-[1.5rem]"
@@ -30,9 +111,21 @@
       </div>
     </div>
   </section>
-  <section>
-    <h2>Works</h2>
-    <h3>Side projects</h3>
+  <section class="w-full max-w-[1200px] mx-auto px-[var(--container-padding)]">
+    <h2 class="text-[2.25rem] font-semibold text-center mb-[3.75rem]">Works</h2>
+    <section
+      class="grid gap-[1.5rem] sm:grid-cols-2 lg:grid-cols-3 pb-[6.25rem] lg:pb-[4.5rem]"
+    >
+      {
+        works.map((work, i) => (
+          <PortfolioCard {...work} class:list={spanForIndex(i)} />
+        ))
+      }
+    </section>
+    <h3 class="text-text text-[1.125rem] mb-[1.5rem]">Side projects</h3>
+    <section class="grid gap-[1.5rem] sm:grid-cols-2 lg:grid-cols-3">
+      {sideProjects.map((item, i) => <PortfolioCard {...item} />)}
+    </section>
   </section>
   <section>
     <h2>Career Path</h2>
