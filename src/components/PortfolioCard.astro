@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import linkArrowRaw from "@/assets/link_arrow.svg?raw";
 
 interface Props {
   href: string;
@@ -20,8 +20,11 @@ const { href, title, years, image, class: extra = "" } = Astro.props;
   ]}
   style={`background-image: url(${image.src});`}
 >
-  <div class="absolute inset-x-0 bottom-0 p-4">
-    <h3 class="text-white text-lg font-semibold">{title}</h3>
-    <p class="text-white/80 text-sm">{years}</p>
+  <div class="absolute inset-x-0 bottom-0 p-4 flex items-end justify-between">
+    <div>
+      <h3 class="text-white text-lg font-semibold">{title}</h3>
+      <p class="text-white/80 text-sm">{years}</p>
+    </div>
+    <span class="h-4 w-4 text-indigo-500" set:html={linkArrowRaw} />
   </div>
 </a>
