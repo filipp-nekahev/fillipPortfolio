@@ -1,0 +1,60 @@
+---
+import JobCard from "./JobCard.astro";
+// Images
+import alfa from "@/assets/logo/alfa.png";
+import mts from "@/assets/logo/mts.png";
+import aloha from "@/assets/logo/aloha.png";
+import rick from "@/assets/logo/rick.png";
+import oneTowTrip from "@/assets/logo/one-two-trip.png";
+import eldorado from "@/assets/logo/eldorado.png";
+
+const Jobs = [
+  {
+    title: "Alfa Travel",
+    years: "2023-2025",
+    text: "I am working on the design of the Alpha Travel website, desktop and mobile version. The main task is to improve the user experience and create a competitive product.",
+    logo: alfa,
+  },
+  {
+    title: "MTS",
+    years: "2022-2023",
+    text: "MTS Corporation is a leading provider of telecommunications services, digital solutions, and media services in Russia. I was part of a team that developed a B2B project for media planners. Over the course of a year, I created a design for a TV and digital platform, which media planners can use to place advertisements and receive analytics.",
+    logo: mts,
+  },
+  {
+    title: "Aloha Mobile",
+    years: "2020-2022",
+    text: "At Aloha, a mobile and desktop browser with VPN capabilities, I completed a full redesign of the Aloha VPN app for iOS and developed a new app for MacOS. Additionally, i was involved in redesign of Aloha Find search website and in new features for main app Aloha Browser. In 2021 we recieved A' Design Award.",
+    logo: aloha,
+  },
+  {
+    title: "Rick.ai",
+    years: "2017-2020",
+    text: "I was the sole designer at a small startup dedicated to developing an end-to-end analytics service with artificial intelligence, enabling automatic recommendations for advertising campaigns. During my work at the company, I designed over a thousand frames, curated a comprehensive library of design elements, conducted extensive hypothesis testing, and streamlined user flows in alignment with customer development feedback.",
+    logo: rick,
+  },
+  {
+    title: "OneTwoTrip",
+    years: "2015-2017",
+    text: "OneTwoTrip.com, a renowned Russian travel booking website, entrusted me with diverse design projects, including crafting user-friendly designs for their mobile app, spearheading website redesign initiatives, and introducing new categories to enhance the user experience.",
+    logo: oneTowTrip,
+  },
+  {
+    title: "Eldorado LLC",
+    years: "2013-2015",
+    text: "At Eldorado.ru, one of Russia's leading retailers of consumer electronics and household appliances, my responsibilities encompassed marketing, creating engaging landing pages, and promotional content. Additionally, I occasionally undertook UI/UX design tasks to enhance the user experience and visual appeal of our digital assets.",
+    logo: eldorado,
+  },
+];
+---
+
+<section class="w-full mx-auto">
+  <div
+    class="flex gap-[1.25rem] overflow-x-auto overflow-y-hidden snap-x snap-mandatory scroll-smooth touch-pan-x no-scrollbar
+         px-[var(--container-padding)] lg:px-[var(--offset-left)]"
+    style="--offset-left: calc(50vw - (1200px / 2) + 315px + 20px + var(--container-padding));"
+    tabindex="0"
+  >
+    {Jobs.map((item, i) => <JobCard {...item} />)}
+  </div>
+</section>

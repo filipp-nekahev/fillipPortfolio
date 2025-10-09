@@ -1,164 +1,20 @@
 ---
-import PortfolioCard from "@/components/PortfolioCard.astro";
-// Images
-import travelImg from "@/assets/travle.jpg";
-import mtsImg from "@/assets/mts.jpg";
-import alohaImg from "@/assets/aloha.jpg";
-import smartaviaImg from "@/assets/smart_avia.jpg";
-import poezdomImg from "@/assets/poezdom.jpg";
-import mnfstImg from "@/assets/mnfst.jpg";
-import fillWiseImg from "@/assets/fillWise.jpg";
-import aiHairStylerImg from "@/assets/aihairstyle.jpg";
-import reWriteImg from "@/assets/re_writing.jpg";
-
-const works = [
-  {
-    href: "/projects/alfa-travel",
-    title: "Alfa-Travel",
-    years: "2023–2025",
-    image: travelImg,
-  },
-  {
-    href: "/projects/mts",
-    title: "MTS",
-    years: "2022–2023",
-    image: mtsImg,
-  },
-  {
-    href: "/projects/aloha-mobile",
-    title: "Aloha Mobile",
-    years: "2020–2022",
-    image: alohaImg,
-  },
-  {
-    href: "/projects/smartavia",
-    title: "SmartAvia",
-    years: "Freelance 2019",
-    image: smartaviaImg,
-  },
-  {
-    href: "/projects/poezdom-ios-app",
-    title: "Poezdom iOS app",
-    years: "Freelance 2019",
-    image: poezdomImg,
-  },
-  {
-    href: "/projects/mnfst",
-    title: "MNFST",
-    years: "Freelance 2018",
-    image: mnfstImg,
-  },
-];
-
-const sideProjects = [
-  {
-    href: "https://www.producthunt.com/posts/instapage-2-0?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-instapage-2-0",
-    title: "FillWise",
-    years: "Side Project 2025",
-    image: fillWiseImg,
-  },
-  {
-    href: "https://www.producthunt.com/posts/instapage-2-0?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-instapage-2-0",
-    title: "Instapage 2.0",
-    years: "2021",
-    image: aiHairStylerImg,
-  },
-  {
-    href: "https://www.producthunt.com/posts/instapage-2-0?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-instapage-2-0",
-    title: "Instapage 2.0",
-    years: "2021",
-    image: reWriteImg,
-  },
-];
-
-const spanForIndex = (i: number) => {
-  const p = i % 6;
-  if (p === 0) return ["col-span-full"]; // full width
-  if (p === 1) return ["lg:col-span-2"]; // 2/3
-  return ["lg:col-span-1"];
-};
+import Hero from "./Hero.astro";
+import About from "./About.astro";
+import Works from "./Works.astro";
+import CareerPath from "./CareerPath.astro";
+import PersonalLife from "./PersonalLife.astro";
+import ContactMe from "./ContactMe.astro";
 ---
 
 <main>
-  <section
-    id="hero"
-    class="text-center h-screen flex flex-col justify-center gap-4 px-[var(--container-padding)]"
-  >
-    <h1 class="text-[2.375rem] font-semibold leading-none">Filipp Nekhaev</h1>
-    <div class="flex flex-col text-[1.125rem] text-[var(--color-description)]">
-      <p class="">Senior Product Designer</p>
-      <p class="opacity-60">UI/UX Designer</p>
-      <p class="opacity-20">Web Designer</p>
-    </div>
-  </section>
-  <section class="flex flex-col justify-center px-[var(--container-padding)] pb-[10rem]">
-    <div class="flex flex-col items-center">
-      <div
-        class="text-[1.125rem] text-[var(--color-text)] max-w-[452px] pb-[1.5rem]"
-      >
-        I have over 10 years of experience in Product Design and UI/UX. I prefer
-        using Figma and Principle but also have experience with Sketch,
-        Photoshop, Illustrator, and some HTML/CSS. Experience includes UX
-        research such as Customer Development, Problem Interviews, have
-        experience to work with Google Analytics and Hotjar, creating Jobs to be
-        Done and CJM maps, surveys, and feedback analysis.
-      </div>
-      <div
-        class="flex flex-col md:flex-row md:gap-[1.5rem] text-[1.125rem] text-black max-w-[470px] border-t border-[#595959]/30 pt-[0.375rem] gap-[0.375rem]"
-      >
-        <span>10+ years of experience</span>
-        <span>13 web and mobile products</span>
-      </div>
-    </div>
-  </section>
-  <section class="w-full max-w-[1200px] mx-auto px-[var(--container-padding)]">
-    <h2 class="text-[2.25rem] font-semibold text-center mb-[3.75rem]">Works</h2>
-    <section
-      class="grid gap-[1.5rem] sm:grid-cols-2 lg:grid-cols-3 pb-[6.25rem] lg:pb-[4.5rem]"
-    >
-      {
-        works.map((work, i) => (
-          <PortfolioCard {...work} class:list={spanForIndex(i)} />
-        ))
-      }
-    </section>
-    <h3 class="text-text text-[1.125rem] mb-[1.5rem]">Side projects</h3>
-    <section class="grid gap-[1.5rem] sm:grid-cols-2 lg:grid-cols-3">
-      {sideProjects.map((item, i) => <PortfolioCard {...item} />)}
-    </section>
-  </section>
-  <section>
-    <h2>Career Path</h2>
-  </section>
+  <Hero />
+  <About />
+  <Works />
+  <CareerPath />
   <section>
     <h2>Side Projects</h2>
   </section>
-  <section class="flex flex-col justify-center px-[var(--container-padding)]">
-    <div class="flex flex-col items-center">
-      <div
-        class="text-[1.125rem] text-[var(--color-text)] max-w-[452px] pb-[1.5rem]"
-      >
-        When I'm not at my desk, you'll find me traveling with my wife and our
-        dog - exploring new cities, trying local food, and taking way too many
-        photos. These moments away from screens tend to be when the best ideas
-        show up unexpectedly.
-      </div>
-    </div>
-    slider
-  </section>
-  <section
-    class="flex flex-col h-screen justify-center px-[var(--container-padding)]"
-  >
-    <div
-      class="flex flex-col mx-auto text-[1.125rem] text-[var(--color-text)] max-w-[452px] w-full gap-[0.625rem]"
-    >
-      <h2 class="text-black text-[2.25rem]">Lets work together</h2>
-      <a class="underline" href="email:filippnekhaev@gmail.com"
-        >filippnekhaev@gmail.com</a
-      >
-      <a class="underline" href="https://www.linkedin.com/in/filippnekhaev/"
-        >LinkedIn</a
-      >
-    </div>
-  </section>
+  <PersonalLife />
+  <ContactMe />
 </main>

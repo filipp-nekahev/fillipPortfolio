@@ -14,9 +14,9 @@ const { href, title, years, image, class: extra = "" } = Astro.props;
 <a
   href={href}
   class:list={[
-    "group relative block h-[440px] w-full overflow-hidden rounded-2xl",
-    "bg-cover bg-center", // background behavior
-    extra, // e.g. 'col-span-full' | 'lg:col-span-2' | 'lg:col-span-1'
+    "group relative block h-[440px] w-full overflow-hidden rounded-2xl transition-all ease-in-out duration-[250ms] lg:hover:scale-[1.03]",
+    "bg-cover bg-center",
+    extra,
   ]}
   style={`background-image: url(${image.src});`}
 >

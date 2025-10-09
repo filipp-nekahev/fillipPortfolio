@@ -1,0 +1,33 @@
+---
+import PortfolioCard from "./PortfolioCard.astro";
+//Images
+import fillWiseImg from "@/assets/fillWise.jpg";
+import aiHairStylerImg from "@/assets/aihairstyle.jpg";
+import reWriteImg from "@/assets/re_writing.jpg";
+
+const sideProjects = [
+  {
+    href: "https://fillwise.app", // Update with actual URLs
+    title: "FillWise",
+    years: "Side Project 2025",
+    image: fillWiseImg,
+  },
+  {
+    href: "https://aihairstyler.app",
+    title: "AI Hair Styler", // Fix title
+    years: "2024",
+    image: aiHairStylerImg,
+  },
+  {
+    href: "https://rewriter.app",
+    title: "ReWriter", // Fix title
+    years: "2023",
+    image: reWriteImg,
+  },
+];
+---
+
+<h3 class="text-text text-[1.125rem] mb-[1.5rem]">Side projects</h3>
+<div class="grid gap-[1.5rem] sm:grid-cols-2 lg:grid-cols-3">
+  {sideProjects.map((item, i) => <PortfolioCard {...item} />)}
+</div>

@@ -1,4 +1,6 @@
 ---
+import { ClientRouter } from "astro:transitions";
+//
 import "../style/global.css";
 ---
 
@@ -10,6 +12,7 @@ import "../style/global.css";
     <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
     <meta name="generator" content={Astro.generator} />
     <title>Fillip Portfolio</title>
+    <ClientRouter />
   </head>
   <body class="font-(family-name:--font-inter)">
     <slot />

@@ -11,3 +11,10 @@
   --color-text: #595959;
   --color-description: #73808c;
 }
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  .dragging { cursor: grabbing !important; user-select: none !important; }
+}

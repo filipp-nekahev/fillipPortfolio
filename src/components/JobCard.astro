@@ -1,0 +1,22 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  title: string;
+  years: string;
+  text: string;
+  logo: ImageMetadata;
+  class?: string | string[];
+}
+const { title, years, text, logo, class: extra = "" } = Astro.props;
+---
+
+<article class:list={["flex flex-col flex-[0_0_315px] relative", extra]}>
+  <div class=" z-0 absolute top-[7px] w-[calc(100%_+_20px)] h-[1px] border-t border-dashed border-[#59595933]"></div>
+  <div class="relative mb-[1.25rem] bg-[#D3D3D3] w-[15px] h-[15px] rounded-full ml-8">
+  </div>
+  <Image class="mb-[0.625rem]" src={logo} height="80" alt={title} />
+  <h4 class="text-2xl font-semibold">{title}</h4>
+  <p class="mb-[0.625rem] text-lg text-[var(--color-text)]">{years}</p>
+  <p class="text-lg text-[var(--color-text)]">{text}</p>
+</article>
