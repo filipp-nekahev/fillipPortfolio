@@ -1,0 +1,16 @@
+---
+import ArrowLeft from "@/assets/icons/arrow-left.svg";
+
+interface Props {
+  href: string;
+  class?: string | string[];
+}
+const { href, class: extra = "" } = Astro.props;
+---
+
+<a
+  href={href}
+  class={`flex items-center justify-center w-12 h-12 rounded-full bg-[#F3F3F3]  transition-transform duration-300 hover:scale-[1.08] ${extra}`}
+>
+  <ArrowLeft />
+</a>

@@ -1,0 +1,41 @@
+---
+import { ClientRouter } from "astro:transitions";
+import ProjectHeader from "@/components/ui/ProjectHeader.astro";
+import BackButton from "@/components/ui/BackButton.astro";
+//
+import "../style/global.css";
+
+export interface Props {
+  title: string;
+  years: string;
+  description?: string;
+}
+const { title, years, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <ClientRouter />
+  </head>
+  <body class="font-(family-name:--font-inter)">
+    <main>
+      <div
+        class="px-[var(--container-padding)] w-full flex items-center gap-4 pt-5 pb-[11.373rem]"
+      >
+        <BackButton href="/" />
+      </div>
+      <div class="max-w-[660px] mx-auto px-[var(--container-padding)]">
+        <ProjectHeader title={title} years={years} description={description} />
+        <section class="grid items-center">
+          <slot />
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

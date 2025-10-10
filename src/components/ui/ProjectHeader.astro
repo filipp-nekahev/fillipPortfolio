@@ -1,0 +1,14 @@
+---
+export interface Props {
+  title: string;
+  years: string;
+  description?: string;
+}
+const { title, years, description } = Astro.props;
+---
+
+<header class="pb-[1.5625rem]">
+  <h1 class="text-4xl font-semibold mb-[0.625rem]">{title}</h1>
+  <p class="text-lg text-[var(--color-text)]">{years}</p>
+  {description && <p class="text-xl font-semibold">{description}</p>}
+</header>

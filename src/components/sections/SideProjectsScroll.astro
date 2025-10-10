@@ -1,0 +1,62 @@
+---
+import JobCard from "@components/cards/JobCard.astro";
+// Images
+import fillWise from "@/assets/logo/fillWise.png";
+import keyFlight from "@/assets/logo/keyflight.png";
+import aloha from "@/assets/logo/aloha.png";
+import reWriting from "@/assets/logo/reWriting.png";
+
+const Jobs = [
+  {
+    title: "FillWise",
+    years: "2025",
+    text: "Built a Chrome extension that uses AI to automatically fill form fields from copied text or document photos.",
+    logo: fillWise,
+  },
+  {
+    title: "KeyFlight",
+    years: "2016-2025",
+    text: "We make flight reservations for travel visa, our main clients is travel agencies and digital nomads.",
+    logo: keyFlight,
+  },
+  {
+    title: "Dayrows.com",
+    years: "2020-2022",
+    text: "Job board for beginner IT specialists.",
+    logo: aloha,
+  },
+  {
+    title: "Rewriting.ai",
+    years: "2017-2018",
+    text: "I had an idea to increase the uniqueness of the content even before the GPT chat appeared, unfortunately now there is not even a domain.",
+    logo: reWriting,
+  },
+];
+---
+
+<section class="w-full mx-auto pb-10">
+  <div class="w-full max-w-[1200px] mx-auto px-[var(--container-padding)]">
+    <h2 class="text-2xl font-semibold mb-[0.625rem] text-[1.75rem]">
+      Side Projects
+    </h2>
+    <div class="text-lg text-[var(--color-text)] mb-10">
+      I feel inspired by creating some design, websites, apps or devices.
+    </div>
+  </div>
+  <div
+    class="flex gap-[1.25rem]
+    overflow-x-auto
+    
+    snap-x snap-mandatory scroll-smooth
+    overscroll-contain no-scrollbar
+    px-[var(--container-padding)] scroll-px-[var(--container-padding)] pb-[calc(var(--container-padding)/2)] lg:px-[var(--offset-left)] lg:scroll-px-0 lg:pb-0"
+    style="--offset-left: calc(50vw - (1200px / 2) + 315px + 20px + var(--container-padding));"
+    tabindex="0"
+  >
+    {
+      Jobs.map((item, i) => (
+        <JobCard {...item} class="snap-start lg:[scroll-snap-align:none]" />
+      ))
+    }
+  </div>
+</section>
