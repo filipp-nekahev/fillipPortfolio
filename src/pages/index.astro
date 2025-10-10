@@ -1,8 +1,21 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Main.astro';
+import Layout from "@/layouts/Main.astro";
+import Hero from "@/components/sections/Hero.astro";
+import About from "@/components/sections/About.astro";
+import Works from "@/components/sections/Works.astro";
+import CareerPath from "@/components/sections/CareerPath.astro";
+import PersonalLife from "@/components/sections/PersonalLife.astro";
+import ContactMe from "@/components/sections/ContactMe.astro";
 ---
 
 <Layout>
-	<Welcome />
+  <Hero />
+  <About />
+  <Works />
+  <CareerPath />
+  <section>
+    <h2>Side Projects</h2>
+  </section>
+  <PersonalLife />
+  <ContactMe />
 </Layout>
