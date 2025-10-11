@@ -1,5 +1,7 @@
 ---
 import Layout from "@/layouts/Project.astro";
+import Heading from "@/components/ui/Heading.astro";
+import Text from "@/components/ui/Text.astro";
 
 const title = "Re:Writing";
 const years = "Side Project 2020";
@@ -7,7 +9,35 @@ const description = "AI-powered text uniqueness enhancement platform";
 ---
 
 <Layout {title} {years} {description}>
-  <!-- Your page content goes here -->
-   uep
+  <Heading level={2} size="xl" weight="semibold">Problem</Heading>
+  <Text class="mb-[1.562rem]"
+    >SEO specialists and content creators struggled with plagiarism detection
+    and needed tools to improve text uniqueness for better search rankings.</Text
+  >
 
+  <Heading level={2} size="xl" weight="semibold">Solution</Heading>
+  <Text class="mb-[1.562rem]"
+    >Built a web platform that analyzed text uniqueness against existing online
+    content, provided detailed similarity reports, and offered AI-powered
+    rewriting services to improve originality scores.</Text
+  >
+
+  <Heading level={2} size="xl" weight="semibold">Key Features</Heading>
+  <ul
+    class="list-disc list-inside mb-[1.562rem] space-y-1 text-[var(--color-text)]"
+  >
+    <li>Free uniqueness analysis with competitor content detection</li>
+    <li>Visual similarity breakdown with percentage scores</li>
+    <li>Paid rewriting service increasing uniqueness by 50%+ on average</li>
+    <li>Before/after comparison showing improvement metrics</li>
+  </ul>
+
+  <Heading level={2} size="xl" weight="semibold">Outcome</Heading>
+  <Text
+    >Developed 5 years before mainstream AI adoption, using early natural
+    language processing techniques to compete with established plagiarism
+    detection services. Successfully served paying customers in the SEO
+    industry. Project discontinued due to high operational costs relative to
+    content quality limitations of pre-transformer AI models.</Text
+  >
 </Layout>

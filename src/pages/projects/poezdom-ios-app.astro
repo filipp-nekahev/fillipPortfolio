@@ -1,0 +1,21 @@
+---
+import Layout from "@/layouts/Project.astro";
+import Heading from "@/components/ui/Heading.astro";
+import Text from "@/components/ui/Text.astro";
+
+const title = "Poezdom iOS app";
+const years = "Freelance 2019";
+---
+
+<Layout {title} {years}>
+  <Heading level={2} size="xl" weight="semibold"
+    >Train ticket booking mobile application</Heading
+  >
+  <Text class="mb-[1.562rem]"
+    >Freelance project for one of OneTwoTrip managers to design streamlined iOS
+    app for Russian train ticket booking, reducing complex multi-step processes
+    into intuitive mobile-first experience. Created complete user journey from
+    route search to seat selection and payment processing, focusing on quick
+    ticket purchase in just a few taps for frequent travelers.</Text
+  >
+</Layout>
