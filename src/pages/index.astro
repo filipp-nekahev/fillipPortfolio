@@ -7,14 +7,17 @@ import CareerPath from "@/components/sections/CareerPath.astro";
 import SideProjectsScroll from "@/components/sections/SideProjectsScroll.astro";
 import PersonalLife from "@/components/sections/PersonalLife.astro";
 import ContactMe from "@/components/sections/ContactMe.astro";
+
+const title = "Fillip Portfolio - Home";
+const description = "Portfolio website showcasing my work and experience";
 ---
 
-<Layout>
-  <Hero />
-  <About />
-  <Works />
-  <CareerPath />
-  <SideProjectsScroll />
-  <PersonalLife />
-  <ContactMe />
+<Layout {title} {description}>
+  <Hero id="hero" />
+  <About id="about" />
+  <Works id="works" />
+  <CareerPath id="career" />
+  <SideProjectsScroll id="side-projects" />
+  <PersonalLife id="personal-life" />
+  <ContactMe id="contact-me" />
 </Layout>
