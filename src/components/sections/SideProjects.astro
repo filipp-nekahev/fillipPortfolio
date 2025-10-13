@@ -1,34 +1,40 @@
 ---
 import PortfolioCard from "@components/cards/PortfolioCard.astro";
 //Images
-import fillWiseImg from "@/assets/fillWise.jpg";
-import aiHairStylerImg from "@/assets/aihairstyle.jpg";
-import reWriteImg from "@/assets/re_writing.jpg";
+import fillWiseImg from "@/assets/portfolio_main/FillWise.png";
+import aiHairStylerImg from "@/assets/portfolio_main/Hairstyle.png";
+import reWriteImg from "@/assets/portfolio_main/Rewriting.png";
 
 const sideProjects = [
   {
     href: "/projects/fill-wise",
     title: "FillWise",
     years: "Side Project 2025",
-    image: fillWiseImg,
+    image: "portfolio_main/FillWise.png",
+    mobileImage: "/portfolio_main/FillWise_s.png",
   },
   {
     href: "/projects/all-hair",
-    title: "AI Hair Styler", // Fix title
+    title: "AI Hair Styler",
     years: "2024",
-    image: aiHairStylerImg,
+    image: "portfolio_main/Hairstyle.png",
+    mobileImage: "portfolio_main/Hairstyle_s.png",
   },
   {
     href: "/projects/re-writing",
-    title: "ReWriter", // Fix title
+    title: "ReWriter",
     years: "2023",
-    image: reWriteImg,
+    image: "portfolio_main/Rewriting.png",
+    mobileImage: "portfolio_main/rewriting_s.png",
   },
 ];
 ---
 
 <section aria-labelledby="side-projects-heading">
-  <h3 id="side-projects-heading" class="text-text text-[1.125rem] mb-[1.5rem] px-[var(--container-padding)]">
+  <h3
+    id="side-projects-heading"
+    class="text-text text-[1.125rem] mb-[1.5rem] px-[var(--container-padding)]"
+  >
     Side projects
   </h3>
   <div
