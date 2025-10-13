@@ -55,26 +55,35 @@ const spanForIndex = (i: number) => {
 };
 ---
 
-<section class="w-full max-w-[1200px] mx-auto pb-[6.25rem]">
-  <h2
-    class="text-[2.25rem] font-semibold text-center mb-[3.75rem] px-[var(--container-padding)]"
-  >
-    Works
-  </h2>
-  <div
-    class="grid grid-flow-col auto-cols-[90%] sm:grid-flow-row sm:auto-cols-auto
+<section class="w-full mx-auto pb-[6.25rem]">
+  <div class="relative">
+    <div
+      class="absolute inset-0
+              before:content-[''] before:absolute before:inset-0
+              before:bg-[#74ABF7]/50 before:blur-[500px]
+              before:rounded-full before:-z-10"
+    >
+    </div>
+    <h2
+      class="text-[2.25rem] font-semibold text-center mb-[3.75rem] px-[var(--container-padding)]"
+    >
+      Works
+    </h2>
+    <div
+      class="max-w-[1200px] grid grid-flow-col auto-cols-[90%] sm:grid-flow-row sm:auto-cols-auto
   gap-[1.5rem] overflow-x-auto sm:overflow-visible scroll-smooth snap-x snap-mandatory no-scrollbar
   px-[var(--container-padding)] sm:px-[var(--container-padding)] sm:grid-cols-2 lg:grid-cols-3
-  scroll-px-[var(--container-padding)] pb-[6.25rem] lg:pb-[4.5rem]"
-  >
-    {
-      works.map((work, i) => (
-        <PortfolioCard
-          {...work}
-          class:list={[...spanForIndex(i), "snap-center"]}
-        />
-      ))
-    }
+  scroll-px-[var(--container-padding)] pb-[6.25rem] lg:pb-[4.5rem] lg:px-[var(--container-padding)] mx-auto"
+    >
+      {
+        works.map((work, i) => (
+          <PortfolioCard
+            {...work}
+            class:list={[...spanForIndex(i), "snap-center"]}
+          />
+        ))
+      }
+    </div>
   </div>
   <SideProjects />
 </section>
