@@ -57,16 +57,26 @@ const spanForIndex = (i: number) => {
 };
 ---
 
-<section class="w-full max-w-[1200px] mx-auto px-[var(--container-padding)] pb-[6.25rem]">
-  <h2 class="text-[2.25rem] font-semibold text-center mb-[3.75rem]">Works</h2>
-  <section
-    class="grid gap-[1.5rem] sm:grid-cols-2 lg:grid-cols-3 pb-[6.25rem] lg:pb-[4.5rem]"
+<section class="w-full max-w-[1200px] mx-auto pb-[6.25rem]">
+  <h2
+    class="text-[2.25rem] font-semibold text-center mb-[3.75rem] px-[var(--container-padding)]"
+  >
+    Works
+  </h2>
+  <div
+    class="grid grid-flow-col auto-cols-[90%] sm:grid-flow-row sm:auto-cols-auto
+  gap-[1.5rem] overflow-x-auto sm:overflow-visible scroll-smooth snap-x snap-mandatory no-scrollbar
+  px-[var(--container-padding)] sm:px-[var(--container-padding)] sm:grid-cols-2 lg:grid-cols-3
+  scroll-px-[var(--container-padding)] pb-[6.25rem] lg:pb-[4.5rem]"
   >
     {
       works.map((work, i) => (
-        <PortfolioCard {...work} class:list={spanForIndex(i)} />
+        <PortfolioCard
+          {...work}
+          class:list={[...spanForIndex(i), "snap-center"]}
+        />
       ))
     }
-  </section>
+  </div>
   <SideProjects />
 </section>

@@ -27,7 +27,22 @@ const sideProjects = [
 ];
 ---
 
-<h3 class="text-text text-[1.125rem] mb-[1.5rem]">Side projects</h3>
-<div class="grid gap-[1.5rem] sm:grid-cols-2 lg:grid-cols-3">
-  {sideProjects.map((item, i) => <PortfolioCard {...item} />)}
-</div>
+<section aria-labelledby="side-projects-heading">
+  <h3 id="side-projects-heading" class="text-text text-[1.125rem] mb-[1.5rem] px-[var(--container-padding)]">
+    Side projects
+  </h3>
+  <div
+    class="grid grid-flow-col auto-cols-[90%] sm:auto-cols-auto sm:grid-flow-row gap-[1.5rem]
+    overflow-x-auto sm:overflow-visible scroll-smooth snap-x snap-mandatory no-scrollbar
+    px-[var(--container-padding)] sm:px-[var(--container-padding)]
+    sm:grid-cols-2 lg:grid-cols-3
+    scroll-px-[var(--container-padding)]"
+    aria-label="Side projects gallery"
+  >
+    {
+      sideProjects.map((item, i) => (
+        <PortfolioCard {...item} class="snap-center" />
+      ))
+    }
+  </div>
+</section>
