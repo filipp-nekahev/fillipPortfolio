@@ -2,6 +2,8 @@
 import Layout from "@/layouts/Project.astro";
 import Heading from "@/components/ui/Heading.astro";
 import Text from "@/components/ui/Text.astro";
+import ProjectContnetWrapper from "@/components/ui/ProjectContnetWrapper.astro";
+import SwiperSlider from "@/components/ui/SwiperSlider.astro";
 
 const title = "AIHairStyle.io";
 const years = "Side Project 2024";
@@ -9,32 +11,37 @@ const description = "AI-powered virtual hairstyling platform";
 ---
 
 <Layout {title} {years} {description}>
-  <Heading level={2} size="xl" weight="semibold">Market Opportunity</Heading>
-  <Text class="mb-[1.562rem]"
-    >Consumers can't preview hairstyles before expensive salon visits, leading
-    to costly mistakes and styling regrets.</Text
-  >
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Market Opportunity</Heading>
+    <Text class="mb-[1.562rem]"
+      >Consumers can't preview hairstyles before expensive salon visits, leading
+      to costly mistakes and styling regrets.</Text
+    >
 
-  <Heading level={2} size="xl" weight="semibold">Solution</Heading>
-  <Text class="mb-[1.562rem]"
-    >Created an AI platform for instant hairstyle try-ons using photo uploads.
-    Users select from 30+ styles and receive realistic results within minutes
-    via email.</Text
-  >
+    <Heading level={2} size="xl" weight="semibold">Solution</Heading>
+    <Text class="mb-[1.562rem]"
+      >Created an AI platform for instant hairstyle try-ons using photo uploads.
+      Users select from 30+ styles and receive realistic results within minutes
+      via email.</Text
+    >
 
-  <Heading level={2} size="xl" weight="semibold">Key Features</Heading>
-  <ul
-    class="list-disc list-inside mb-[1.562rem] space-y-1 text-[var(--color-text)]"
-  >
-    <li>3-step workflow: upload → select styles → receive results</li>
-    <li>Freemium model: $0 (watermarked, 24h) vs $9.90 (premium, 5-30min)</li>
-    <li>Mobile-optimized interface with comprehensive style library</li>
-    <li>Automated payment processing and email delivery system</li>
-  </ul>
-  <Heading level={2} size="xl" weight="semibold">Outcome</Heading>
-  <Text
-    >Built complete production-ready platform with AI integration and payment
-    systems. Strategic decision to maintain as case study due to rapidly
-    evolving AI landscape requiring constant model updates.</Text
-  >
+    <Heading level={2} size="xl" weight="semibold">Key Features</Heading>
+    <ul
+      class="list-disc list-inside mb-[1.562rem] space-y-1 text-[var(--color-text)]"
+    >
+      <li>3-step workflow: upload → select styles → receive results</li>
+      <li>Freemium model: $0 (watermarked, 24h) vs $9.90 (premium, 5-30min)</li>
+      <li>Mobile-optimized interface with comprehensive style library</li>
+      <li>Automated payment processing and email delivery system</li>
+    </ul>
+  </ProjectContnetWrapper>
+  <SwiperSlider className="mt-[60px] mb-[50px]" />
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Outcome</Heading>
+    <Text
+      >Built complete production-ready platform with AI integration and payment
+      systems. Strategic decision to maintain as case study due to rapidly
+      evolving AI landscape requiring constant model updates.</Text
+    >
+  </ProjectContnetWrapper>
 </Layout>
