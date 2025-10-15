@@ -10,8 +10,17 @@ const title = "Re:Writing";
 const years = "Side Project 2020";
 const description = "AI-powered text uniqueness enhancement platform";
 
-const sliderImages = Array.from({ length: 3 }).map(
-  (_, i) => `/rewriting/${i + 1}.png`
+const imageModules = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/rewriting/*.{jpeg,jpg,png,gif}"
+);
+
+const sliderImages = await Promise.all(
+  Object.entries(imageModules).map(async ([path, importer]) => {
+    const mod = await importer();
+    return {
+      ...mod.default,
+    };
+  })
 );
 ---
 
@@ -41,7 +50,7 @@ const sliderImages = Array.from({ length: 3 }).map(
     </ul>
   </ProjectContnetWrapper>
   <div class="mt-[60px] mb-[50px]">
-    <SwiperSlider {sliderImages} />
+    <SwiperSlider {sliderImages} initialWidth="300px" />
   </div>
   <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold">Outcome</Heading>

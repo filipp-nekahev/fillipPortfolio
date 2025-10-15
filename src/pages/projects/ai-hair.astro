@@ -9,8 +9,17 @@ const title = "AIHairStyle.io";
 const years = "Side Project 2024";
 const description = "AI-powered virtual hairstyling platform";
 
-const sliderImages = Array.from({ length: 6 }).map(
-  (_, i) => `/hair/${i + 1}.png`
+const imageModules = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/hair/*.{jpeg,jpg,png,gif}"
+);
+
+const sliderImages = await Promise.all(
+  Object.entries(imageModules).map(async ([path, importer]) => {
+    const mod = await importer();
+    return {
+      ...mod.default,
+    };
+  })
 );
 ---
 
@@ -38,7 +47,7 @@ const sliderImages = Array.from({ length: 6 }).map(
     </ul>
   </ProjectContnetWrapper>
   <div class="mt-[60px] mb-[50px]">
-    <SwiperSlider {sliderImages} />
+    <SwiperSlider {sliderImages} initialWidth="300px" />
   </div>
   <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold">Outcome</Heading>

@@ -9,8 +9,17 @@ const title = "FillWise.ai";
 const years = "Side Project 2025";
 const description = "AI-powered Chrome extension for intelligent form filling";
 
-const sliderImages = Array.from({ length: 5 }).map(
-  (_, i) => `/fillwise/${i + 1}.png`
+const imageModules = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/fillwise/*.{jpeg,jpg,png,gif}"
+);
+
+const sliderImages = await Promise.all(
+  Object.entries(imageModules).map(async ([path, importer]) => {
+    const mod = await importer();
+    return {
+      ...mod.default,
+    };
+  })
 );
 ---
 
@@ -38,7 +47,9 @@ const sliderImages = Array.from({ length: 5 }).map(
       was also AI-generated and refined for optimal conversion.</Text
     >
   </ProjectContnetWrapper>
-  <div class="mt-[60px] mb-[50px]"><SwiperSlider {sliderImages} /></div>
+  <div class="mt-[60px] mb-[50px]">
+    <SwiperSlider {sliderImages} initialWidth="300px" />
+  </div>
   <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold">Business Impact</Heading>
     <Text>

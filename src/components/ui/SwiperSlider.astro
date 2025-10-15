@@ -1,16 +1,16 @@
 ---
 export interface Props {
-  imagePlaceholder?: string;
-  sliderImages: string[];
+  sliderImages: ImageMetadata[];
+  initialWidth: string;
 }
 
-const { sliderImages, imagePlaceholder = "" } = Astro.props;
+const { sliderImages, initialWidth } = Astro.props;
 ---
 
 <div
   class="flex items-start gap-4 py-[4.375rem] overflow-x-auto overflow-visible scroll-smooth snap-x snap-mandatory no-scrollbar
-      px-[var(--container-padding)] scroll-px-[var(--container-padding)] lg:pl-[var(--offset-left)] lg:scroll-px-0 lg:pb-0"
-  style="--offset-left: calc(50vw - (600px/2) + 100px + 20px);"
+      px-[var(--container-padding)] scroll-px-[var(--container-padding)] lg:px-[var(--offset-left)] lg:scroll-px-0 lg:pb-0"
+  style=`--offset-left: calc(50vw - (1200px/2) + ${initialWidth} + 20px)`
   tabindex="0"
   role="region"
   aria-label="Media carousel"
@@ -18,7 +18,12 @@ const { sliderImages, imagePlaceholder = "" } = Astro.props;
   {
     sliderImages.length > 0 &&
       sliderImages.map((image) => (
-        <img class="snap-center" src={image} alt={imagePlaceholder} />
+        <img
+          class={`snap-center`}
+          style=`max-width: ${image.width / 2}px`
+          src={image.src}
+          alt=""
+        />
       ))
   }
 </div>
