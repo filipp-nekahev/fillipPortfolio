@@ -19,7 +19,7 @@ const { sliderImages, initialWidth } = Astro.props;
     sliderImages.length > 0 &&
       sliderImages.map((image) => (
         <img
-          class={`snap-center`}
+          class="md:snap-center"
           style=`max-width: ${image.width / 2}px`
           src={image.src}
           alt=""
