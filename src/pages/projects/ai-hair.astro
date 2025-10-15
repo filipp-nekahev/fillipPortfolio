@@ -8,6 +8,10 @@ import SwiperSlider from "@/components/ui/SwiperSlider.astro";
 const title = "AIHairStyle.io";
 const years = "Side Project 2024";
 const description = "AI-powered virtual hairstyling platform";
+
+const sliderImages = Array.from({ length: 6 }).map(
+  (_, i) => `/hair/${i + 1}.png`
+);
 ---
 
 <Layout {title} {years} {description}>
@@ -26,16 +30,16 @@ const description = "AI-powered virtual hairstyling platform";
     >
 
     <Heading level={2} size="xl" weight="semibold">Key Features</Heading>
-    <ul
-      class="list-disc list-inside mb-[1.562rem] space-y-1 text-[var(--color-text)]"
-    >
+    <ul class="list-disc list-inside space-y-1 text-[var(--color-text)]">
       <li>3-step workflow: upload → select styles → receive results</li>
       <li>Freemium model: $0 (watermarked, 24h) vs $9.90 (premium, 5-30min)</li>
       <li>Mobile-optimized interface with comprehensive style library</li>
       <li>Automated payment processing and email delivery system</li>
     </ul>
   </ProjectContnetWrapper>
-  <SwiperSlider className="mt-[60px] mb-[50px]" />
+  <div class="mt-[60px] mb-[50px]">
+    <SwiperSlider {sliderImages} />
+  </div>
   <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold">Outcome</Heading>
     <Text
@@ -44,4 +48,5 @@ const description = "AI-powered virtual hairstyling platform";
       evolving AI landscape requiring constant model updates.</Text
     >
   </ProjectContnetWrapper>
-</Layout>
+</Layout>} />
+

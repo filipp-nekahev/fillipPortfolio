@@ -1,47 +1,24 @@
 ---
-import "@glidejs/glide/dist/css/glide.core.min.css";
-
 export interface Props {
-  className?: string;
+  imagePlaceholder?: string;
+  sliderImages: string[];
 }
 
-const { className } = Astro.props;
+const { sliderImages, imagePlaceholder = "" } = Astro.props;
 ---
 
 <div
-  class={`glide mySwiper w-full px-[var(--container-padding)] md:px-0 ${className}`}
+  class="flex items-start gap-4 py-[4.375rem] overflow-x-auto overflow-visible scroll-smooth snap-x snap-mandatory no-scrollbar
+      px-[var(--container-padding)] scroll-px-[var(--container-padding)] lg:pl-[var(--offset-left)] lg:scroll-px-0 lg:pb-0"
+  style="--offset-left: calc(50vw - (600px/2) + 100px + 20px);"
+  tabindex="0"
+  role="region"
+  aria-label="Media carousel"
 >
-  <div class="glide__track" data-glide-el="track">
-    <div class="glide__slides">
-      {
-        Array.from({ length: 6 }, (_, i) => (
-          <div class="glide__slide">
-            <img class="cover" src={`/hair/${i + 1}.png`} alt="" />
-          </div>
-        ))
-      }
-    </div>
-  </div>
+  {
+    sliderImages.length > 0 &&
+      sliderImages.map((image) => (
+        <img class="snap-center" src={image} alt={imagePlaceholder} />
+      ))
+  }
 </div>
-
-<script>
-  import Glide from "@glidejs/glide";
-  const glide = new Glide(".mySwiper", {
-    type: "slider",
-    perView: 1.9,
-    focusAt: "center",
-    rewind: false,
-    gap: 40,
-    breakpoints: {
-      800: {
-        perView: 3,
-      },
-      480: {
-        perView: 1,
-        gap: 20,
-      },
-    },
-  });
-
-  glide.mount();
-</script>
