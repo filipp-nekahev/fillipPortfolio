@@ -1,0 +1,134 @@
+---
+import { Image } from "astro:assets";
+import Layout from "@/layouts/Project.astro";
+import Heading from "@/components/ui/Heading.astro";
+import Text from "@/components/ui/Text.astro";
+import ProjectContnetWrapper from "@/components/ui/ProjectContnetWrapper.astro";
+import SwiperSlider from "@/components/ui/SwiperSlider.astro";
+import { loadImages } from "@/utils/loadImages";
+
+import detail1Img from "@/assets/mtsDecor/1.png";
+import detail2Img from "@/assets/mtsDecor/2.png";
+import logoImg from "@/assets/mtsDecor/logo.png";
+
+const title = "MTS Digital";
+const years = "2022-2023";
+const description =
+  "MTS - Russia's largest telecommunications company with 100M+ subscribers";
+
+const imageModulesFirst = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/mts1/*.{jpeg,jpg,png,gif}"
+);
+const imageModulesSecond = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/mts2/*.{jpeg,jpg,png,gif}"
+);
+const imageModulesThird = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/mts3/*.{jpeg,jpg,png,gif}"
+);
+
+const sliderImagesFirst = await loadImages(imageModulesFirst);
+const sliderImagesSecond = await loadImages(imageModulesSecond);
+const sliderImagesThird = await loadImages(imageModulesThird);
+---
+
+<Layout {title} {years} {description} logo={logoImg}>
+  <ProjectContnetWrapper>
+    <Text>
+      Led the foundational design for MTS's first digital media planning
+      platform, establishing core UX principles and user flows for enterprise
+      media buyers. This greenfield B2B product aimed to transform traditional
+      manual media planning processes into a streamlined digital experience.</Text
+    >
+    <Heading level={2} size="xl" weight="semibold">Challenge</Heading>
+    <Text class="mb-[1.562rem]">
+      Media planning agencies were spending 2+ weeks manually creating media
+      plans in Excel spreadsheets, coordinating across multiple channels (web,
+      mobile, TV) without centralized workflow management. The market lacked a
+      comprehensive solution for Russian media landscape.
+    </Text>
+    <Heading level={2} size="xl" weight="semibold">My Role</Heading>
+    <Text class="mb-[60px]">
+      As lead designer, I owned the entire design process from research through
+      MVP delivery, working directly with product management and engineering
+      teams.</Text
+    >
+    <Heading
+      class="mt-[100px] mb-[10px] text-[28px]"
+      level={2}
+      weight="semibold">Design Strategy</Heading
+    >
+    <Text class="mb-[25px]"
+      >Working on a 0-to-1 enterprise product, I prioritized core functionality
+      over feature breadth, focusing on complex user workflows through direct
+      stakeholder research.</Text
+    >
+
+    <Heading level={2} size="xl" weight="semibold">Research & Discovery</Heading
+    >
+    <Text class="mb-[1.562rem]">
+      Conducted interviews with media planners across agency types, identifying
+      two key user groups: primary planners managing end-to-end campaigns, and
+      collaborative teams requiring approval workflows with version control
+      constraints.
+    </Text>
+
+    <Heading level={2} size="xl" weight="semibold"
+      >Product Strategy Decision</Heading
+    >
+    <Text class="mb-[25px]">
+      Given that clients were already using Excel-based workflows, we chose an
+      MLP approach over basic MVP to reduce migration friction and deliver
+      immediate value.
+    </Text>
+  </ProjectContnetWrapper>
+  <Image
+    src={detail1Img}
+    alt="detail1Img"
+    width="657"
+    class="m-auto mb-[50px]"
+  />
+  <Text class="mb-[40px] max-w-[452px] m-auto text-center text-[15px] italic">
+    I used the MLP framework to balance essential functionality with user
+    delight, ensuring competitive advantage over existing Excel workflows.
+  </Text>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">UI Design</Heading>
+    <Text class="mb-[60px]"
+      >After the initial stages, I consistently conducted interviews with
+      potential users. As a result, over the course of a year, the product was
+      nearly fully designed, with the primary user flow comprising approximately
+      60 frames and an additional 300 frames for various states.</Text
+    >
+    <Image
+      src={detail2Img}
+      alt="detail2Img"
+      width="556"
+      class="m-auto mb-[100px]"
+    />
+  </ProjectContnetWrapper>
+  <div class="mb-[100px]">
+    <SwiperSlider sliderImages={sliderImagesFirst} initialWidth="480px" />
+  </div>
+  <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
+    Campaign Approval Workflow
+  </Text>
+  <div class="mt-[100px] mb-[25px]">
+    <SwiperSlider sliderImages={sliderImagesSecond} initialWidth="275px" />
+  </div>
+  <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
+    Flexible Analytics Configuration.<br />Advanced dashboard builder allowing
+    media planners to customize their workspace. Users can select from multiple
+    chart types (line graphs, bar charts, pie charts, spreadsheets) and
+    configure data sources to match their specific reporting needs.
+  </Text>
+  <div class="mb-[50px]">
+    <SwiperSlider sliderImages={sliderImagesThird} initialWidth="275px" />
+  </div>
+  <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
+    Television Media Slot Management.<br />Complex TV scheduling interface
+    enabling precise time slot selection across multiple channels and programs.
+    The grid-based system shows real-time availability, pricing, and audience
+    demographics, allowing planners to optimize reach and frequency for
+    broadcast campaigns.
+  </Text>
+</Layout>

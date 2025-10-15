@@ -3,19 +3,35 @@ import Layout from "@/layouts/Project.astro";
 import Heading from "@/components/ui/Heading.astro";
 import Text from "@/components/ui/Text.astro";
 
+import ProjectContnetWrapper from "@/components/ui/ProjectContnetWrapper.astro";
+import SwiperSlider from "@/components/ui/SwiperSlider.astro";
+import { loadImages } from "@/utils/loadImages";
+
 const title = "MNFST";
 const years = "Freelance 2018";
+
+const imageModules = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/mnfst/*.{jpeg,jpg,png,gif}"
+);
+
+const sliderImages = await loadImages(imageModules);
 ---
 
 <Layout {title} {years}>
-  <Heading level={2} size="xl" weight="semibold"
-    >B2B influencer marketing platform</Heading
-  >
-  <Text class="mb-[1.562rem]"
-    >Designed B2B dashboard enabling brands to create sponsored photo campaigns
-    where social media users overlay brand elements on personal content and earn
-    money based on engagement. Created 30+ artboards covering complete platform
-    for campaign management, targeting, budget allocation, and performance
-    tracking across Facebook, Instagram, Twitter, and VKontakte.</Text
-  >
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold"
+      >B2B influencer marketing platform</Heading
+    >
+    <Text class="mb-[1.562rem]"
+      >Designed B2B dashboard enabling brands to create sponsored photo
+      campaigns where social media users overlay brand elements on personal
+      content and earn money based on engagement. Created 30+ artboards covering
+      complete platform for campaign management, targeting, budget allocation,
+      and performance tracking across Facebook, Instagram, Twitter, and
+      VKontakte.</Text
+    >
+  </ProjectContnetWrapper>
+  <div class="mt-[60px] mb-[50px]">
+    <SwiperSlider {sliderImages} initialWidth="486px" />
+  </div>
 </Layout>

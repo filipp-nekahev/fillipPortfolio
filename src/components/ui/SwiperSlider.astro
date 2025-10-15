@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 export interface Props {
   sliderImages: ImageMetadata[];
   initialWidth: string;
@@ -8,7 +9,7 @@ const { sliderImages, initialWidth } = Astro.props;
 ---
 
 <div
-  class="flex items-start gap-4 py-[4.375rem] overflow-x-auto overflow-visible scroll-smooth snap-x snap-mandatory no-scrollbar
+  class="flex items-start gap-4 overflow-x-auto overflow-visible scroll-smooth snap-x snap-mandatory no-scrollbar
       px-[var(--container-padding)] scroll-px-[var(--container-padding)] lg:px-[var(--offset-left)] lg:scroll-px-0 lg:pb-0"
   style=`--offset-left: calc(50vw - (1200px/2) + ${initialWidth} + 20px)`
   tabindex="0"
@@ -18,10 +19,11 @@ const { sliderImages, initialWidth } = Astro.props;
   {
     sliderImages.length > 0 &&
       sliderImages.map((image) => (
-        <img
+        <Image
           class="md:snap-center"
           style=`max-width: ${image.width / 2}px`
-          src={image.src}
+          src={image}
+          width={`${image.width / 2}px`}
           alt=""
         />
       ))

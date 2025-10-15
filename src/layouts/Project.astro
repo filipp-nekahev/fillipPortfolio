@@ -3,6 +3,7 @@ import { ClientRouter } from "astro:transitions";
 import ProjectHeader from "@/components/ui/ProjectHeader.astro";
 import BackButton from "@/components/ui/BackButton.astro";
 import ProjectContnetWrapper from "@/components/ui/ProjectContnetWrapper.astro";
+import { Image } from "astro:assets";
 //
 import "../style/global.css";
 
@@ -10,8 +11,9 @@ export interface Props {
   title: string;
   years: string;
   description?: string;
+  logo?: ImageMetadata;
 }
-const { title, years, description } = Astro.props;
+const { title, years, description, logo } = Astro.props;
 ---
 
 <!doctype html>
@@ -32,6 +34,7 @@ const { title, years, description } = Astro.props;
         <BackButton href="/" />
       </div>
       <ProjectContnetWrapper>
+        {logo && <Image class="mb-[10px]" src={logo} width="80" alt={title} />}
         <ProjectHeader title={title} years={years} description={description} />
       </ProjectContnetWrapper>
       <slot />

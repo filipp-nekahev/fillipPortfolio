@@ -3,30 +3,53 @@ import Layout from "@/layouts/Project.astro";
 import Heading from "@/components/ui/Heading.astro";
 import Text from "@/components/ui/Text.astro";
 
+import ProjectContnetWrapper from "@/components/ui/ProjectContnetWrapper.astro";
+import SwiperSlider from "@/components/ui/SwiperSlider.astro";
+import { loadImages } from "@/utils/loadImages";
+
 const title = "SmartAvia";
 const years = "Freelance 2019";
+
+const imageModulesFirst = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/smartavia1/*.{jpeg,jpg,png,gif}"
+);
+const imageModulesSecond = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/smartavia2/*.{jpeg,jpg,png,gif}"
+);
+
+const sliderImagesFirst = await loadImages(imageModulesFirst);
+const sliderImagesSecond = await loadImages(imageModulesSecond);
 ---
 
 <Layout {title} {years}>
-  <Heading level={2} size="xl" weight="semibold">Website Redesign</Heading>
-  <Text class="mb-[1.562rem]">
-    Freelance project redesigning core website elements for flight booking
-    experience. Developed desktop and mobile versions covering flight search
-    interface, seat selection system, passenger management, and payment
-    processing workflows. Created intuitive booking flow with calendar
-    selection, passenger details, and multiple payment options including cards
-    and digital wallets.</Text
-  >
-
-  <Heading level={2} size="xl" weight="semibold"
-    >In-Flight Entertainment</Heading
-  >
-  <Text>
-    Designed comprehensive offline entertainment platform accessible via
-    airplane Wi-Fi without global internet access. Created interfaces for
-    movies, music, books, games, and onboard shopping, optimizing for various
-    screen sizes and offline functionality. System allows passengers to consume
-    entertainment content during flight without requiring global internet
-    connection.
-  </Text>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Website Redesign</Heading>
+    <Text class="mb-[1.562rem]">
+      Freelance project redesigning core website elements for flight booking
+      experience. Developed desktop and mobile versions covering flight search
+      interface, seat selection system, passenger management, and payment
+      processing workflows. Created intuitive booking flow with calendar
+      selection, passenger details, and multiple payment options including cards
+      and digital wallets.</Text
+    >
+  </ProjectContnetWrapper>
+  <div class="mt-[60px] mb-[50px]">
+    <SwiperSlider sliderImages={sliderImagesFirst} initialWidth="536px" />
+  </div>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold"
+      >In-Flight Entertainment</Heading
+    >
+    <Text>
+      Designed comprehensive offline entertainment platform accessible via
+      airplane Wi-Fi without global internet access. Created interfaces for
+      movies, music, books, games, and onboard shopping, optimizing for various
+      screen sizes and offline functionality. System allows passengers to
+      consume entertainment content during flight without requiring global
+      internet connection.
+    </Text>
+  </ProjectContnetWrapper>
+  <div class="mt-[60px] mb-[50px]">
+    <SwiperSlider sliderImages={sliderImagesSecond} initialWidth="250px" />
+  </div>
 </Layout>

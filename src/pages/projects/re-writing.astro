@@ -2,9 +2,9 @@
 import Layout from "@/layouts/Project.astro";
 import Heading from "@/components/ui/Heading.astro";
 import Text from "@/components/ui/Text.astro";
-
 import ProjectContnetWrapper from "@/components/ui/ProjectContnetWrapper.astro";
 import SwiperSlider from "@/components/ui/SwiperSlider.astro";
+import { loadImages } from "@/utils/loadImages";
 
 const title = "Re:Writing";
 const years = "Side Project 2020";
@@ -14,14 +14,7 @@ const imageModules = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/rewriting/*.{jpeg,jpg,png,gif}"
 );
 
-const sliderImages = await Promise.all(
-  Object.entries(imageModules).map(async ([path, importer]) => {
-    const mod = await importer();
-    return {
-      ...mod.default,
-    };
-  })
-);
+const sliderImages = await loadImages(imageModules);
 ---
 
 <Layout {title} {years} {description}>
