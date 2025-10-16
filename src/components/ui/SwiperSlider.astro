@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import { date } from 'astro:schema';
 export interface Props {
   sliderImages: ImageMetadata[];
   initialWidth: string;
@@ -10,7 +11,7 @@ const { sliderImages, initialWidth, video=false } = Astro.props;
 ---
 
 <div
-  class="flex items-start gap-[40px] overflow-x-auto overflow-visible scroll-smooth snap-x snap-mandatory no-scrollbar
+  class="flex items-start gap-[40px] overflow-x-auto overflow-visible scroll-smooth snap-x snap-mandatory lg:snap-none no-scrollbar
       px-[var(--container-padding)] scroll-px-[var(--container-padding)] lg:px-[var(--offset-left)] lg:scroll-px-0 lg:pb-0"
   style=`--offset-left: calc(50vw - (1200px/2) + ${initialWidth} + 20px)`
   tabindex="0"
@@ -33,13 +34,14 @@ const { sliderImages, initialWidth, video=false } = Astro.props;
 }
     {sliderImages.length > 0 &&
       sliderImages.map((image) => (
+        <div class="snap-center">
         <Image
-          class="md:snap-center"
           style=`max-width: ${image.width / 2}px`
           src={image}
           width={`${image.width / 2}px`}
           alt=""
         />
+        </div>
       ))
   }
 </div>

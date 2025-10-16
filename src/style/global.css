@@ -13,8 +13,27 @@
 }
 
 @layer utilities {
-  .no-scrollbar::-webkit-scrollbar { display: none; }
-  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none ; }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 
-  .dragging { cursor: grabbing !important; user-select: none !important; }
+  .dragging {
+    @media (min-width: 768px) {
+      scroll-behavior: auto;
+      cursor: grabbing !important;
+      user-select: none !important;
+      scroll-snap-type: none !important;
+      scroll-snap-align: none !important;
+
+      img {
+        pointer-events: none !important;
+        scroll-snap-type: none !important;
+        scroll-snap-align: none !important;
+      }
+    }
+  }
 }

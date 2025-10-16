@@ -28,29 +28,10 @@ const { title, description } = Astro.props;
     </main>
   </body>
 </html>
-<style>
-  .no-scrollbar {
-    cursor: grab;
-    -webkit-overflow-scrolling: touch; /* smoother on iOS */
-  }
-
-  .no-scrollbar.is-dragging {
-    cursor: grabbing;
-    user-select: none; /* prevent text selection while dragging */
-  }
-
-  /* optional: avoid image/text catching the pointer while dragging */
-  .no-scrollbar * {
-    -webkit-user-drag: none;
-  }
-</style>
 
 <script>
-  // ---- tiny helpers --------------------------------------------------------
-  const SNAP_X = "snap-x";
-  const SNAP_MANDATORY = "snap-mandatory";
-
   const initDragScroll = (el: Element) => {
+    if (window.innerWidth < 1024) return;
     if (!el || (el as HTMLElement).dataset.dragInit === "1") return;
 
     // Skip if not actually scrollable horizontally
@@ -68,7 +49,6 @@ const { title, description } = Astro.props;
     let startLeft = 0;
     let dragged = false;
 
-    // rAF throttle
     let raf = 0;
     let pendingLeft: number | null = null;
 
@@ -86,19 +66,7 @@ const { title, description } = Astro.props;
       }
     };
 
-    const disableSnap = () => {
-      // only touch classes when needed
-      if (htmlEl.classList.contains(SNAP_X)) htmlEl.classList.remove(SNAP_X);
-      if (htmlEl.classList.contains(SNAP_MANDATORY))
-        htmlEl.classList.remove(SNAP_MANDATORY);
-    };
-
-    const enableSnap = () => {
-      htmlEl.classList.add(SNAP_X, SNAP_MANDATORY);
-    };
-
     const onPointerDown = (e: PointerEvent) => {
-      // Desktop: only primary mouse; allow touch/pen
       if (e.pointerType === "mouse" && e.button !== 0) return;
 
       down = true;
@@ -107,7 +75,6 @@ const { title, description } = Astro.props;
       startLeft = el.scrollLeft;
 
       el.classList.add("dragging");
-      disableSnap();
       try {
         el.setPointerCapture(e.pointerId);
       } catch {}
@@ -115,13 +82,11 @@ const { title, description } = Astro.props;
 
     const onPointerMove = (e: PointerEvent) => {
       if (!down) return;
-      // prevent text selection / native gestures
       e.preventDefault();
 
       const dx = e.clientX - startX;
       if (!dragged && Math.abs(dx) > 2) dragged = true;
 
-      // multiplier = 1 (adjust if you want faster drag)
       setLeft(startLeft - dx);
     };
 
@@ -129,7 +94,6 @@ const { title, description } = Astro.props;
       if (!down) return;
       down = false;
       el.classList.remove("dragging");
-      enableSnap();
       try {
         e && el.releasePointerCapture(e.pointerId);
       } catch {}
@@ -139,15 +103,6 @@ const { title, description } = Astro.props;
       if (dragged) {
         e.preventDefault();
         e.stopPropagation();
-      }
-    };
-
-    // Optional: vertical wheel => horizontal scroll (desktop nicety)
-    const onWheel = (e: WheelEvent) => {
-      // If vertical scroll dominates and no Shift, redirect to horizontal
-      if (!e.shiftKey && Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        setLeft(el.scrollLeft + e.deltaY);
-        e.preventDefault();
       }
     };
 
@@ -168,12 +123,10 @@ const { title, description } = Astro.props;
       passive: true,
     });
     htmlEl.addEventListener("click", onClickCapture as EventListener, true);
-    htmlEl.addEventListener("wheel", onWheel as EventListener, {
-      passive: false,
-    });
   };
 
   const initAll = () => {
+    console.log("initAll");
     // Only elements not yet initialized
     const scrollElements = document.querySelectorAll(
       ".no-scrollbar:not([data-drag-init='1'])"
@@ -183,5 +136,6 @@ const { title, description } = Astro.props;
 
   // Astro SPA lifecycle
   document.addEventListener("astro:page-load", initAll);
+  document.addEventListener("DOMContentLoaded", initAll);
   document.addEventListener("astro:after-swap", initAll);
 </script>

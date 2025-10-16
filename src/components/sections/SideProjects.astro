@@ -39,7 +39,7 @@ const sideProjects = [
   <div
     id="side-projects"
     class="grid grid-flow-col auto-cols-[90%] sm:auto-cols-auto sm:grid-flow-row gap-[1.5rem]
-    overflow-x-auto sm:overflow-visible scroll-smooth snap-x snap-mandatory no-scrollbar
+    overflow-x-auto sm:overflow-visible scroll-smooth lg:scroll-auto snap-x snap-mandatory no-scrollbar
     px-[var(--container-padding)] sm:px-[var(--container-padding)]
     sm:grid-cols-2 lg:grid-cols-3
     scroll-px-[var(--container-padding)]"
@@ -47,7 +47,10 @@ const sideProjects = [
   >
     {
       sideProjects.map((item, i) => (
-        <PortfolioCard {...item} class="snap-center" />
+        <PortfolioCard
+          {...item}
+          class="snap-center lg:[scroll-snap-align:none]"
+        />
       ))
     }
   </div>

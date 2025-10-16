@@ -22,7 +22,7 @@ const sliderImages = await loadImages(imageModules);
   <div>
     <!-- Horizontal snap scroller -->
     <div
-      class="flex gap-4 py-[4.375rem] overflow-x-auto overflow-visible scroll-smooth snap-x snap-mandatory no-scrollbar items-end
+      class="flex gap-4 py-[4.375rem] overflow-x-auto overflow-visible scroll-smooth lg:scroll-auto snap-x snap-mandatory no-scrollbar items-end
       px-[var(--container-padding)] scroll-px-[var(--container-padding)] lg:px-[var(--offset-left)] lg:scroll-px-0 lg:pb-0"
       style="--offset-left: calc(50vw - (1200px/2) + 375px + 20px);"
       tabindex="0"
@@ -31,7 +31,7 @@ const sliderImages = await loadImages(imageModules);
     >
       {
         sliderImages.map((image, i) => (
-          <Image class="snap-center max-h-[400px]" src={image} alt="" />
+          <Image class="snap-center  max-h-[400px]" src={image} alt="" />
         ))
       }
     </div>
