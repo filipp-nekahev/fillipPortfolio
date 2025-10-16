@@ -3,9 +3,10 @@ import { Image } from 'astro:assets';
 export interface Props {
   sliderImages: ImageMetadata[];
   initialWidth: string;
+  video?: boolean;
 }
 
-const { sliderImages, initialWidth } = Astro.props;
+const { sliderImages, initialWidth, video=false } = Astro.props;
 ---
 
 <div
@@ -16,8 +17,21 @@ const { sliderImages, initialWidth } = Astro.props;
   role="region"
   aria-label="Media carousel"
 >
-  {
-    sliderImages.length > 0 &&
+{  video &&
+  (<video   autoplay
+  muted
+  loop
+  playsinline
+  preload="auto"
+  poster="/video/hero-cover.png"
+  class="max-w-[224px]"
+  >
+    <source src="/video/output.webm" type="video/webm">
+    <source src="/video/output.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>)
+}
+    {sliderImages.length > 0 &&
       sliderImages.map((image) => (
         <Image
           class="md:snap-center"
