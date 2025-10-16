@@ -20,11 +20,96 @@ const { title, description } = Astro.props;
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <ClientRouter />
   </head>
-  <body class="font-(family-name:--font-inter)">
+    <body class="font-inter">
     <main>
       <slot />
     </main>
+      <ClientRouter />
   </body>
 </html>
+<style>
+  .no-scrollbar {
+    cursor: grab;
+    -webkit-overflow-scrolling: touch; /* smoother on iOS */
+  }
+
+  .no-scrollbar.is-dragging {
+    cursor: grabbing;
+  }
+</style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const slider = document.querySelector(".no-scrollbar");
+        if (!slider) return;
+        let isDown = false;
+        let startX = 0;
+        let scrollLeft = 0;
+
+        slider.addEventListener("mousedown", (e) => {
+          isDown = true;
+          slider.classList.add("active");
+          startX = e.pageX - slider.offsetLeft;
+          scrollLeft = slider.scrollLeft;
+        });
+
+        slider.addEventListener("mouseleave", () => {
+          isDown = false;
+          slider.classList.remove("active");
+        });
+
+        slider.addEventListener("mouseup", () => {
+          isDown = false;
+          slider.classList.remove("active");
+        });
+
+        slider.addEventListener("mousemove", (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = e.pageX - slider.offsetLeft;
+          const walk = (x - startX) * 1; // scroll speed multiplier
+          slider.scrollLeft = scrollLeft - walk;
+        });
+      });
+        } catch {}
+      },
+      { passive: true }
+    );
+
+    el.addEventListener(
+      "pointermove",
+      (e) => {
+        if (!down) return;
+        e.preventDefault(); // blocks text selection
+        const dx = e.clientX - startX;
+        if (Math.abs(dx) > 2) dragged = true;
+        el.scrollLeft = startLeft - dx * 2; // multiplier = 1; tweak if needed
+      },
+      { passive: false }
+    );
+
+    const end = (e) => {
+      if (!down) return;
+      down = false;
+      el.classList.remove("dragging");
+      try {
+        e && el.releasePointerCapture(e.pointerId);
+      } catch {}
+    };
+    el.addEventListener("pointerup", end, { passive: true });
+    el.addEventListener("pointerleave", end, { passive: true });
+    el.addEventListener("pointercancel", end, { passive: true });
+
+    // Optional: prevent clicks on links if it was a drag
+    el.addEventListener(
+      "click",
+      (e) => {
+        if (dragged) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      },
+      true
+    );
+  })();
+</script>
