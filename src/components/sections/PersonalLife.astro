@@ -1,3 +1,13 @@
+---
+import { Image } from "astro:assets";
+
+import { loadImages } from "@/utils/loadImages";
+const imageModules = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/main/photoslider/*.{jpeg,jpg,png,gif}"
+);
+const sliderImages = await loadImages(imageModules);
+---
+
 <section class="flex flex-col justify-center pt-[12.6rem]">
   <div class="flex flex-col items-center">
     <div
@@ -20,12 +30,8 @@
       aria-label="Media carousel"
     >
       {
-        Array.from({ length: 10 }, (_, i) => (
-          <img
-            class="snap-center max-h-[400px]"
-            src={`photoslider/${i + 1}.png`}
-            alt=""
-          />
+        sliderImages.map((image, i) => (
+          <Image class="snap-center max-h-[400px]" src={image} alt="" />
         ))
       }
     </div>

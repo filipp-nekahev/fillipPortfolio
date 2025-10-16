@@ -1,56 +1,122 @@
 ---
-import Layout from "../../layouts/Main.astro";
+import { Image } from "astro:assets";
+import Layout from "@/layouts/Project.astro";
+import Heading from "@/components/ui/Heading.astro";
+import Text from "@/components/ui/Text.astro";
+import ProjectContnetWrapper from "@/components/ui/ProjectContnetWrapper.astro";
+import SwiperSlider from "@/components/ui/SwiperSlider.astro";
+import { loadImages } from "@/utils/loadImages";
+
+import detail1Img from "@/assets/alfaDecor/1.png";
+import detail2Img from "@/assets/alfaDecor/2.png";
+import logoImg from "@/assets/logo/alfalogo-min.png";
+
+const title = "Alfa Bank - Alfa Travel";
+const years = "2023-2025";
+
+const imageModulesFirst = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/alfa1/*.{jpeg,jpg,png,gif}"
+);
+const imageModulesSecond = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/alfa2/*.{jpeg,jpg,png,gif}"
+);
+const imageModulesThird = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/alfa3/*.{jpeg,jpg,png,gif}"
+);
+
+const sliderImagesFirst = await loadImages(imageModulesFirst);
+const sliderImagesSecond = await loadImages(imageModulesSecond);
+const sliderImagesThird = await loadImages(imageModulesThird);
 ---
 
-<Layout>
-  <main class="max-w-[660px] mx-auto px-[var(--container-padding)]">
-    <!-- Header Section -->
-    <section class="pt-[4rem] pb-[3rem]">
-      <div class="flex items-center gap-4 mb-6">
-        <a
-          href="/"
-          class="text-[var(--color-description)] hover:text-[var(--color-text)] transition-colors"
-        >
-          ← Back to Portfolio
-        </a>
-      </div>
-
-      <div class="grid items-center">
-        <div>
-          <h1 class="text-[3rem] font-semibold leading-tight mb-4">
-            Alfa Bank - Alfa Travel
-          </h1>
-          <p class="text-[1.25rem] text-[var(--color-description)] mb-6">
-            2023–2025
-          </p>
-          <p>
-            Alfa-Bank is Russia's largest private bank, providing financial
-            services to over 22 million customers through 672+ branches
-            nationwide. As a universal bank, it offers comprehensive banking
-            operations including retail, corporate banking, investment services,
-            and digital solutions with approximately 25,000 employees.
-          </p>
-          <p>
-            Alfa Travel is the bank's integrated travel booking platform,
-            providing comprehensive travel services including flights, hotels,
-            train tickets, and vacation packages. The platform leverages the
-            bank's ecosystem approach, allowing customers to utilize bonus
-            points and rewards across all banking services while seamlessly
-            booking and paying for travel through their existing banking
-            relationship.
-          </p>
-          <h2>My Role</h2>
-          <p>
-            Served as the sole designer within the travel services department,
-            responsible for designing and enhancing the comprehensive travel
-            booking platform. Working within Alfa Bank's established design
-            system, I leveraged the bank's component library to create cohesive
-            user experiences across flight bookings, hotel reservations, train
-            tickets, and vacation packages while ensuring seamless integration
-            with the broader banking ecosystem and rewards program.
-          </p>
-        </div>
-      </div>
-    </section>
-  </main></Layout
->
+<Layout {title} {years} logo={logoImg}>
+  <ProjectContnetWrapper>
+    <Text>
+      Alfa-Bank is Russia's largest private bank, providing financial services
+      to over 22 million customers through 672+ branches nationwide. As a
+      universal bank, it offers comprehensive banking operations including
+      retail, corporate banking, investment services, and digital solutions with
+      approximately 25,000 employees.</Text
+    >
+    <Text class="mb-[1.562rem]"
+      >Alfa Travel is the bank's integrated travel booking platform, providing
+      comprehensive travel services including flights, hotels, train tickets,
+      and vacation packages. The platform leverages the bank's ecosystem
+      approach, allowing customers to utilize bonus points and rewards across
+      all banking services while seamlessly booking and paying for travel
+      through their existing banking relationship.</Text
+    >
+    <Heading level={2} size="xl" weight="semibold">My Role</Heading>
+    <Text class="mb-[1.562rem]">
+      Served as the sole designer within the travel services department,
+      responsible for designing and enhancing the comprehensive travel booking
+      platform. Working within Alfa Bank's established design system, I
+      leveraged the bank's component library to create cohesive user experiences
+      across flight bookings, hotel reservations, train tickets, and vacation
+      packages while ensuring seamless integration with the broader banking
+      ecosystem and rewards program.
+    </Text>
+    <Heading
+      class="mt-[100px] mb-[10px] text-[28px]"
+      level={2}
+      weight="semibold">A Few Key Projects & Solutions</Heading
+    >
+    <Heading level={2} size="xl" weight="semibold"
+      >Homepage Redesign & User Engagement</Heading
+    >
+    <Text class="mb-[25px]"
+      >Redesigned the main travel platform interface using Alfa Bank's component
+      library to create a cohesive search experience across all travel services.
+      Implemented a flexible Bento-style banner system that dynamically
+      accommodates varying quantities of promotional content, enabling both
+      internal marketing and external partner advertising opportunities. Added
+      "Popular Destinations," "Popular Hotels," and "Popular Tours" sections to
+      increase user engagement and facilitate travel discovery through curated
+      recommendations.</Text
+    >
+  </ProjectContnetWrapper>
+  <div class="mt-[40px] mb-[100px]">
+    <SwiperSlider sliderImages={sliderImagesFirst} initialWidth="267px" />
+  </div>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold"
+      >Automated Ticket Services</Heading
+    >
+    <Text class="mb-[1.562rem]">
+      Developed self-service ticket refund and exchange system with automated
+      price difference calculations, eliminating the need for customer support
+      intervention. This solution reduced support inquiries for ticket-related
+      issues by <b>74.1%</b>, significantly improving operational efficiency
+      while providing users with instant ticket management capabilities.
+    </Text>
+  </ProjectContnetWrapper>
+  <div class="mt-[40px] mb-[100px]">
+    <SwiperSlider sliderImages={sliderImagesSecond} initialWidth="270px" />
+  </div>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold"
+      >Product Strategy Decision</Heading
+    >
+    <Text class="mb-[25px]">
+      Given that clients were already using Excel-based workflows, we chose an
+      MLP approach over basic MVP to reduce migration friction and deliver
+      immediate value.
+    </Text>
+  </ProjectContnetWrapper>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold"
+      >Enhanced Booking Experience</Heading
+    >
+    <Text class="mb-[60px]"
+      >Created comprehensive booking workflows including airplane seat selection
+      interfaces with visual seat maps, hotel booking system with interactive
+      property search and maps, additional baggage services, SMS notification
+      systems, digital ticket designs, and various auxiliary travel services to
+      enhance the complete customer journey from search to post-travel
+      experience.</Text
+    >
+  </ProjectContnetWrapper>
+  <div class="mt-[40px] mb-[100px]">
+    <SwiperSlider sliderImages={sliderImagesThird} initialWidth="270px" />
+  </div>
+</Layout>

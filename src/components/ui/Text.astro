@@ -1,29 +1,29 @@
 ---
 interface Props {
-  as?: 'p' | 'span' | 'div';
-  size?: 'sm' | 'base' | 'lg' | 'xl';
-  color?: 'primary' | 'secondary' | 'muted';
+  as?: "p" | "span" | "div";
+  size?: "sm" | "base" | "lg" | "xl";
+  color?: "primary" | "secondary" | "muted";
   class?: string;
 }
 
-const { 
-  as: Tag = 'p', 
-  size = 'base', 
-  color = 'primary',
-  class: className = '' 
+const {
+  as: Tag = "p",
+  size = "base",
+  color = "primary",
+  class: className = "",
 } = Astro.props;
 
-const sizeClasses: Record<NonNullable<Props['size']>, string> = {
-  sm: 'text-sm',
-  base: 'text-base', 
-  lg: 'text-lg',
-  xl: 'text-xl'
+const sizeClasses: Record<NonNullable<Props["size"]>, string> = {
+  sm: "text-sm",
+  base: "text-[18px]",
+  lg: "text-lg",
+  xl: "text-xl",
 };
 
-const colorClasses: Record<NonNullable<Props['color']>, string> = {
-  primary: 'text-[var(--color-text)]',
-  secondary: 'text-gray-600',
-  muted: 'text-gray-500'
+const colorClasses: Record<NonNullable<Props["color"]>, string> = {
+  primary: "text-[var(--color-text)]",
+  secondary: "text-gray-600",
+  muted: "text-gray-500",
 };
 ---
 

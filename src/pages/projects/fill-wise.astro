@@ -5,6 +5,7 @@ import Text from "@/components/ui/Text.astro";
 import ProjectContnetWrapper from "@/components/ui/ProjectContnetWrapper.astro";
 import SwiperSlider from "@/components/ui/SwiperSlider.astro";
 import { loadImages } from "@/utils/loadImages";
+import logo from "@/assets/logo/fwlogo-min.png";
 
 const title = "FillWise.ai";
 const years = "Side Project 2025";
@@ -17,7 +18,7 @@ const imageModules = import.meta.glob<{ default: ImageMetadata }>(
 const sliderImages = await loadImages(imageModules);
 ---
 
-<Layout {title} {years} {description}>
+<Layout {title} {years} {description} {logo}>
   <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold">Problem Statement</Heading>
     <Text class="mb-[1.562rem]"
