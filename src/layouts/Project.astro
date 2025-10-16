@@ -41,3 +41,22 @@ const { title, years, description, logo } = Astro.props;
     </main>
   </body>
 </html>
+
+<script>
+  function initBackButton() {
+    const btn = document.getElementById("back-btn");
+    if (!btn) return;
+    const url = new URL(window.location.href);
+    const from = url.searchParams.get("from") || url.searchParams.get("back");
+    if (from) {
+      btn.setAttribute("href", "/#" + from);
+    } else {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        window.history.back();
+      });
+    }
+  }
+
+  document.addEventListener("astro:page-load", initBackButton);
+</script>

@@ -1,27 +1,23 @@
 ---
 import PortfolioCard from "@components/cards/PortfolioCard.astro";
-//Images
-import fillWiseImg from "@/assets/portfolio_main/FillWise.png";
-import aiHairStylerImg from "@/assets/portfolio_main/Hairstyle.png";
-import reWriteImg from "@/assets/portfolio_main/Rewriting.png";
 
 const sideProjects = [
   {
-    href: "/projects/fill-wise",
+    href: "/projects/fill-wise?from=side-projects",
     title: "FillWise",
     years: "Side Project 2025",
     image: "portfolio_main/FillWise.png",
     mobileImage: "/portfolio_main/FillWise_s.png",
   },
   {
-    href: "/projects/ai-hair",
+    href: "/projects/ai-hair?from=side-projects",
     title: "AIHAIRSTYLE.IO",
     years: "Side Project 2025",
     image: "portfolio_main/Hairstyle.png",
     mobileImage: "portfolio_main/Hairstyle_s.png",
   },
   {
-    href: "/projects/re-writing",
+    href: "/projects/re-writing?from=side-projects",
     title: "Re:Writing",
     years: "Side Project 2019",
     image: "portfolio_main/Rewriting.png",
@@ -41,6 +37,7 @@ const sideProjects = [
     Side projects
   </h3>
   <div
+    id="side-projects"
     class="grid grid-flow-col auto-cols-[90%] sm:auto-cols-auto sm:grid-flow-row gap-[1.5rem]
     overflow-x-auto sm:overflow-visible scroll-smooth snap-x snap-mandatory no-scrollbar
     px-[var(--container-padding)] sm:px-[var(--container-padding)]

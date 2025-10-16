@@ -4,42 +4,42 @@ import SideProjects from "./SideProjects.astro";
 
 const works = [
   {
-    href: "/projects/alfa-travel",
+    href: "/projects/alfa-travel?from=works",
     title: "Alfa-Travel",
     years: "2023–2025",
     image: "/portfolio_main/Alfa.png",
     mobileImage: "/portfolio_main/Alfa_s.png",
   },
   {
-    href: "/projects/mts",
+    href: "/projects/mts?from=works",
     title: "MTS",
     years: "2022–2023",
     image: "/portfolio_main/MTS.png",
     mobileImage: "/portfolio_main/MTS_s.png",
   },
   {
-    href: "/projects/aloha-mobile",
+    href: "/projects/aloha-mobile?from=works",
     title: "Aloha Mobile",
     years: "2020–2022",
     image: "/portfolio_main/Aloha.png",
     mobileImage: "/portfolio_main/Aloha.png",
   },
   {
-    href: "/projects/smart-avia",
+    href: "/projects/smart-avia?from=works",
     title: "SmartAvia",
     years: "Freelance 2019",
     image: "/portfolio_main/Smartavia.png",
     mobileImage: "/portfolio_main/smartAvia_s.png",
   },
   {
-    href: "/projects/poezdom-ios-app",
+    href: "/projects/poezdom-ios-app?from=works",
     title: "Poezdom iOS app",
     years: "Freelance 2019",
     image: "/portfolio_main/Poezdom.png",
     mobileImage: "/portfolio_main/Poezdom_s.png",
   },
   {
-    href: "/projects/mnfst",
+    href: "/projects/mnfst?from=works",
     title: "MNFST",
     years: "Freelance 2018",
     image: "/portfolio_main/MNFST.png",
@@ -70,6 +70,7 @@ const spanForIndex = (i: number) => {
       Works
     </h2>
     <div
+      id="works"
       class="max-w-[1200px] grid grid-flow-col auto-cols-[90%] sm:grid-flow-row sm:auto-cols-auto
   gap-[1.5rem] overflow-x-auto sm:overflow-visible scroll-smooth snap-x snap-mandatory no-scrollbar
   px-[var(--container-padding)] sm:px-[var(--container-padding)] sm:grid-cols-2 lg:grid-cols-3
