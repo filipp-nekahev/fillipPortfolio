@@ -29,11 +29,11 @@ const { title, years, description, logo } = Astro.props;
   <body class="font-(family-name:--font-inter)">
     <main class="pb-[12.5rem]">
       <div
-        class="px-[var(--container-padding)] w-full flex items-center gap-4 pt-5 pb-[11.373rem]"
+        class="px-[var(--container-padding)] w-full flex items-center gap-4 py-5 lg:sticky top-0 z-10"
       >
         <BackButton href="/" />
       </div>
-      <ProjectContnetWrapper>
+      <ProjectContnetWrapper class="pt-[11.373rem]">
         {logo && <Image class="mb-[10px]" src={logo} width="80" alt={title} />}
         <ProjectHeader title={title} years={years} description={description} />
       </ProjectContnetWrapper>
