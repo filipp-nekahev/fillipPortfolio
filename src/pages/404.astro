@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/Main.astro";
+---
+
+<Layout
+  title="Page not found"
+  cls="min-h-screen flex flex-col justify-center items-center text-center px-4 relative overflow-hidden"
+>
+  <div
+    class="pointer-events-none absolute inset-0 bg-gradient-to-b from-white to-[#eaf2ff] z-0"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div
+    class="pointer-events-none absolute -z-10 left-1/2 top-[70%] h-[60vmin] w-[60vmin] -translate-x-1/2 rounded-full blur-3xl opacity-50"
+    style="background: radial-gradient(60% 60% at 50% 50%, rgba(147,197,253,0.45) 0%, rgba(147,197,253,0) 70%);"
+    aria-hidden="true"
+  >
+  </div>
+  <section class="relative z-10">
+    <h1 class="text-6xl font-bold mb-4">404</h1>
+    <p class="text-lg mb-8">
+      Sorry, the page you’re looking for doesn’t exist.
+    </p>
+    <a href="/" class="text-blue-600 hover:underline">Go back home</a>
+  </section>
+</Layout>

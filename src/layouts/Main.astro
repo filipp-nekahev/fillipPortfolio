@@ -6,9 +6,10 @@ import "../style/global.css";
 export interface Props {
   title?: string;
   description?: string;
+  cls?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, cls = "" } = Astro.props;
 ---
 
 <!doctype html>
@@ -23,7 +24,7 @@ const { title, description } = Astro.props;
     <ClientRouter />
   </head>
   <body class="font-(family-name:--font-inter)">
-    <main>
+    <main class={cls}>
       <slot />
     </main>
   </body>
@@ -126,7 +127,6 @@ const { title, description } = Astro.props;
   };
 
   const initAll = () => {
-    console.log("initAll");
     // Only elements not yet initialized
     const scrollElements = document.querySelectorAll(
       ".no-scrollbar:not([data-drag-init='1'])"
