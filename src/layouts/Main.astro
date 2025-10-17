@@ -30,7 +30,7 @@ const { title, description, cls = "" } = Astro.props;
   </body>
 </html>
 
-<script is:inline type="module">
-  import { attachAstroLifecycle } from "./src/lib/projectEnhancements.ts";
+<script>
+  import { attachAstroLifecycle } from "@/lib/projectEnhancements.ts";
   attachAstroLifecycle();
 </script>

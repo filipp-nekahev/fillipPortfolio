@@ -60,7 +60,7 @@ const { title, years, description, logo } = Astro.props;
 
   document.addEventListener("astro:page-load", initBackButton);
 </script>
-<script is:inline type="module">
-  import { attachAstroLifecycle } from "./src/lib/projectEnhancements.ts";
+<script>
+  import { attachAstroLifecycle } from "@/lib/projectEnhancements.ts";
   attachAstroLifecycle();
 </script>
