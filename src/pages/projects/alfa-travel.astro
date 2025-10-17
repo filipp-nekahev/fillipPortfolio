@@ -7,8 +7,8 @@ import ProjectContnetWrapper from "@/components/ui/ProjectContnetWrapper.astro";
 import SwiperSlider from "@/components/ui/SwiperSlider.astro";
 import { loadImages } from "@/utils/loadImages";
 
-import detail1Img from "@/assets/alfaDecor/1.png";
-import detail2Img from "@/assets/alfaDecor/2.png";
+import detail1Img from "@/assets/alfaDecor/4.png";
+import detail2Img from "@/assets/alfaDecor/5.png";
 import logoImg from "@/assets/logo/alfalogo-min.png";
 
 const title = "Alfa Bank - Alfa Travel";
@@ -122,5 +122,33 @@ const sliderImagesThird = await loadImages(imageModulesThird);
   </ProjectContnetWrapper>
   <div class="mt-[40px] mb-[100px]">
     <SwiperSlider sliderImages={sliderImagesThird} initialWidth="270px" />
+  </div>
+  <div
+    class="mt-[40px] mb-[100px] flex items-start gap-[40px] overflow-x-auto overflow-visible scroll-smooth snap-x snap-mandatory lg:snap-none no-scrollbar
+      px-[var(--container-padding)] scroll-px-[var(--container-padding)] lg:px-[var(--offset-left)] lg:scroll-px-0 lg:pb-0"
+    style=`--offset-left: calc(50vw - (1200px/2) + 270px + 20px)`
+    tabindex="0"
+    role="region"
+    aria-label="Media carousel"
+  >
+    <Image
+      src={detail1Img}
+      class="max-w-[none]"
+      alt="Decorative detail image"
+    />
+  </div>
+  <div
+    class="mt-[40px] mb-[100px] flex items-start gap-[40px] overflow-x-auto overflow-visible scroll-smooth snap-x snap-mandatory lg:snap-none no-scrollbar
+      px-[var(--container-padding)] scroll-px-[var(--container-padding)] lg:px-[var(--offset-left)] lg:scroll-px-0 lg:pb-0"
+    style=`--offset-left: calc(50vw - (1200px/2) + 270px + 20px)`
+    tabindex="0"
+    role="region"
+    aria-label="Media carousel"
+  >
+    <Image
+      src={detail2Img}
+      class="max-w-[none]"
+      alt="Decorative detail image"
+    />
   </div>
 </Layout>
