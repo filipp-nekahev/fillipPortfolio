@@ -97,29 +97,6 @@ const sliderImagesThird = await loadImages(imageModulesThird);
   <div class="mt-[40px] mb-[100px]">
     <SwiperSlider sliderImages={sliderImagesSecond} initialWidth="270px" />
   </div>
-  <ProjectContnetWrapper>
-    <Heading level={2} size="xl" weight="semibold"
-      >Product Strategy Decision</Heading
-    >
-    <Text class="mb-[25px]">
-      Given that clients were already using Excel-based workflows, we chose an
-      MLP approach over basic MVP to reduce migration friction and deliver
-      immediate value.
-    </Text>
-  </ProjectContnetWrapper>
-  <ProjectContnetWrapper>
-    <Heading level={2} size="xl" weight="semibold"
-      >Enhanced Booking Experience</Heading
-    >
-    <Text class="mb-[60px]"
-      >Created comprehensive booking workflows including airplane seat selection
-      interfaces with visual seat maps, hotel booking system with interactive
-      property search and maps, additional baggage services, SMS notification
-      systems, digital ticket designs, and various auxiliary travel services to
-      enhance the complete customer journey from search to post-travel
-      experience.</Text
-    >
-  </ProjectContnetWrapper>
   <div class="mt-[40px] mb-[100px]">
     <SwiperSlider sliderImages={sliderImagesThird} initialWidth="270px" />
   </div>
@@ -133,6 +110,7 @@ const sliderImagesThird = await loadImages(imageModulesThird);
   >
     <Image
       src={detail1Img}
+      width={detail1Img.width / 2}
       class="max-w-[none]"
       alt="Decorative detail image"
     />
@@ -147,6 +125,7 @@ const sliderImagesThird = await loadImages(imageModulesThird);
   >
     <Image
       src={detail2Img}
+      width={detail2Img.width / 2}
       class="max-w-[none]"
       alt="Decorative detail image"
     />
