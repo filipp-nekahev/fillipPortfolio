@@ -13,6 +13,9 @@ export default defineConfig({
       },
     },
   },
+  alias: {
+    "@": "./src",
+  },
   compressHTML: true,
   prefetch: {
     prefetchAll: true,
