@@ -1,3 +1,9 @@
-<div class="max-w-[660px] mx-auto px-[var(--container-padding)]">
+---
+export interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+<div class={`max-w-[660px] mx-auto px-[var(--container-padding)] ${className}`}>
   <slot />
 </div>
