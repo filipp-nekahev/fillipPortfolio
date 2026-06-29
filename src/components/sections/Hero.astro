@@ -245,16 +245,31 @@ const DEFAULT_VARIANT = "gradient";
     start();
 
     /* --------------------------- live picker ---------------------------- */
-    if (params.get("pick") === "1" && !document.getElementById("hero-picker")) {
+    // Always-on, click-to-preview switcher. No URL params or code edits
+    // needed: open the site and tap a button. The choice is remembered.
+    // Add `?pick=0` to the URL to hide it once a variant is chosen.
+    if (params.get("pick") !== "0" && !document.getElementById("hero-picker")) {
+      const labels: Record<Variant, string> = {
+        gradient: "Градиент",
+        particles: "Частицы",
+        waves: "Волны",
+      };
+
       const bar = document.createElement("div");
       bar.id = "hero-picker";
       bar.style.cssText =
-        "position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:50;display:flex;gap:6px;padding:6px;background:rgba(255,255,255,0.9);border:1px solid #e5e7eb;border-radius:999px;box-shadow:0 4px 20px rgba(0,0,0,0.08);font-family:Inter,sans-serif;font-size:13px;backdrop-filter:blur(8px)";
+        "position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:4px;padding:5px;background:rgba(255,255,255,0.92);border:1px solid #e8e8e8;border-radius:999px;box-shadow:0 6px 24px rgba(0,0,0,0.1);font-family:Inter,sans-serif;font-size:13px;font-weight:500;backdrop-filter:blur(10px)";
+
+      const caption = document.createElement("span");
+      caption.textContent = "Фон:";
+      caption.style.cssText = "padding:0 8px 0 10px;color:#9aa3ad";
+      bar.appendChild(caption);
+
       (["gradient", "particles", "waves"] as Variant[]).forEach((v) => {
         const btn = document.createElement("button");
-        btn.textContent = v;
+        btn.textContent = labels[v];
         btn.style.cssText =
-          "padding:6px 14px;border-radius:999px;border:none;cursor:pointer;text-transform:capitalize;color:#595959;background:transparent";
+          "padding:7px 16px;border-radius:999px;border:none;cursor:pointer;color:#595959;background:transparent;font:inherit;transition:background .15s,color .15s";
         const sync = () => {
           bar.querySelectorAll("button").forEach((b) => {
             (b as HTMLButtonElement).style.background = "transparent";
@@ -270,6 +285,7 @@ const DEFAULT_VARIANT = "gradient";
         });
         bar.appendChild(btn);
       });
+
       document.body.appendChild(bar);
     }
   }
