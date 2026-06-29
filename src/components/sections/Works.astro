@@ -1,6 +1,5 @@
 ---
 import PortfolioCard from "@/components/cards/PortfolioCard.astro";
-import SideProjects from "./SideProjects.astro";
 
 const works = [
   {
@@ -24,12 +23,19 @@ const works = [
     image: "/portfolio_main/Aloha-min.png",
     mobileImage: "/portfolio_main/Aloha-min.png",
   },
+  // {
+  //   href: "/projects/smart-avia?from=works",
+  //   title: "SmartAvia",
+  //   years: "Freelance 2019",
+  //   image: "/portfolio_main/smartAvia-min.png",
+  //   mobileImage: "/portfolio_main/smartAvia_s-min.png",
+  // },
   {
-    href: "/projects/smart-avia?from=works",
-    title: "SmartAvia",
-    years: "Freelance 2019",
-    image: "/portfolio_main/smartAvia-min.png",
-    mobileImage: "/portfolio_main/smartAvia_s-min.png",
+    href: "/projects/fill-wise?from=works",
+    title: "FillWise",
+    years: "Side Project 2025",
+    image: "/portfolio_main/FillWise-min.png",
+    mobileImage: "/portfolio_main/FillWise_s-min.png",
   },
   {
     href: "/projects/poezdom-ios-app?from=works",
@@ -39,12 +45,19 @@ const works = [
     mobileImage: "/portfolio_main/Poezdom_s-min.png",
   },
   {
-    href: "/projects/mnfst?from=works",
-    title: "MNFST",
-    years: "Freelance 2018",
-    image: "/portfolio_main/MNFST-min.png",
-    mobileImage: "/portfolio_main/MNFST_s-min.png",
+    href: "/projects/ai-hair?from=works",
+    title: "AIHAIRSTYLE.IO",
+    years: "Side Project 2025",
+    image: "/portfolio_main/Hairstyle-min.png",
+    mobileImage: "/portfolio_main/Hairstyle_s-min.png",
   },
+  // {
+  //   href: "/projects/mnfst?from=works",
+  //   title: "MNFST",
+  //   years: "Freelance 2018",
+  //   image: "/portfolio_main/MNFST-min.png",
+  //   mobileImage: "/portfolio_main/MNFST_s-min.png",
+  // },
 ];
 
 const spanForIndex = (i: number) => {
@@ -86,5 +99,4 @@ const spanForIndex = (i: number) => {
       }
     </div>
   </div>
-  <SideProjects />
 </section>
