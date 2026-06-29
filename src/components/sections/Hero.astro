@@ -1,94 +1,279 @@
+---
+// Hero background animation.
+// Three variants available, switch with the constant below or live via `?bg=`:
+//   - "gradient"  : soft animated mesh gradient (premium, calm)
+//   - "particles" : constellation field that reacts to the cursor
+//   - "waves"     : layered flowing line waves
+// Add `?pick=1` to the URL to show a small on-screen switcher while choosing.
+const DEFAULT_VARIANT = "gradient";
+---
+
 <section
   id="hero"
-  class="text-center h-screen flex flex-col justify-center gap-4 px-[var(--container-padding)]"
+  class="relative overflow-hidden text-center h-screen flex flex-col justify-center gap-4 px-[var(--container-padding)]"
 >
-  <h1 class="text-[2.375rem] font-semibold leading-none">Filipp Nekhaev</h1>
-  <div class="flex flex-col text-[1.125rem] text-[var(--color-description)]">
-    <p class="">Senior Product Designer</p>
+  <canvas
+    id="hero-bg"
+    class="absolute inset-0 -z-10 w-full h-full"
+    data-default={DEFAULT_VARIANT}
+    aria-hidden="true"></canvas>
+
+  <h1 class="relative text-[2.375rem] font-semibold leading-none">
+    Filipp Nekhaev
+  </h1>
+  <div
+    class="relative flex flex-col text-[1.125rem] text-[var(--color-description)]"
+  >
+    <p>Senior Product Designer</p>
     <p class="opacity-60">UI/UX Designer</p>
   </div>
-  <canvas
-    id="hero-wave"
-    class="w-full max-w-[600px] h-[120px] mx-auto"
-    aria-hidden="true"
-  >
-  </canvas>
 </section>
 
 <script>
-  const canvas = document.getElementById("hero-wave") as HTMLCanvasElement | null;
+  type Variant = "gradient" | "particles" | "waves";
 
-  if (canvas) {
+  function initHeroBg() {
+    const section = document.getElementById("hero");
+    const canvas = document.getElementById("hero-bg") as HTMLCanvasElement | null;
+    if (!section || !canvas) return;
+
+    // Avoid double-init across Astro view transitions.
+    if (canvas.dataset.init === "1") return;
+    canvas.dataset.init = "1";
+
     const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const fromUrl = params.get("bg") as Variant | null;
+    const stored = localStorage.getItem("heroBg") as Variant | null;
+    let variant: Variant =
+      fromUrl || stored || ((canvas.dataset.default as Variant) ?? "gradient");
+
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     );
-
-    const ROWS = 3;
-    const COLS = 60;
-    const DOT_RADIUS = 1.5;
-    const COLOR = "rgba(160, 160, 160, 0.16)";
 
     let width = 0;
     let height = 0;
     let dpr = 1;
     let rafId = 0;
     let time = 0;
+    const pointer = { x: 0.5, y: 0.5, active: false };
 
     const resize = () => {
-      dpr = window.devicePixelRatio || 1;
-      width = canvas.clientWidth;
-      height = canvas.clientHeight;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = section.clientWidth;
+      height = section.clientHeight;
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
-      if (ctx) ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      setupParticles();
     };
 
-    const draw = () => {
-      if (!ctx) return;
+    /* ----------------------------- gradient ----------------------------- */
+    // Soft pastel blobs drifting over white, blended with "multiply"
+    // so they tint the background without washing it out.
+    const blobs = [
+      { color: "#dfe8ff", r: 0.55, ox: 0.3, oy: 0.35, sx: 0.6, sy: 0.5 },
+      { color: "#ffe3ec", r: 0.5, ox: 0.7, oy: 0.4, sx: 0.45, sy: 0.7 },
+      { color: "#e0f7f1", r: 0.6, ox: 0.5, oy: 0.7, sx: 0.7, sy: 0.4 },
+      { color: "#fdf0d5", r: 0.45, ox: 0.4, oy: 0.55, sx: 0.55, sy: 0.65 },
+    ];
+
+    const drawGradient = () => {
       ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = COLOR;
+      ctx.globalCompositeOperation = "multiply";
+      const base = Math.max(width, height);
+      for (let i = 0; i < blobs.length; i++) {
+        const b = blobs[i];
+        const t = time * 0.35;
+        const cx = (b.ox + Math.sin(t * b.sx + i) * 0.18) * width;
+        const cy = (b.oy + Math.cos(t * b.sy + i * 1.7) * 0.18) * height;
+        const radius = b.r * base;
+        const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+        g.addColorStop(0, b.color);
+        g.addColorStop(1, "rgba(255,255,255,0)");
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalCompositeOperation = "source-over";
+    };
 
-      const rowGap = height / (ROWS + 1);
-      const colGap = width / (COLS - 1);
+    /* ---------------------------- particles ----------------------------- */
+    type P = { x: number; y: number; vx: number; vy: number };
+    let particles: P[] = [];
 
-      for (let r = 0; r < ROWS; r++) {
-        const baseY = rowGap * (r + 1);
-        for (let c = 0; c < COLS; c++) {
-          const x = colGap * c;
-          const phase = c * 0.35 + r * 0.6 + time;
-          const y = baseY + Math.sin(phase) * (rowGap * 0.35);
-          ctx.beginPath();
-          ctx.arc(x, y, DOT_RADIUS, 0, Math.PI * 2);
-          ctx.fill();
+    const setupParticles = () => {
+      if (variant !== "particles") return;
+      const count = Math.min(90, Math.round((width * height) / 14000));
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+      }));
+    };
+
+    const drawParticles = () => {
+      ctx.clearRect(0, 0, width, height);
+      const px = pointer.x * width;
+      const py = pointer.y * height;
+      const linkDist = 120;
+
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        // gentle cursor repulsion
+        if (pointer.active) {
+          const dx = p.x - px;
+          const dy = p.y - py;
+          const d = Math.hypot(dx, dy);
+          if (d < 140 && d > 0) {
+            const f = (140 - d) / 140 * 0.6;
+            p.x += (dx / d) * f;
+            p.y += (dy / d) * f;
+          }
         }
+      }
+
+      // links
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const a = particles[i];
+          const b = particles[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const d = Math.hypot(dx, dy);
+          if (d < linkDist) {
+            ctx.strokeStyle = `rgba(115,128,140,${(1 - d / linkDist) * 0.18})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // dots
+      ctx.fillStyle = "rgba(115,128,140,0.5)";
+      for (const p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 1.6, 0, Math.PI * 2);
+        ctx.fill();
       }
     };
 
+    /* ------------------------------ waves ------------------------------- */
+    const drawWaves = () => {
+      ctx.clearRect(0, 0, width, height);
+      const layers = 4;
+      for (let l = 0; l < layers; l++) {
+        const yBase = height * (0.5 + (l - layers / 2) * 0.06);
+        const amp = height * 0.05 * (1 + l * 0.3);
+        const speed = time * (0.4 + l * 0.12);
+        const grad = ctx.createLinearGradient(0, 0, width, 0);
+        grad.addColorStop(0, "rgba(115,128,140,0)");
+        grad.addColorStop(0.5, `rgba(115,128,140,${0.16 - l * 0.025})`);
+        grad.addColorStop(1, "rgba(115,128,140,0)");
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.25;
+        ctx.beginPath();
+        for (let x = 0; x <= width; x += 6) {
+          const y =
+            yBase +
+            Math.sin(x * 0.008 + speed + l) * amp +
+            Math.sin(x * 0.02 - speed * 0.7) * amp * 0.3;
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+    };
+
+    /* ------------------------------ loop -------------------------------- */
+    const renderers: Record<Variant, () => void> = {
+      gradient: drawGradient,
+      particles: drawParticles,
+      waves: drawWaves,
+    };
+
+    const draw = () => renderers[variant]();
+
     const animate = () => {
-      time += 0.03;
+      time += 0.016;
       draw();
       rafId = requestAnimationFrame(animate);
     };
 
     const start = () => {
       cancelAnimationFrame(rafId);
-      if (prefersReducedMotion.matches) {
-        draw();
-      } else {
-        animate();
-      }
+      if (prefersReducedMotion.matches) draw();
+      else animate();
     };
+
+    const setVariant = (v: Variant) => {
+      variant = v;
+      localStorage.setItem("heroBg", v);
+      setupParticles();
+      start();
+    };
+
+    /* --------------------------- interaction ---------------------------- */
+    section.addEventListener("pointermove", (e) => {
+      const rect = section.getBoundingClientRect();
+      pointer.x = (e.clientX - rect.left) / rect.width;
+      pointer.y = (e.clientY - rect.top) / rect.height;
+      pointer.active = true;
+    });
+    section.addEventListener("pointerleave", () => (pointer.active = false));
 
     const handleResize = () => {
       resize();
       start();
     };
+    window.addEventListener("resize", handleResize);
+    prefersReducedMotion.addEventListener("change", start);
 
     resize();
     start();
 
-    window.addEventListener("resize", handleResize);
-    prefersReducedMotion.addEventListener("change", start);
+    /* --------------------------- live picker ---------------------------- */
+    if (params.get("pick") === "1" && !document.getElementById("hero-picker")) {
+      const bar = document.createElement("div");
+      bar.id = "hero-picker";
+      bar.style.cssText =
+        "position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:50;display:flex;gap:6px;padding:6px;background:rgba(255,255,255,0.9);border:1px solid #e5e7eb;border-radius:999px;box-shadow:0 4px 20px rgba(0,0,0,0.08);font-family:Inter,sans-serif;font-size:13px;backdrop-filter:blur(8px)";
+      (["gradient", "particles", "waves"] as Variant[]).forEach((v) => {
+        const btn = document.createElement("button");
+        btn.textContent = v;
+        btn.style.cssText =
+          "padding:6px 14px;border-radius:999px;border:none;cursor:pointer;text-transform:capitalize;color:#595959;background:transparent";
+        const sync = () => {
+          bar.querySelectorAll("button").forEach((b) => {
+            (b as HTMLButtonElement).style.background = "transparent";
+            (b as HTMLButtonElement).style.color = "#595959";
+          });
+          btn.style.background = "#111";
+          btn.style.color = "#fff";
+        };
+        if (v === variant) sync();
+        btn.addEventListener("click", () => {
+          setVariant(v);
+          sync();
+        });
+        bar.appendChild(btn);
+      });
+      document.body.appendChild(bar);
+    }
   }
+
+  document.addEventListener("astro:page-load", initHeroBg);
+  document.addEventListener("DOMContentLoaded", initHeroBg);
 </script>
