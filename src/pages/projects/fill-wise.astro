@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "@/layouts/Project.astro";
 import Heading from "@/components/ui/Heading.astro";
 import Text from "@/components/ui/Text.astro";
@@ -6,6 +7,10 @@ import ProjectContnetWrapper from "@/components/ui/ProjectContnetWrapper.astro";
 import SwiperSlider from "@/components/ui/SwiperSlider.astro";
 import { loadImages } from "@/utils/loadImages";
 import logo from "@/assets/logo/fwlogo-min.png";
+import moodboardImg from "@/assets/fillwiseProcess/moodboard.png";
+import onboarding1Img from "@/assets/fillwiseProcess/onboarding-1.png";
+import onboarding2Img from "@/assets/fillwiseProcess/onboarding-2.png";
+import landingImg from "@/assets/fillwiseProcess/landing.png";
 
 const title = "FillWise.ai";
 const years = "Side Project 2025";
@@ -27,6 +32,12 @@ const sliderImages = await loadImages(imageModules);
       documents, or physical forms into web interfaces - a process that consumes
       significant time and introduces human error.</Text
     >
+    <Heading level={2} size="xl" weight="semibold">How It Started</Heading>
+    <Text class="mb-[1.562rem]"
+      >I built FillWise for my wife. The tools I found felt inconvenient: they
+      filled forms with random data or asked you to map every field by
+      hand.</Text
+    >
     <Heading level={2} size="xl" weight="semibold">Solution</Heading>
     <Text class="mb-[1.562rem]"
       >Developed an intelligent Chrome extension that automates form filling
@@ -34,6 +45,26 @@ const sliderImages = await loadImages(imageModules);
       any source or upload document photos (including passports and IDs), and
       the tool automatically populates corresponding web form fields.</Text
     >
+    <Heading level={2} size="xl" weight="semibold">Design Exploration</Heading>
+    <Text class="mb-[1.562rem]"
+      >Before designing the extension panel, I collected UI references and
+      explored different visual directions, mainly on Dribbble and Pinterest. I
+      also looked for similar tools in mobile apps but found nothing close to
+      this use case.</Text
+    >
+  </ProjectContnetWrapper>
+  <Image
+    src={moodboardImg}
+    alt="FillWise UI references moodboard"
+    width="500"
+    densities={[1, 2]}
+    class="m-auto mb-[25px]"
+  />
+  <Text class="mb-[50px] max-w-[452px] m-auto text-center text-[15px] italic">
+    UI references and visual directions collected before designing the
+    extension panel.
+  </Text>
+  <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold">Technical Approach</Heading>
     <Text class="mb-[1.562rem]"
       >Built initial prototype using AI tools for rapid validation, then
@@ -41,10 +72,80 @@ const sliderImages = await loadImages(imageModules);
       robust browser integration and enhanced AI capabilities. The landing page
       was also AI-generated and refined for optimal conversion.</Text
     >
+    <Heading level={2} size="xl" weight="semibold"
+      >Iterating with Real Users</Heading
+    >
+    <Text class="mb-[1.562rem]"
+      >I tested every version on my wife's real tasks and used her feedback.
+      Later I started using the extension myself to apply for jobs. This is how
+      Templates appeared: a template keeps your own data, like your email, and
+      client data goes into the text area. My wife needed this too. For airline
+      bookings she had to use her own email with each client's details, and now
+      there is no extra switching between tabs or retyping.</Text
+    >
   </ProjectContnetWrapper>
-  <div class="mt-[60px] mb-[50px]">
+  <div class="mt-[60px] mb-[25px]">
     <SwiperSlider {sliderImages} initialWidth="270px" />
   </div>
+  <Text class="mb-[50px] max-w-[452px] m-auto text-center text-[15px] italic">
+    The panel went through several versions, from an early prototype to the
+    current layout. One idea was tabs (the Pitch Deck concept) to fill a form
+    exactly as in the source document or in a more free way. I didn't find a
+    solution I liked and had more important tasks, so it stayed an idea.
+  </Text>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Onboarding</Heading>
+    <Text class="mb-[1.562rem]"
+      >Chrome allows an extension to open a web page right after installation,
+      so I used this moment for a guided onboarding. The user pins the
+      extension and can try it right away on a built-in test form with prepared
+      sample data (or their own). This way people see the core value before
+      touching a real task.</Text
+    >
+  </ProjectContnetWrapper>
+  <Image
+    src={onboarding1Img}
+    alt="FillWise onboarding, pin the extension"
+    width="657"
+    densities={[1, 2]}
+    class="m-auto mb-[25px]"
+  />
+  <Image
+    src={onboarding2Img}
+    alt="FillWise onboarding, built-in test form with sample data"
+    width="657"
+    densities={[1, 2]}
+    class="m-auto mb-[50px]"
+  />
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Feature Trade-offs</Heading>
+    <Text class="mb-[1.562rem]"
+      >The extension also works with PDFs and images: you can drop in your CV
+      or a passport photo. I also built Excel autofill, but I had to put it
+      aside. Google asks for wide access to user spreadsheets, which means
+      touching sensitive client data, or I would have to pay $1000+ per year
+      for extension verification. For a small side project that was not worth
+      it. PDF form filling made it into production.</Text
+    >
+    <Heading level={2} size="xl" weight="semibold">Landing Page</Heading>
+    <Text class="mb-[1.562rem]"
+      >I made the first version of the current landing page with Figma AI,
+      improved it by hand, then passed the design to Claude through the Figma
+      MCP and shipped the result to production at <a
+        href="https://fillwise.ai"
+        target="_blank"
+        rel="noopener"
+        class="underline">fillwise.ai</a
+      >.</Text
+    >
+  </ProjectContnetWrapper>
+  <Image
+    src={landingImg}
+    alt="FillWise landing page"
+    width="657"
+    densities={[1, 2]}
+    class="m-auto mb-[50px]"
+  />
   <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold">Business Impact</Heading>
     <Text>
@@ -62,5 +163,10 @@ const sliderImages = await loadImages(imageModules);
       it didn't generate significant traction, the experience provided valuable
       lessons in product positioning and community engagement.
     </Text>
+    <Heading level={2} size="xl" weight="semibold">What's Next</Heading>
+    <Text
+      >Soon FillWise will be free or almost free, and PDF filling will also
+      work for documents without form fields inside.</Text
+    >
   </ProjectContnetWrapper>
 </Layout>
