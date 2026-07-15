@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "@/layouts/Project.astro";
 import Heading from "@/components/ui/Heading.astro";
 import Text from "@/components/ui/Text.astro";
@@ -6,6 +7,9 @@ import ProjectContnetWrapper from "@/components/ui/ProjectContnetWrapper.astro";
 import SwiperSlider from "@/components/ui/SwiperSlider.astro";
 import { loadImages } from "@/utils/loadImages";
 import logo from "@/assets/logo/fwlogo-min.png";
+import moodboardImg from "@/assets/fillwiseProcess/moodboard.png";
+import onboarding1Img from "@/assets/fillwiseProcess/onboarding-1.png";
+import onboarding2Img from "@/assets/fillwiseProcess/onboarding-2.png";
 
 const title = "FillWise.ai";
 const years = "Side Project 2025";
@@ -34,6 +38,26 @@ const sliderImages = await loadImages(imageModules);
       any source or upload document photos (including passports and IDs), and
       the tool automatically populates corresponding web form fields.</Text
     >
+    <Heading level={2} size="xl" weight="semibold">Design Exploration</Heading>
+    <Text class="mb-[1.562rem]"
+      >Before designing the extension panel, I collected UI references and
+      explored different visual directions — mainly on Dribbble and Pinterest. I
+      also searched for similar solutions in mobile apps, but found nothing
+      close to this use case.</Text
+    >
+  </ProjectContnetWrapper>
+  <Image
+    src={moodboardImg}
+    alt="FillWise UI references moodboard"
+    width="500"
+    densities={[1, 2]}
+    class="m-auto mb-[25px]"
+  />
+  <Text class="mb-[50px] max-w-[452px] m-auto text-center text-[15px] italic">
+    UI references and visual directions collected before designing the
+    extension panel.
+  </Text>
+  <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold">Technical Approach</Heading>
     <Text class="mb-[1.562rem]"
       >Built initial prototype using AI tools for rapid validation, then
@@ -42,9 +66,39 @@ const sliderImages = await loadImages(imageModules);
       was also AI-generated and refined for optimal conversion.</Text
     >
   </ProjectContnetWrapper>
-  <div class="mt-[60px] mb-[50px]">
+  <div class="mt-[60px] mb-[25px]">
     <SwiperSlider {sliderImages} initialWidth="270px" />
   </div>
+  <Text class="mb-[50px] max-w-[452px] m-auto text-center text-[15px] italic">
+    The extension panel went through several iterations — from an early version
+    with saved form templates to the current focused layout. A separate Pitch
+    Deck mode appeared in one of the explorations, but it stayed a concept and
+    never went into development.
+  </Text>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Onboarding</Heading>
+    <Text class="mb-[1.562rem]"
+      >Chrome allows an extension to open a web page right after installation,
+      so I used this moment for a guided onboarding. The user pins the
+      extension and can immediately try it on a built-in test form with
+      prepared sample data (or their own) — experiencing the core value before
+      touching a real task.</Text
+    >
+  </ProjectContnetWrapper>
+  <Image
+    src={onboarding1Img}
+    alt="FillWise onboarding — pin the extension"
+    width="657"
+    densities={[1, 2]}
+    class="m-auto mb-[25px]"
+  />
+  <Image
+    src={onboarding2Img}
+    alt="FillWise onboarding — built-in test form with sample data"
+    width="657"
+    densities={[1, 2]}
+    class="m-auto mb-[50px]"
+  />
   <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold">Business Impact</Heading>
     <Text>

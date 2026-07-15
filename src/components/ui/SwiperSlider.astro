@@ -39,6 +39,7 @@ const { sliderImages, initialWidth, video=false } = Astro.props;
           style=`max-width: ${image.width / 2}px`
           src={image}
           width={image.width / 2}
+          densities={[1, 2]}
           alt=""
         />
         </div>
