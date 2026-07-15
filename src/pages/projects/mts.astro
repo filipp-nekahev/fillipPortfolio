@@ -10,6 +10,7 @@ import { loadImages } from "@/utils/loadImages";
 import detail1Img from "@/assets/mtsDecor/1.png";
 import detail2Img from "@/assets/mtsDecor/2.png";
 import excelImg from "@/assets/mtsDecor/excel.png";
+import planfactImg from "@/assets/mtsDecor/planfact.png";
 import workflowImg from "@/assets/mtsDecor/workflow.png";
 import logoImg from "@/assets/mtsDecor/logo.png";
 
@@ -150,6 +151,25 @@ const sliderImagesThird = await loadImages(imageModulesThird);
   <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
     Campaign Approval Workflow
   </Text>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Plan vs Fact</Heading>
+    <Text class="mb-[1.562rem]">
+      Another stage we brought into the platform is the plan-fact report. You
+      plan one thing and get another, so planners tracked the difference in a
+      separate Excel report with 286 columns. In the platform this became a
+      report with detailed analytics.
+    </Text>
+  </ProjectContnetWrapper>
+  <Image
+    src={planfactImg}
+    alt="The original plan-fact report in Excel"
+    width="657"
+    densities={[1, 2]}
+    class="m-auto mb-[25px]"
+  />
+  <Text class="mb-[50px] max-w-[452px] m-auto text-center text-[15px] italic">
+    The plan-fact report in Excel. 286 columns.
+  </Text>
   <div class="mt-[100px] mb-[25px]">
     <SwiperSlider sliderImages={sliderImagesSecond} initialWidth="275px" />
   </div>
@@ -179,4 +199,11 @@ const sliderImagesThird = await loadImages(imageModulesThird);
     demographics, allowing planners to optimize reach and frequency for
     broadcast campaigns.
   </Text>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Outcome</Heading>
+    <Text class="mb-[50px]">
+      We shipped the platform to production inside the corporation, with a plan
+      to sell it to other corporations and marketing agencies.
+    </Text>
+  </ProjectContnetWrapper>
 </Layout>
