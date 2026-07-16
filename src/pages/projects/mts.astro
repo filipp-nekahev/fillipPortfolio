@@ -9,6 +9,9 @@ import { loadImages } from "@/utils/loadImages";
 
 import detail1Img from "@/assets/mtsDecor/1.png";
 import detail2Img from "@/assets/mtsDecor/2.png";
+import excelImg from "@/assets/mtsDecor/excel.png";
+import planfactImg from "@/assets/mtsDecor/planfact.png";
+import workflowImg from "@/assets/mtsDecor/workflow.png";
 import logoImg from "@/assets/mtsDecor/logo.png";
 
 const title = "MTS Digital";
@@ -46,11 +49,28 @@ const sliderImagesThird = await loadImages(imageModulesThird);
       mobile, TV) without centralized workflow management. The market lacked a
       comprehensive solution for Russian media landscape.
     </Text>
+    <Text class="mb-[1.562rem]">
+      At first the whole project looked like a small task: take a huge Excel
+      spreadsheet and turn it into a web format.
+    </Text>
+  </ProjectContnetWrapper>
+  <Image
+    src={excelImg}
+    alt="The original media plan template in Excel"
+    width="657"
+    densities={[1, 2]}
+    class="m-auto mb-[25px]"
+  />
+  <Text class="mb-[50px] max-w-[452px] m-auto text-center text-[15px] italic">
+    The starting point: the media plan template in Excel. 99 columns and 242
+    rows.
+  </Text>
+  <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold">My Role</Heading>
     <Text class="mb-[60px]">
-      As lead designer, I owned the entire design process from research through
-      MVP delivery, working directly with product management and engineering
-      teams.</Text
+      As lead designer, I built the platform design from scratch and owned the
+      entire process from research through MVP delivery, working directly with
+      product management and engineering teams.</Text
     >
     <Heading
       class="mt-[100px] mb-[10px] text-[28px]"
@@ -66,10 +86,17 @@ const sliderImagesThird = await loadImages(imageModulesThird);
     <Heading level={2} size="xl" weight="semibold">Research & Discovery</Heading
     >
     <Text class="mb-[1.562rem]">
-      Conducted interviews with media planners across agency types, identifying
-      two key user groups: primary planners managing end-to-end campaigns, and
-      collaborative teams requiring approval workflows with version control
-      constraints.
+      I ran interviews with media planners inside the company, and we kept
+      weekly sessions with them through the whole project. Because of an NDA I
+      was not allowed to talk to planners from other companies.
+    </Text>
+    <Text class="mb-[1.562rem]">
+      These calls showed that the task was much bigger than moving a table to
+      the web: plans go through approvals at different stages, planners wanted
+      to launch internet ads right from the platform, and they wanted to see
+      analytics in the same place. The interviews also revealed two key user
+      groups: primary planners managing end-to-end campaigns, and collaborative
+      teams requiring approval workflows with version control constraints.
     </Text>
 
     <Heading level={2} size="xl" weight="semibold"
@@ -99,6 +126,18 @@ const sliderImagesThird = await loadImages(imageModulesThird);
       nearly fully designed, with the primary user flow comprising approximately
       60 frames and an additional 300 frames for various states.</Text
     >
+  </ProjectContnetWrapper>
+  <Image
+    src={workflowImg}
+    alt="The final version of the platform workflow scheme"
+    width="657"
+    densities={[1, 2]}
+    class="m-auto mb-[25px]"
+  />
+  <Text class="mb-[50px] max-w-[452px] m-auto text-center text-[15px] italic">
+    The final version of the platform workflow scheme.
+  </Text>
+  <ProjectContnetWrapper>
     <Image
       src={detail2Img}
       alt="detail2Img"
@@ -112,6 +151,25 @@ const sliderImagesThird = await loadImages(imageModulesThird);
   <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
     Campaign Approval Workflow
   </Text>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Plan vs Fact</Heading>
+    <Text class="mb-[1.562rem]">
+      Another stage we brought into the platform is the plan-fact report. You
+      plan one thing and get another, so planners tracked the difference in a
+      separate Excel report with 286 columns. In the platform this became a
+      report with detailed analytics.
+    </Text>
+  </ProjectContnetWrapper>
+  <Image
+    src={planfactImg}
+    alt="The original plan-fact report in Excel"
+    width="657"
+    densities={[1, 2]}
+    class="m-auto mb-[25px]"
+  />
+  <Text class="mb-[50px] max-w-[452px] m-auto text-center text-[15px] italic">
+    The plan-fact report in Excel. 286 columns.
+  </Text>
   <div class="mt-[100px] mb-[25px]">
     <SwiperSlider sliderImages={sliderImagesSecond} initialWidth="275px" />
   </div>
@@ -121,6 +179,16 @@ const sliderImagesThird = await loadImages(imageModulesThird);
     chart types (line graphs, bar charts, pie charts, spreadsheets) and
     configure data sources to match their specific reporting needs.
   </Text>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">From Digital to TV</Heading>
+    <Text class="mb-[60px]">
+      Once all of this worked for internet advertising, we asked: why not do
+      the same for TV? Nothing like that existed in Russia at that time. With
+      the team we built TV ad planning with the option to pick and buy a
+      specific ad block, plus the same flexible automatic budget distribution
+      as for internet ads.
+    </Text>
+  </ProjectContnetWrapper>
   <div class="mb-[50px]">
     <SwiperSlider sliderImages={sliderImagesThird} initialWidth="275px" />
   </div>
@@ -131,4 +199,11 @@ const sliderImagesThird = await loadImages(imageModulesThird);
     demographics, allowing planners to optimize reach and frequency for
     broadcast campaigns.
   </Text>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Outcome</Heading>
+    <Text class="mb-[50px]">
+      We shipped the platform to production inside the corporation, with a plan
+      to sell it to other corporations and marketing agencies.
+    </Text>
+  </ProjectContnetWrapper>
 </Layout>
