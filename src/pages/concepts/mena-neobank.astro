@@ -1,0 +1,622 @@
+---
+// Hidden concept page — not linked from the main site. Direct URL only.
+const title = "Qamar — MENA neobank concept";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no"
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#0b0906" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:opsz,wght@14..32,400..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="stage">
+      <div class="phone-wrap">
+        <div class="phone" id="phone">
+          <!-- ===== HOME SCREEN ===== -->
+          <div class="screen" id="screen">
+            <div class="header-glow" aria-hidden="true"></div>
+
+            <header class="topbar">
+              <button class="chip avatar press" aria-label="Profile">
+                <span class="avatar-letter">C</span>
+              </button>
+              <div class="greet">
+                <span class="greet-hello">Ahlan,</span>
+                <span class="greet-name">Camila</span>
+              </div>
+              <button class="chip press" id="bell" aria-label="Notifications">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 3a6 6 0 0 0-6 6v3.3l-1.4 2.8a1 1 0 0 0 .9 1.4h13a1 1 0 0 0 .9-1.4L18 12.3V9a6 6 0 0 0-6-6Z"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linejoin="round"></path>
+                  <path
+                    d="M10 19a2 2 0 0 0 4 0"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"></path>
+                </svg>
+                <span class="bell-dot"></span>
+              </button>
+            </header>
+
+            <section class="balance" id="balance-tap" role="button" tabindex="0" aria-label="Toggle balance visibility">
+              <span class="balance-label">Total balance
+                <svg class="eye" width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z" stroke="currentColor" stroke-width="1.6"></path>
+                  <circle cx="12" cy="12" r="2.6" stroke="currentColor" stroke-width="1.6"></circle>
+                </svg>
+              </span>
+              <div class="balance-amount" id="balance-amount">
+                <span class="dirham">&#xD0;</span><span class="digits" id="digits">10&thinsp;659<span class="cents">,18</span></span>
+              </div>
+            </section>
+
+            <!-- ===== CARD STACK ===== -->
+            <section class="stack" id="stack" aria-label="Your cards, tap to cycle">
+              <div class="card card-2" data-pos="2">
+                <div class="card-inner card-green">
+                  <span class="card-num">•••• 4406</span>
+                  <span class="card-name">Family</span>
+                </div>
+              </div>
+              <div class="card card-1" data-pos="1">
+                <div class="card-inner card-cream">
+                  <span class="card-num">•••• 2291</span>
+                  <span class="card-name">Virtual</span>
+                </div>
+              </div>
+              <div class="card card-0" data-pos="0">
+                <div class="card-inner card-hero">
+                  <span class="wm" aria-hidden="true">&#xD0;</span>
+                  <div class="card-row-top">
+                    <span class="card-num">•••• 8152</span>
+                    <span class="card-tier">Infinite</span>
+                  </div>
+                  <div class="qt">
+                    <span class="qt-label">Quick transfer</span>
+                    <div class="qt-faces">
+                      <span class="face f1">S</span>
+                      <span class="face f2">M</span>
+                      <span class="face f3">L</span>
+                      <button class="face f-add press" id="qt-add" aria-label="New transfer">+</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- ===== QUICK ACTIONS CAPSULE ===== -->
+            <nav class="capsule glass" aria-label="Quick actions">
+              <button class="action press" id="act-transfer">
+                <span class="action-ic dark">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="action-t">Transfer</span>
+              </button>
+              <button class="action press">
+                <span class="action-ic dark">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M17 7 7 17M15 17H7V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="action-t">Request</span>
+              </button>
+              <button class="action press">
+                <span class="action-ic dark">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12L13 2Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+                </span>
+                <span class="action-t">Bills</span>
+              </button>
+              <button class="action press" aria-label="More">
+                <span class="action-ic gold">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="6.5" height="6.5" rx="2" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="2" stroke="currentColor" stroke-width="1.7"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="2" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="2" stroke="currentColor" stroke-width="1.7"/></svg>
+                </span>
+              </button>
+            </nav>
+
+            <!-- ===== SHEET ===== -->
+            <section class="sheet">
+              <div class="sheet-head">
+                <h2 class="sheet-title">Recent activity</h2>
+                <button class="see-all press">See all</button>
+              </div>
+              <ul class="tx-list">
+                <li class="tx press-soft">
+                  <span class="tx-ic" style="--c: #1b6fb8">C</span>
+                  <span class="tx-mid"><b>Carrefour</b><small>Today · 20:25</small></span>
+                  <span class="tx-amt">−34,50&nbsp;&#xD0;</span>
+                </li>
+                <li class="tx press-soft">
+                  <span class="tx-ic" style="--c: #e8641b">T</span>
+                  <span class="tx-mid"><b>Talabat</b><small>Today · 13:02</small></span>
+                  <span class="tx-amt">−58,00&nbsp;&#xD0;</span>
+                </li>
+                <li class="tx press-soft">
+                  <span class="tx-ic" style="--c: #caa53d">S</span>
+                  <span class="tx-mid"><b>Salary — Meraas</b><small>1 May · 09:00</small></span>
+                  <span class="tx-amt tx-in">+12&thinsp;400,00&nbsp;&#xD0;</span>
+                </li>
+                <li class="tx press-soft">
+                  <span class="tx-ic" style="--c: #0f9d58">K</span>
+                  <span class="tx-mid"><b>Careem</b><small>30 Apr · 18:44</small></span>
+                  <span class="tx-amt">−21,00&nbsp;&#xD0;</span>
+                </li>
+              </ul>
+            </section>
+          </div>
+
+          <!-- ===== TRANSFER BOTTOM SHEET (state 2) ===== -->
+          <div class="overlay" id="overlay" aria-hidden="true"></div>
+          <div class="tsheet glass-dark" id="tsheet" role="dialog" aria-modal="true" aria-label="Send money">
+            <div class="grabber"></div>
+            <h3 class="tsheet-title">Send to</h3>
+            <div class="tsheet-faces">
+              <button class="ts-person press"><span class="face lg f1">S</span><small>Sara</small></button>
+              <button class="ts-person press"><span class="face lg f2">M</span><small>Mansour</small></button>
+              <button class="ts-person press"><span class="face lg f3">L</span><small>Layla</small></button>
+              <button class="ts-person press"><span class="face lg f-add">+</span><small>New</small></button>
+            </div>
+            <div class="tsheet-amt" id="ts-amt"><span class="dirham sm">&#xD0;</span><span id="ts-value">0</span></div>
+            <div class="pad">
+              <button class="key press-soft">1</button><button class="key press-soft">2</button><button class="key press-soft">3</button>
+              <button class="key press-soft">4</button><button class="key press-soft">5</button><button class="key press-soft">6</button>
+              <button class="key press-soft">7</button><button class="key press-soft">8</button><button class="key press-soft">9</button>
+              <button class="key key-mut press-soft">,</button><button class="key press-soft">0</button><button class="key key-mut press-soft" id="key-del">⌫</button>
+            </div>
+            <button class="send press" id="send-btn">Send</button>
+          </div>
+
+          <!-- success toast -->
+          <div class="toast glass" id="toast">Sent ✓</div>
+        </div>
+      </div>
+
+      <!-- ===== CONCEPT NOTES (brief requirement) ===== -->
+      <aside class="notes">
+        <h1 class="notes-brand">Qamar</h1>
+        <p class="notes-lede">
+          A neobank concept for the MENA market. The name means “moon” — the
+          product borrows its palette from the region’s dusk: deep black
+          softened by warm gold light.
+        </p>
+        <h2>Core idea</h2>
+        <p>
+          The home screen is built around the card as a physical object — a
+          stack you flip through, the way cards live in a wallet. Money in the
+          region is social: transfers to family are a daily scenario, so Quick
+          Transfer contacts sit directly on the hero card, one tap from a
+          payment.
+        </p>
+        <h2>Screen logic</h2>
+        <p>
+          Priorities top-down: identity &amp; balance → cards (the object of
+          trust) → four daily actions in a floating capsule on the seam
+          between the “bank” zone and the “life” zone → recent activity.
+          Everything secondary lives behind “More”.
+        </p>
+        <h2>Visual decisions</h2>
+        <p>
+          A Didone serif for money gives the numbers a voice of their own —
+          calligraphic, close to the new dirham symbol’s spirit, distinct from
+          the geometric sans of the UI. Gold is used as light, not as fill:
+          gradients and glow instead of flat yellow surfaces. Micro-motion
+          follows iOS: springy press states, a sheet with a grabber, blurred
+          glass layers.
+        </p>
+        <h2>Try it</h2>
+        <p class="notes-hint">
+          Tap the balance to hide it · tap the back cards to cycle the stack ·
+          “Transfer” or “+” opens the send flow.
+        </p>
+      </aside>
+    </div>
+
+    <style>
+      :root {
+        --gold: #c9973b;
+        --gold-hi: #e9c168;
+        --ink: #0b0906;
+        --paper: #faf8f4;
+        --serif: "Fraunces", "Times New Roman", serif;
+        --sans: "Inter", -apple-system, system-ui, sans-serif;
+        --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        font-family: var(--sans);
+        background: #101010;
+        color: #eee;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-font-smoothing: antialiased;
+        overscroll-behavior-y: none;
+      }
+      button { font-family: inherit; border: 0; background: none; color: inherit; cursor: pointer; touch-action: manipulation; }
+
+      /* ---------- layout: phone + notes ---------- */
+      .stage {
+        min-height: 100dvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 64px;
+        padding: 48px 24px;
+        background:
+          radial-gradient(900px 500px at 70% -10%, rgba(201, 151, 59, 0.14), transparent 60%),
+          #101010;
+        flex-wrap: wrap;
+      }
+      .phone-wrap { flex: 0 0 auto; }
+      .phone {
+        position: relative;
+        width: 393px;
+        height: 852px;
+        border-radius: 54px;
+        overflow: hidden;
+        box-shadow:
+          0 0 0 10px #1c1c1e,
+          0 0 0 12px #3a3a3c,
+          0 40px 80px rgba(0, 0, 0, 0.6);
+        isolation: isolate;
+      }
+      .screen {
+        position: absolute; inset: 0;
+        background: var(--ink);
+        display: flex; flex-direction: column;
+        padding-top: max(58px, env(safe-area-inset-top));
+        overflow: hidden;
+      }
+      .header-glow {
+        position: absolute; inset: -20% -30% auto;
+        height: 68%;
+        background:
+          radial-gradient(60% 55% at 50% 88%, rgba(233, 193, 104, 0.55), transparent 70%),
+          radial-gradient(90% 70% at 50% 100%, rgba(201, 151, 59, 0.32), transparent 75%);
+        filter: blur(6px);
+        pointer-events: none;
+        z-index: 0;
+      }
+      .screen > :not(.header-glow) { position: relative; z-index: 1; }
+      .screen > .capsule { z-index: 5; }
+
+      /* ---------- topbar ---------- */
+      .topbar { display: flex; align-items: center; gap: 12px; padding: 6px 24px 0; }
+      .chip {
+        width: 42px; height: 42px; border-radius: 50%;
+        display: grid; place-items: center;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: #f2e9d8;
+        position: relative;
+      }
+      .avatar { background: linear-gradient(140deg, #3a2c12, #171208); border-color: rgba(201,151,59,.45); }
+      .avatar-letter { font-family: var(--serif); font-size: 18px; color: var(--gold-hi); }
+      .greet { flex: 1; display: flex; flex-direction: column; line-height: 1.15; }
+      .greet-hello { font-size: 12px; color: rgba(255,255,255,.55); }
+      .greet-name { font-size: 16px; font-weight: 600; letter-spacing: .01em; }
+      .bell-dot {
+        position: absolute; top: 9px; right: 10px;
+        width: 7px; height: 7px; border-radius: 50%;
+        background: var(--gold-hi);
+        box-shadow: 0 0 0 2px var(--ink);
+      }
+
+      /* ---------- balance ---------- */
+      .balance {
+        margin-top: 26px;
+        display: flex; flex-direction: column; align-items: center; gap: 4px;
+        user-select: none; -webkit-user-select: none;
+      }
+      .balance-label {
+        font-size: 13px; color: rgba(255,255,255,.55);
+        display: inline-flex; align-items: center; gap: 6px;
+      }
+      .eye { opacity: .7; }
+      .balance-amount {
+        font-family: var(--serif);
+        font-weight: 430;
+        font-size: 52px;
+        letter-spacing: 0.005em;
+        display: flex; align-items: baseline; gap: 10px;
+        color: #fdf9f0;
+        transition: transform 0.45s var(--spring), filter 0.3s ease;
+      }
+      .balance-amount.hidden-amt { filter: blur(14px); transform: scale(0.96); }
+      .dirham { font-size: 0.62em; color: var(--gold-hi); transform: translateY(-2px); }
+      .dirham.sm { font-size: 0.5em; }
+      .cents { font-size: 0.55em; color: rgba(253, 249, 240, 0.65); }
+
+      /* ---------- card stack ---------- */
+      .stack {
+        position: relative;
+        height: 262px;
+        margin: 48px 24px 0;
+        perspective: 900px;
+      }
+      .card {
+        position: absolute; left: 0; right: 0; bottom: 0;
+        height: 212px;
+        transition: transform 0.55s var(--spring), opacity 0.4s ease, filter 0.4s ease;
+        will-change: transform;
+      }
+      .card[data-pos="0"] { transform: translateY(0) scale(1); z-index: 3; }
+      .card[data-pos="1"] { transform: translateY(-26px) scale(0.925); z-index: 2; filter: brightness(0.75); }
+      .card[data-pos="2"] { transform: translateY(-48px) scale(0.855); z-index: 1; filter: brightness(0.55); }
+      .card-inner {
+        position: relative; height: 100%;
+        border-radius: 26px; overflow: hidden;
+        padding: 22px 24px;
+        display: flex; flex-direction: column; justify-content: space-between;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+      }
+      .card-hero {
+        background:
+          radial-gradient(120% 160% at 100% 0%, rgba(201, 151, 59, 0.4), transparent 55%),
+          radial-gradient(130% 120% at 0% 100%, rgba(201, 151, 59, 0.22), transparent 55%),
+          linear-gradient(150deg, #171310, #0a0805 55%, #131007);
+        border: 1px solid rgba(233, 193, 104, 0.35);
+      }
+      .card-cream { background: linear-gradient(150deg, #efe6d4, #d8c9a8); color: #241c0c; }
+      .card-green { background: linear-gradient(150deg, #1d3a28, #0d1f14); color: #dfe9dd; }
+      .card-cream .card-num, .card-green .card-num { font-size: 13px; opacity: .8; }
+      .card-1 .card-inner, .card-2 .card-inner { padding-top: 12px; justify-content: flex-start; flex-direction: row; gap: 10px; align-items: center; }
+      .card-name { font-size: 12px; opacity: .6; margin-left: auto; }
+      .wm {
+        position: absolute; right: -6px; top: -18px;
+        font-family: var(--serif);
+        font-size: 170px; line-height: 1;
+        color: rgba(233, 193, 104, 0.07);
+        pointer-events: none;
+      }
+      .card-row-top { display: flex; justify-content: space-between; align-items: center; }
+      .card-hero .card-num { font-size: 14px; letter-spacing: 0.14em; color: rgba(255,255,255,.85); }
+      .card-tier { font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--gold-hi); }
+      .qt { display: flex; flex-direction: column; gap: 10px; }
+      .qt-label { font-size: 12px; color: rgba(255,255,255,.5); }
+      .qt-faces { display: flex; }
+      .face {
+        width: 40px; height: 40px; border-radius: 50%;
+        display: grid; place-items: center;
+        font-size: 14px; font-weight: 600;
+        border: 2px solid #0c0a07;
+        margin-right: -9px;
+        user-select: none;
+      }
+      .face.lg { width: 52px; height: 52px; margin: 0; font-size: 17px; border-color: transparent; }
+      .f1 { background: #b98a5e; color: #2a1c0d; }
+      .f2 { background: #7d739c; color: #17131f; }
+      .f3 { background: #6f9b82; color: #10201716; color: #122019; }
+      .f-add { background: rgba(233, 193, 104, 0.15); color: var(--gold-hi); border: 1.5px dashed rgba(233, 193, 104, 0.6); font-size: 18px; }
+
+      /* ---------- capsule ---------- */
+      .capsule {
+        margin: 18px auto 0;
+        display: flex; align-items: center; gap: 2px;
+        padding: 7px;
+        border-radius: 999px;
+        width: max-content;
+        position: relative;
+        z-index: 5;
+      }
+      .glass {
+        background: rgba(250, 248, 244, 0.86);
+        -webkit-backdrop-filter: blur(24px) saturate(160%);
+        backdrop-filter: blur(24px) saturate(160%);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35);
+        color: var(--ink);
+      }
+      .action { display: flex; align-items: center; gap: 7px; padding: 3px 8px 3px 3px; border-radius: 999px; }
+      .action:last-child { padding-right: 3px; }
+      .action-ic {
+        width: 38px; height: 38px; border-radius: 50%;
+        display: grid; place-items: center;
+      }
+      .action-ic.dark { background: var(--ink); color: #f5efe2; }
+      .action-ic.gold { background: linear-gradient(140deg, var(--gold-hi), var(--gold)); color: var(--ink); }
+      .action-t { font-size: 13px; font-weight: 600; }
+
+      /* ---------- sheet ---------- */
+      .sheet {
+        flex: 1;
+        margin-top: -28px;
+        padding: 40px 24px calc(20px + env(safe-area-inset-bottom));
+        background: var(--paper);
+        border-radius: 32px 32px 0 0;
+        color: var(--ink);
+        overflow: hidden;
+      }
+      .sheet-head { display: flex; align-items: baseline; }
+      .sheet-title { font-family: var(--serif); font-weight: 480; font-size: 21px; flex: 1; }
+      .see-all { font-size: 13px; font-weight: 600; color: var(--gold); padding: 4px; }
+      .tx-list { list-style: none; margin-top: 14px; }
+      .tx {
+        display: flex; align-items: center; gap: 13px;
+        padding: 11px 8px; margin: 0 -8px;
+        border-radius: 16px;
+      }
+      .tx-ic {
+        width: 42px; height: 42px; border-radius: 50%;
+        display: grid; place-items: center;
+        font-weight: 700; font-size: 15px;
+        color: var(--c);
+        background: color-mix(in srgb, var(--c) 13%, transparent);
+      }
+      .tx-mid { flex: 1; display: flex; flex-direction: column; gap: 1px; }
+      .tx-mid b { font-size: 14.5px; font-weight: 600; }
+      .tx-mid small { font-size: 12px; color: #8b8577; }
+      .tx-amt { font-size: 14.5px; font-weight: 600; font-variant-numeric: tabular-nums; }
+      .tx-in { color: #0f7c46; }
+
+      /* ---------- press micro-interactions ---------- */
+      .press, .press-soft {
+        transition: transform 0.35s var(--spring), background-color 0.2s ease;
+      }
+      .press:active { transform: scale(0.9); }
+      .press-soft:active { transform: scale(0.965); background-color: rgba(0, 0, 0, 0.05); }
+
+      /* ---------- transfer bottom sheet ---------- */
+      .overlay {
+        position: absolute; inset: 0; z-index: 8;
+        background: rgba(5, 4, 2, 0.5);
+        -webkit-backdrop-filter: blur(6px);
+        backdrop-filter: blur(6px);
+        opacity: 0; pointer-events: none;
+        transition: opacity 0.35s ease;
+      }
+      .overlay.on { opacity: 1; pointer-events: auto; }
+      .tsheet {
+        position: absolute; left: 0; right: 0; bottom: 0; z-index: 9;
+        border-radius: 32px 32px 0 0;
+        padding: 10px 24px calc(22px + env(safe-area-inset-bottom));
+        transform: translateY(105%);
+        transition: transform 0.5s var(--spring);
+      }
+      .glass-dark {
+        background: rgba(20, 16, 10, 0.88);
+        -webkit-backdrop-filter: blur(28px) saturate(140%);
+        backdrop-filter: blur(28px) saturate(140%);
+        border-top: 1px solid rgba(233, 193, 104, 0.25);
+        color: #f5efe2;
+      }
+      .tsheet.open { transform: translateY(0); }
+      .grabber { width: 38px; height: 5px; border-radius: 3px; background: rgba(255,255,255,.25); margin: 2px auto 16px; }
+      .tsheet-title { font-family: var(--serif); font-weight: 450; font-size: 19px; margin-bottom: 14px; }
+      .tsheet-faces { display: flex; gap: 18px; margin-bottom: 8px; }
+      .ts-person { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+      .ts-person small { font-size: 11.5px; color: rgba(255,255,255,.6); }
+      .ts-person.sel .face { outline: 2px solid var(--gold-hi); outline-offset: 2px; }
+      .tsheet-amt {
+        font-family: var(--serif); font-size: 44px;
+        display: flex; align-items: baseline; gap: 8px; justify-content: center;
+        padding: 14px 0 6px;
+        color: #fdf9f0;
+      }
+      .pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px 8px; }
+      .key {
+        height: 52px; border-radius: 14px;
+        font-size: 22px; font-weight: 500;
+        color: #f5efe2;
+      }
+      .key-mut { color: rgba(255,255,255,.45); }
+      .press-soft.key:active { background: rgba(255, 255, 255, 0.08); }
+      .send {
+        margin-top: 12px; width: 100%; height: 54px;
+        border-radius: 999px;
+        background: linear-gradient(140deg, var(--gold-hi), var(--gold));
+        color: var(--ink);
+        font-size: 16px; font-weight: 700;
+      }
+      .toast {
+        position: absolute; top: 64px; left: 50%; z-index: 20;
+        transform: translate(-50%, -30px) scale(0.9);
+        padding: 10px 22px; border-radius: 999px;
+        font-weight: 600; font-size: 14px;
+        opacity: 0; pointer-events: none;
+        transition: transform 0.5s var(--spring), opacity 0.3s ease;
+      }
+      .toast.on { opacity: 1; transform: translate(-50%, 0) scale(1); }
+
+      /* ---------- notes ---------- */
+      .notes { max-width: 400px; color: #cfc9bd; font-size: 14.5px; line-height: 1.65; }
+      .notes-brand { font-family: var(--serif); font-weight: 420; font-size: 44px; color: #fdf9f0; }
+      .notes-lede { margin: 10px 0 26px; color: #a89f8d; }
+      .notes h2 { font-family: var(--serif); font-weight: 480; font-size: 18px; color: var(--gold-hi); margin: 22px 0 6px; }
+      .notes-hint { color: #8b8577; }
+
+      /* ---------- mobile: fullscreen phone ---------- */
+      @media (max-width: 900px) {
+        .stage { padding: 0; gap: 0; display: block; }
+        .phone {
+          width: 100%; height: 100dvh;
+          border-radius: 0; box-shadow: none;
+        }
+        .notes { padding: 40px 28px 60px; max-width: none; }
+      }
+    </style>
+
+    <script>
+      const $ = (s: string) => document.querySelector(s) as HTMLElement;
+
+      // hide/show balance
+      const amt = $("#balance-amount");
+      $("#balance-tap")?.addEventListener("click", () => {
+        amt.classList.toggle("hidden-amt");
+        tap(10);
+      });
+
+      // card stack cycling — tap back cards to bring forward
+      const stack = $("#stack");
+      stack?.addEventListener("click", (e) => {
+        const card = (e.target as HTMLElement).closest(".card") as HTMLElement | null;
+        if (!card || card.dataset.pos === "0") return;
+        const cards = [...stack.querySelectorAll<HTMLElement>(".card")];
+        const tapped = Number(card.dataset.pos);
+        cards.forEach((c) => {
+          const p = Number(c.dataset.pos);
+          c.dataset.pos = String(c === card ? 0 : (p + (3 - tapped)) % 3);
+        });
+        tap(12);
+      });
+
+      // transfer sheet
+      const overlay = $("#overlay"), tsheet = $("#tsheet"), toast = $("#toast");
+      const open = () => { overlay.classList.add("on"); tsheet.classList.add("open"); tap(12); };
+      const close = () => { overlay.classList.remove("on"); tsheet.classList.remove("open"); };
+      $("#act-transfer")?.addEventListener("click", open);
+      $("#qt-add")?.addEventListener("click", (e) => { e.stopPropagation(); open(); });
+      overlay?.addEventListener("click", close);
+
+      // person select
+      tsheet?.querySelectorAll(".ts-person").forEach((p) =>
+        p.addEventListener("click", () => {
+          tsheet.querySelectorAll(".ts-person").forEach((x) => x.classList.remove("sel"));
+          p.classList.add("sel");
+          tap(8);
+        })
+      );
+
+      // keypad
+      let value = "0";
+      const tsValue = $("#ts-value");
+      const render = () => { tsValue.textContent = value.replace(/\B(?=(\d{3})+(?!\d))/g, " "); };
+      tsheet?.querySelectorAll<HTMLElement>(".key").forEach((k) =>
+        k.addEventListener("click", () => {
+          const c = k.textContent!.trim();
+          if (k.id === "key-del") value = value.length > 1 ? value.slice(0, -1) : "0";
+          else if (c === ",") { if (!value.includes(",")) value += ","; }
+          else value = value === "0" ? c : (value.length < 9 ? value + c : value);
+          render(); tap(6);
+        })
+      );
+
+      // send
+      $("#send-btn")?.addEventListener("click", () => {
+        close(); tap(20);
+        value = "0"; render();
+        toast.classList.add("on");
+        setTimeout(() => toast.classList.remove("on"), 1800);
+      });
+
+      // haptics where supported
+      function tap(ms: number) {
+        if ("vibrate" in navigator) try { navigator.vibrate(ms); } catch {}
+      }
+    </script>
+  </body>
+</html>
