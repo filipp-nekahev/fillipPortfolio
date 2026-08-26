@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import Analytics from "@vercel/analytics/astro";
 import ProjectHeader from "@/components/ui/ProjectHeader.astro";
 import BackButton from "@/components/ui/BackButton.astro";
 import ProjectContnetWrapper from "@/components/ui/ProjectContnetWrapper.astro";
@@ -25,6 +26,7 @@ const { title, years, description, logo } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <ClientRouter />
+    <Analytics />
   </head>
   <body class="font-(family-name:--font-inter)">
     <main class="pb-[12.5rem]">
