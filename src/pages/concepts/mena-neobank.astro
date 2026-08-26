@@ -1,0 +1,470 @@
+---
+// Hidden concept page — not linked from the main site. Direct URL only.
+// Layout follows the Figma frame "1. Home" (node 3:604).
+const title = "MENA neobank — Home concept";
+const A = "/concepts/mena";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no"
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Monomakh&family=Inter:opsz,wght@14..32,400..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="stage">
+      <div class="phone">
+        <div class="screen">
+          <!-- gold streaks header background -->
+          <div class="hero-bg" aria-hidden="true">
+            <div class="hero-lines"></div>
+            <div class="hero-fade"></div>
+          </div>
+
+          <!-- status bar -->
+          <div class="statusbar">
+            <span class="sb-time">9:41</span>
+            <img class="sb-icons" src={`${A}/statusbar.svg`} alt="" width="67" height="11" />
+          </div>
+
+          <!-- top bar -->
+          <header class="topbar">
+            <div class="topbar-left">
+              <button class="chip press" aria-label="Profile">
+                <img src={`${A}/icon-user.svg`} alt="" width="24" height="24" />
+              </button>
+              <span class="hi">Hi, Camila</span>
+            </div>
+            <button class="chip press" aria-label="Notifications">
+              <img src={`${A}/icon-bell.svg`} alt="" width="24" height="24" />
+            </button>
+          </header>
+
+          <!-- balance -->
+          <section
+            class="balance"
+            id="balance-tap"
+            role="button"
+            tabindex="0"
+            aria-label="Toggle balance visibility"
+          >
+            <span class="balance-label">Total balance</span>
+            <div class="balance-row" id="balance-amount">
+              <img class="dirham" src={`${A}/dirham.svg`} alt="Ð" width="18" height="16" />
+              <span class="amount">10&nbsp;659,18</span>
+            </div>
+          </section>
+
+          <!-- card chips -->
+          <div class="cards no-scrollbar" id="cards">
+            <button class="cardchip press-soft">
+              <span class="cc-col"><small>Virtual</small><b>•••• 1234</b></span>
+              <img class="cc-logo" src={`${A}/visa.png`} alt="VISA" />
+            </button>
+            <button class="cardchip press-soft">
+              <span class="cc-col"><small>Physical</small><b>•••• 1234</b></span>
+              <img class="cc-logo" src={`${A}/visa.png`} alt="VISA" />
+            </button>
+            <button class="cardchip press-soft">
+              <span class="cc-col"><small>Physical</small><b>•••• 1234</b></span>
+              <img class="cc-logo" src={`${A}/visa.png`} alt="VISA" />
+            </button>
+          </div>
+
+          <!-- white sheet -->
+          <section class="sheet">
+            <h2 class="section-title">Quick actions</h2>
+            <div class="qa-row">
+              <button class="qa press">
+                <span class="qa-bg"><img src={`${A}/icon-paybalance.svg`} alt="" width="23" height="23" /></span>
+                <span class="qa-t">Pay balance</span>
+              </button>
+              <button class="qa press">
+                <span class="qa-bg"><img src={`${A}/icon-barchart.svg`} alt="" width="24" height="24" /></span>
+                <span class="qa-t">Increase<br />limits</span>
+              </button>
+              <button class="qa press">
+                <span class="qa-bg"><img src={`${A}/icon-pay.svg`} alt="" width="24" height="24" /></span>
+                <span class="qa-t">My<br />cards</span>
+              </button>
+              <button class="qa press">
+                <span class="qa-bg"><img src={`${A}/icon-filetext.svg`} alt="" width="24" height="24" /></span>
+                <span class="qa-t">Statement</span>
+              </button>
+            </div>
+
+            <button class="banner press-soft">
+              <span class="banner-sq" aria-hidden="true"></span>
+              <span class="banner-col">
+                <b>Gold Card Banner</b>
+                <small>Due on October 24</small>
+              </span>
+              <img src={`${A}/icon-chevron.svg`} alt="" width="24" height="24" />
+            </button>
+
+            <div class="tx-head">
+              <h2 class="section-title">Recent transactions</h2>
+              <button class="see-more press">See more</button>
+            </div>
+
+            <ul class="tx-list">
+              <li class="tx press-soft bordered">
+                <span class="tx-ic"><img src={`${A}/mercadona.png`} alt="" class="tx-img-sq" /></span>
+                <span class="tx-mid"><b>Mercadona</b><small>Today · 20:25</small></span>
+                <span class="tx-right"><b>−8,82&nbsp;€</b><small>Credit</small></span>
+              </li>
+              <li class="tx press-soft bordered">
+                <span class="tx-ic"><img src={`${A}/amazon.png`} alt="" class="tx-img-wide" /></span>
+                <span class="tx-mid"><b>Amazon</b><small>2 May · 12:51</small></span>
+                <span class="tx-right"><b>−130,00&nbsp;€</b><small>Pay later</small></span>
+              </li>
+              <li class="tx press-soft">
+                <span class="tx-ic tx-ic-cream"><img src={`${A}/mediamarkt.png`} alt="" class="tx-img-sq" /></span>
+                <span class="tx-mid"><b>MediaMarkt</b><small>1 May · 18:48</small></span>
+                <span class="tx-right"><b>−444,00&nbsp;€</b><small>Pay later</small></span>
+              </li>
+              <li class="tx press-soft bordered">
+                <span class="tx-ic"><img src={`${A}/amazon.png`} alt="" class="tx-img-wide" /></span>
+                <span class="tx-mid"><b>Amazon</b><small>2 May · 12:51</small></span>
+                <span class="tx-right"><b>−130,00&nbsp;€</b><small>Pay later</small></span>
+              </li>
+              <li class="tx press-soft">
+                <span class="tx-ic tx-ic-cream"><img src={`${A}/mediamarkt.png`} alt="" class="tx-img-sq" /></span>
+                <span class="tx-mid"><b>MediaMarkt</b><small>1 May · 18:48</small></span>
+                <span class="tx-right"><b>−444,00&nbsp;€</b><small>Pay later</small></span>
+              </li>
+            </ul>
+          </section>
+
+          <!-- tab bar -->
+          <nav class="tabbar" aria-label="Tab bar">
+            <div class="tabbar-row">
+              <button class="tab is-active press" data-tab>
+                <svg viewBox="0 0 24 24" fill="none"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1v-9.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+                <span>Home</span>
+              </button>
+              <button class="tab press" data-tab>
+                <svg viewBox="0 0 24 24" fill="none"><path d="M7 8h10M7 12h10M7 16h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><rect x="3.5" y="4" width="17" height="16" rx="3" stroke="currentColor" stroke-width="1.7"/></svg>
+                <span>Transactions</span>
+              </button>
+              <button class="tab press" data-tab>
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 20s-7-4.35-7-9.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 7 3.5C19 15.65 12 20 12 20Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+                <span>Wishlist</span>
+              </button>
+              <button class="tab press" data-tab>
+                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/><path d="M12 4v2m0 12v2M4 12h2m12 0h2M6.3 6.3l1.4 1.4m8.6 8.6 1.4 1.4m0-11.4-1.4 1.4M7.7 16.3l-1.4 1.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+                <span>Settings</span>
+              </button>
+            </div>
+            <div class="home-indicator"><span></span></div>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      :root {
+        --ink: #0f0f0f;
+        --grey: #9b9b9b;
+        --sans: "Inter", -apple-system, system-ui, sans-serif;
+        --serif: "Monomakh", serif;
+        --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        font-family: var(--sans);
+        background: #161616;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-font-smoothing: antialiased;
+        overscroll-behavior-y: none;
+      }
+      button { font-family: inherit; border: 0; background: none; color: inherit; cursor: pointer; touch-action: manipulation; }
+      .no-scrollbar { scrollbar-width: none; }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+
+      .stage {
+        min-height: 100dvh;
+        display: flex; align-items: center; justify-content: center;
+        padding: 40px 24px;
+        background: radial-gradient(800px 480px at 50% -10%, rgba(218, 166, 65, 0.12), transparent 60%), #161616;
+      }
+      .phone {
+        width: 393px; height: 901px;
+        border-radius: 24px;
+        border: 6px solid #e8e8e8;
+        overflow: hidden;
+        position: relative;
+        background: #000;
+      }
+      .screen {
+        position: absolute; inset: 0;
+        display: flex; flex-direction: column;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        scrollbar-width: none;
+      }
+      .screen::-webkit-scrollbar { display: none; }
+
+      /* ---------- header background ---------- */
+      .hero-bg {
+        position: absolute; top: 0; left: 0; right: 0;
+        height: 460px;
+        overflow: hidden;
+        background: #000;
+        pointer-events: none;
+      }
+      .hero-bg {
+        background: linear-gradient(
+          180deg,
+          #000 0%,
+          #000 20%,
+          #1c1204 42%,
+          #6d4c12 68%,
+          #c1902e 88%,
+          #eec25e 100%
+        );
+      }
+      .hero-lines {
+        position: absolute; inset: 0;
+        background:
+          repeating-linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.38) 0 3px,
+            rgba(0, 0, 0, 0) 3px 11px,
+            rgba(255, 246, 220, 0.10) 11px 14px,
+            rgba(0, 0, 0, 0.12) 14px 23px
+          );
+        filter: blur(0.5px);
+      }
+      .hero-fade {
+        position: absolute; inset: 0;
+        background:
+          radial-gradient(70% 45% at 50% 100%, rgba(255, 236, 180, 0.35), transparent 70%),
+          linear-gradient(180deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.25) 30%, rgba(0, 0, 0, 0) 60%);
+      }
+      .screen > :not(.hero-bg) { position: relative; z-index: 1; }
+
+      /* ---------- status bar ---------- */
+      .statusbar {
+        height: 53px;
+        flex-shrink: 0;
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 0 24px 0 21px;
+        padding-top: env(safe-area-inset-top);
+      }
+      .sb-time {
+        width: 54px; text-align: center;
+        color: #fff; font-size: 14px; font-weight: 590; letter-spacing: -0.28px;
+        font-family: -apple-system, var(--sans);
+      }
+
+      /* ---------- top bar ---------- */
+      .topbar {
+        flex-shrink: 0;
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 8px 16px;
+      }
+      .topbar-left { display: flex; align-items: center; gap: 12px; }
+      .chip {
+        width: 40px; height: 40px; border-radius: 50%;
+        background: rgba(255, 255, 255, 0.12);
+        display: grid; place-items: center;
+      }
+      .hi { color: #fff; font-size: 18px; font-weight: 500; }
+
+      /* ---------- balance ---------- */
+      .balance {
+        flex-shrink: 0;
+        padding: 64px 0 60px; /* pt24 + pt40, pb60 */
+        display: flex; flex-direction: column; align-items: center; gap: 10px;
+        user-select: none; -webkit-user-select: none;
+      }
+      .balance-label { color: var(--grey); font-size: 11px; font-weight: 500; }
+      .balance-row {
+        display: flex; align-items: flex-end; gap: 10px;
+        transition: transform 0.45s var(--spring), filter 0.3s ease;
+      }
+      .balance-row.hidden-amt { filter: blur(14px); transform: scale(0.96); }
+      .dirham { margin-bottom: 20px; }
+      .amount {
+        font-family: var(--serif);
+        font-size: 52px; line-height: 1;
+        color: #fff;
+        white-space: nowrap;
+      }
+
+      /* ---------- card chips ---------- */
+      .cards {
+        flex-shrink: 0;
+        display: flex; gap: 8px;
+        padding: 12px 24px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-left: 24px;
+      }
+      .cardchip {
+        flex: 0 0 150px;
+        height: 52px;
+        background: #fff;
+        border-radius: 10px;
+        padding: 0 12px;
+        display: flex; align-items: center; gap: 4px;
+        scroll-snap-align: start;
+        text-align: left;
+      }
+      .cc-col { flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+      .cc-col small { color: var(--grey); font-size: 11px; font-weight: 500; line-height: 1; }
+      .cc-col b { color: var(--ink); font-size: 14px; font-weight: 700; line-height: 1; }
+      .cc-logo { width: 32px; height: 12px; object-fit: contain; align-self: flex-start; margin-top: 2px; }
+
+      /* ---------- white sheet ---------- */
+      .sheet {
+        flex: 1;
+        background: #fff;
+        border-radius: 24px 24px 0 0;
+        padding-bottom: calc(96px + env(safe-area-inset-bottom));
+        min-height: 340px;
+      }
+      .section-title { color: var(--ink); font-size: 16px; font-weight: 700; }
+      .sheet > .section-title { padding: 24px 24px 0; display: block; }
+
+      .qa-row {
+        display: flex; justify-content: space-between;
+        padding: 14px 24px 0;
+      }
+      .qa { width: 66px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+      .qa-bg {
+        width: 54px; height: 54px; border-radius: 16px;
+        background: #f1f1f1;
+        display: grid; place-items: center;
+      }
+      .qa-t {
+        color: var(--ink); font-size: 10.5px; font-weight: 600;
+        line-height: 12.6px; text-align: center;
+      }
+
+      .banner {
+        margin: 24px 24px 0;
+        width: calc(100% - 48px);
+        height: 64px;
+        background: #daa641;
+        border-radius: 12px;
+        padding: 0 12px;
+        display: flex; align-items: center; gap: 12px;
+        text-align: left;
+      }
+      .banner-sq { width: 40px; height: 40px; border-radius: 8px; background: rgba(0, 0, 0, 0.08); flex-shrink: 0; }
+      .banner-col { flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+      .banner-col b { color: var(--ink); font-size: 14px; font-weight: 700; }
+      .banner-col small { color: var(--ink); opacity: 0.4; font-size: 11px; font-weight: 500; }
+
+      .tx-head {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 32px 24px 0;
+      }
+      .see-more { color: #4c2882; font-size: 12.5px; font-weight: 600; }
+
+      .tx-list { list-style: none; padding: 8px 24px 0; }
+      .tx {
+        display: flex; align-items: center; gap: 12px;
+        padding: 12px 0 13px;
+      }
+      .tx.bordered { border-bottom: 1px solid #efeef1; }
+      .tx-ic {
+        width: 42px; height: 42px; border-radius: 12px;
+        overflow: hidden;
+        display: grid; place-items: center;
+        flex-shrink: 0;
+      }
+      .tx-ic-cream { background: #fbefd0; }
+      .tx-img-sq { width: 42px; height: 42px; object-fit: cover; }
+      .tx-img-wide { width: 42px; height: 21px; object-fit: contain; }
+      .tx-mid { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+      .tx-mid b { color: var(--ink); font-size: 13.5px; font-weight: 600; }
+      .tx-mid small { color: var(--grey); font-size: 11px; font-weight: 500; }
+      .tx-right { display: flex; flex-direction: column; gap: 2px; align-items: flex-end; }
+      .tx-right b { color: var(--ink); font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+      .tx-right small { color: var(--grey); font-size: 11px; font-weight: 500; }
+
+      /* ---------- tab bar ---------- */
+      .tabbar {
+        position: sticky; bottom: 0; z-index: 6;
+        margin-top: auto;
+        background: rgba(253, 253, 253, 0.92);
+        -webkit-backdrop-filter: blur(24px);
+        backdrop-filter: blur(24px);
+      }
+      .tabbar-row { display: flex; }
+      .tab {
+        flex: 1; height: 49px;
+        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
+        color: #aeaeb2;
+      }
+      .tab svg { width: 26px; height: 26px; }
+      .tab span {
+        font-size: 10px; font-weight: 510; letter-spacing: -0.4px;
+        color: rgba(60, 60, 67, 0.6);
+      }
+      .tab.is-active { color: var(--ink); }
+      .tab.is-active span { color: var(--ink); }
+      .home-indicator { height: calc(33px + env(safe-area-inset-bottom)); display: flex; align-items: flex-start; justify-content: center; padding-top: 20px; }
+      .home-indicator span { width: 139px; height: 5px; border-radius: 100px; background: #000; }
+
+      /* ---------- press micro-interactions ---------- */
+      .press, .press-soft { transition: transform 0.35s var(--spring), opacity 0.2s ease, background-color 0.2s ease; }
+      .press:active { transform: scale(0.9); }
+      .press-soft:active { transform: scale(0.97); opacity: 0.85; }
+      .tab.press:active { transform: scale(0.88); }
+
+      /* ---------- mobile: fullscreen ---------- */
+      @media (max-width: 640px) {
+        .stage { padding: 0; }
+        .phone {
+          width: 100%; height: 100dvh;
+          border: 0; border-radius: 0;
+        }
+        .statusbar { display: none; } /* real status bar takes over */
+        .topbar { padding-top: max(14px, env(safe-area-inset-top)); }
+      }
+    </style>
+
+    <script>
+      const $ = (s: string) => document.querySelector(s) as HTMLElement;
+
+      // tap balance to hide/show
+      $("#balance-tap")?.addEventListener("click", () => {
+        $("#balance-amount").classList.toggle("hidden-amt");
+        tap(10);
+      });
+
+      // tab switching
+      document.querySelectorAll<HTMLElement>("[data-tab]").forEach((t) =>
+        t.addEventListener("click", () => {
+          document.querySelectorAll("[data-tab]").forEach((x) => x.classList.remove("is-active"));
+          t.classList.add("is-active");
+          tap(8);
+        })
+      );
+
+      // light haptics where supported
+      function tap(ms: number) {
+        if ("vibrate" in navigator) try { navigator.vibrate(ms); } catch {}
+      }
+    </script>
+  </body>
+</html>
