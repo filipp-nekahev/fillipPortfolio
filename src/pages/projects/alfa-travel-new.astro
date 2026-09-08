@@ -1,0 +1,278 @@
+---
+import Layout from "@/layouts/Project.astro";
+import Heading from "@/components/ui/Heading.astro";
+import Text from "@/components/ui/Text.astro";
+import ProjectContnetWrapper from "@/components/ui/ProjectContnetWrapper.astro";
+import SwiperSlider from "@/components/ui/SwiperSlider.astro";
+import DraftNote from "@/components/ui/DraftNote.astro";
+import { loadImages } from "@/utils/loadImages";
+
+import logoImg from "@/assets/logo/alfalogo-min.png";
+
+const title = "Alfa Bank - Alfa Travel";
+const years = "2023-2025";
+
+const imageModulesFirst = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/alfa1/*.{jpeg,jpg,png,gif}"
+);
+const imageModulesSecond = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/alfa2/*.{jpeg,jpg,png,gif}"
+);
+const imageModulesThird = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/alfa3/*.{jpeg,jpg,png,gif}"
+);
+
+const sliderImagesFirst = await loadImages(imageModulesFirst);
+const sliderImagesSecond = await loadImages(imageModulesSecond);
+const sliderImagesThird = await loadImages(imageModulesThird);
+---
+
+<Layout {title} {years} logo={logoImg}>
+  {/* ---------- 1. CONTEXT ---------- */}
+  <ProjectContnetWrapper>
+    <Text>
+      Alfa-Bank is Russia's largest private bank, serving over 22 million
+      customers. Alfa Travel is its in-house travel platform: flights, hotels,
+      train tickets and package tours, booked and paid for inside the customer's
+      existing banking relationship, with bank bonus points usable across the
+      whole ecosystem.
+    </Text>
+    <Text class="mb-[1.562rem]">
+      I joined as the travel department's first designer and stayed for two
+      years as its only designer, working across web and mobile web inside the
+      bank's design system.
+    </Text>
+
+    {/* ---------- 2. ROLE & SCOPE ---------- */}
+    <Heading level={2} size="xl" weight="semibold">My Role</Heading>
+    <Text class="mb-[1.562rem]">
+      Sole designer for the travel department, owning flights, hotels, train
+      tickets and tours end to end — from research and flows to final UI and
+      handoff, on both desktop and mobile web.
+    </Text>
+    <Text class="mb-[1.562rem]">Over two years I shipped:</Text>
+    <ul
+      class="mb-[1.562rem] list-disc pl-[20px] text-[1.062rem] leading-[1.6] marker:text-[#9a9a9a]"
+    >
+      <li>Self-service ticket refunds and exchanges, desktop and mobile</li>
+      <li>The travel homepage redesign and its recommendation blocks</li>
+      <li>The hotel booking flow, designed from scratch</li>
+      <li>Search across four verticals: flights, hotels, trains, tours</li>
+      <li>The personal account where users manage trips and tickets</li>
+      <li>TV and internet promo integrations, A/B tests on the booking funnel</li>
+    </ul>
+    <Text class="mb-[1.562rem]">
+      This case goes deep on two of them — refunds and exchanges, and the
+      homepage redesign — because they show the constraints I had to design
+      around.
+    </Text>
+
+    {/* ---------- 3. PLATFORM HISTORY ---------- */}
+    <Heading level={2} size="xl" weight="semibold"
+      >The Platform I Inherited</Heading
+    >
+    <Text class="mb-[1.562rem]">
+      Before me, the design was done by a designer from the partner company,
+      since flight sales worked through the partner's API. Part of the flow was
+      a white label, part was drawn by the partner's designer. When the product
+      started to grow, it had to be brought up to the quality level of a large
+      bank.
+    </Text>
+  </ProjectContnetWrapper>
+  <DraftNote
+    label="The white label story, in your words: why the bank decided to build its own product, what got migrated, what stayed on the partner, and why today everything except the homepage is white label again. This is the constraint the whole case sits on — Revolut explicitly asks for designers who name their constraints, so it belongs up front."
+  />
+  <DraftNote
+    image
+    label="Before / after: the partner's white label screen next to yours. Figma has 'Туры / Старый дизайн' and the Webview section — that comparison proves the story in one image."
+  />
+
+  {/* ---------- 4. DEEP DIVE: REFUNDS & EXCHANGES ---------- */}
+  <ProjectContnetWrapper>
+    <Heading class="mt-[100px] mb-[10px] text-[28px]" level={2} weight="semibold"
+      >Refunds & Exchanges</Heading
+    >
+    <Heading level={2} size="xl" weight="semibold">The Problem</Heading>
+  </ProjectContnetWrapper>
+  <DraftNote
+    label="What happened before: the user had to contact support, how long it took, where the request came from (business, support load, complaints), and the scale of the problem."
+  />
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Constraints</Heading>
+  </ProjectContnetWrapper>
+  <DraftNote
+    label="What boxed the design in: fare rules, airline policies, the partner API, legal and compliance sign-off, the bank's design system. Which of these was the hardest to get through, and what it cost the design."
+  />
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold"
+      >Two Flows, Not One</Heading
+    >
+  </ProjectContnetWrapper>
+  <DraftNote
+    label="Why voluntary and forced refunds were split into separate flows — the key structural decision here. What each one demands from the user (a reason, documents, proof), and what you considered before landing on the split."
+  />
+  <DraftNote
+    image
+    label="Full flow map, exported wide from Figma and shown full-bleed with horizontal scroll (same pattern as the decorative carousels on the current page). One image for the voluntary refund: 36 mobile frames with arrows and branches. This is the single most important image on the page — it shows an end-to-end journey at a glance."
+  />
+  <div class="mt-[40px] mb-[25px]">
+    <SwiperSlider sliderImages={sliderImagesSecond} initialWidth="270px" />
+  </div>
+  <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
+    Placeholder slider — to be replaced by 6–8 key refund screens: request,
+    confirm, amount breakdown, in progress, completed.
+  </Text>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold"
+      >Edge Cases & States</Heading
+    >
+    <Text class="mb-[1.562rem]">
+      A refund has far more failure states than happy paths. The flow covers a
+      non-refundable fare, an expired refund window, a rejected request, a
+      refund the airline cannot process, a partial refund on a multi-segment
+      ticket, and the case where the user declines the amount they were offered.
+    </Text>
+  </ProjectContnetWrapper>
+  <DraftNote
+    label="Confirm this list matches reality, and explain the 'Отказ от вырученной суммы' case — I could not work out what it means from the screens alone. Also: which of these states caused the most argument in review?"
+  />
+  <DraftNote
+    image
+    label="A row of 3–4 close-ups of the hardest states side by side (non-refundable fare, rejected, refund impossible, expired window), each captioned with the rule behind it. This is the 'edge cases and validation states' evidence they ask for — it should read as a deliberate set, not leftovers."
+  />
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold"
+      >Exchange & Price Difference</Heading
+    >
+  </ProjectContnetWrapper>
+  <DraftNote
+    label="How the exchange flow handles a new ticket that costs more or less than the original: the top-up payment, the acquiring step, what happens when the difference goes the other way. The Figma exchange section has 37 desktop frames, so there is plenty to show."
+  />
+  <DraftNote
+    image
+    label="The exchange flow map, same wide full-bleed treatment as the refund one, plus the top-up / payment screens."
+  />
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold"
+      >Decisions & Trade-offs</Heading
+    >
+  </ProjectContnetWrapper>
+  <DraftNote
+    label="The most valuable section on the page, and it has to be honest. You said you are not fully happy with the result but it works, and that it took many iterations and sign-offs. Write that down: what you wanted, what the constraints forced, what you would do differently now. A designer who names a compromise reads as senior; one who presents everything as a clean win does not."
+  />
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Outcome</Heading>
+    <Text class="mb-[1.562rem]">
+      Self-service refunds and exchanges with automated price difference
+      calculation removed the need for support intervention and reduced
+      support inquiries for ticket-related issues by <b>74.1%</b>.
+    </Text>
+  </ProjectContnetWrapper>
+  <DraftNote
+    label="Anything else measurable here: adoption, share of refunds handled without support, time to complete a refund, error rate. One number is thin for a section this size."
+  />
+
+  {/* ---------- 5. DEEP DIVE: HOMEPAGE ---------- */}
+  <ProjectContnetWrapper>
+    <Heading class="mt-[100px] mb-[10px] text-[28px]" level={2} weight="semibold"
+      >Homepage Redesign</Heading
+    >
+    <Text class="mb-[1.562rem]">
+      The homepage redesign started with people, not screens. I had calls with
+      the heads of the travel business to collect their wishes and expectations.
+      I also talked to the designer of the bank's main homepage and stayed in
+      touch with them at every stage. For references I collected screenshots of
+      homepages from major services in Russia and worldwide, partly through
+      Mobbin.
+    </Text>
+    <Heading level={2} size="xl" weight="semibold"
+      >Designing Inside a Fixed Layout</Heading
+    >
+    <Text class="mb-[1.562rem]">
+      The bento layout was not my choice. The bank's main homepage already used
+      it, so travel had to follow for the ecosystem to stay consistent, and I
+      agreed every step with the designers of the main site. The work was
+      finding what could vary inside that grid: the business team kept asking
+      for promo banners, so I prepared different grid layouts for different
+      numbers of banners rather than one fixed arrangement.
+    </Text>
+    <Text class="mb-[25px]">
+      The main idea was to make the homepage more alive with travel
+      recommendations: "Popular Destinations," "Popular Hotels," and "Popular
+      Tours." Later we added an integration with Alfa Afisha, a service with
+      events across Russia. I showed intermediate versions to stakeholders all
+      the time, and we ran design reviews with the design team.
+    </Text>
+  </ProjectContnetWrapper>
+  <div class="mt-[40px] mb-[25px]">
+    <SwiperSlider
+      sliderImages={sliderImagesFirst}
+      initialWidth="267px"
+      video={true}
+    />
+  </div>
+  <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
+    Existing homepage slider — keep, but add high-res final desktop and mobile
+    screens next to it.
+  </Text>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Explorations</Heading>
+  </ProjectContnetWrapper>
+  <DraftNote
+    label="Figma has 'Главная_бенто1' and 'Главная_бенто2', 'Главная1/2/3', and a whole section called 'В работе / Идеи / Проверки'. Which of these were real alternatives, what you tried, and why each was dropped. 'Thought process / exploration' is on their checklist as a very good signal, and right now the site shows none of it."
+  />
+  <DraftNote
+    image
+    label="Two or three homepage directions side by side, captioned with what each one was trying to solve and why it lost. Not a moodboard — a comparison."
+  />
+
+  {/* ---------- 6. A/B TESTING ---------- */}
+  <ProjectContnetWrapper>
+    <Heading class="mt-[100px] mb-[10px] text-[28px]" level={2} weight="semibold"
+      >A/B Testing</Heading
+    >
+  </ProjectContnetWrapper>
+  <DraftNote
+    label="Two or three tests, each as: hypothesis, variant A vs variant B, the metric, the result in numbers, and what you shipped. Their letter names skipping the data-driven testing process as a typical reason portfolios fail this stage, so this section carries real weight. Screens of both variants would make it much stronger."
+  />
+
+  {/* ---------- 7. DESIGN SYSTEM ---------- */}
+  <ProjectContnetWrapper>
+    <Heading class="mt-[100px] mb-[10px] text-[28px]" level={2} weight="semibold"
+      >Working Within the Bank's Design System</Heading
+    >
+  </ProjectContnetWrapper>
+  <DraftNote
+    label="Where the bank's components ran out and what you built: the refund state cards, the amount breakdown, the flight picker in the exchange flow, the search history block. One concrete example of stretching or breaking the system, and the reasoning. Revolut warns directly that leaning on a design system without showing personal craft is a common pitfall — this section is the answer to that."
+  />
+
+  {/* ---------- 8. OTHER WORK ---------- */}
+  <ProjectContnetWrapper>
+    <Heading class="mt-[100px] mb-[10px] text-[28px]" level={2} weight="semibold"
+      >Also Shipped</Heading
+    >
+    <Text class="mb-[1.562rem]">
+      Alongside the two projects above, I designed the hotel booking flow from
+      scratch, kept improving the personal account where users manage their
+      trips and tickets, and worked on search across all four verticals —
+      flights, hotels, trains and tours — including complex multi-city routes,
+      search history, and passenger validation.
+    </Text>
+  </ProjectContnetWrapper>
+  <div class="mt-[40px] mb-[25px]">
+    <SwiperSlider sliderImages={sliderImagesThird} initialWidth="270px" />
+  </div>
+  <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
+    Placeholder slider — final screens across hotels, search and the personal
+    account.
+  </Text>
+
+  {/* ---------- 9. MENTORING ---------- */}
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Mentoring</Heading>
+    <Text class="mb-[50px]">
+      When a middle designer joined the team, I onboarded them: distributed
+      tasks and helped them understand the project and the design system.
+    </Text>
+  </ProjectContnetWrapper>
+</Layout>
