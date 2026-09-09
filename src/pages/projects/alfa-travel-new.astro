@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "@/layouts/Project.astro";
 import Heading from "@/components/ui/Heading.astro";
 import Text from "@/components/ui/Text.astro";
@@ -8,6 +9,9 @@ import DraftNote from "@/components/ui/DraftNote.astro";
 import { loadImages } from "@/utils/loadImages";
 
 import logoImg from "@/assets/logo/alfalogo-min.png";
+import searchVariantsImg from "@/assets/alfaHomeDecor/search_form_variants.png";
+import desktopBentoImg from "@/assets/alfaHomeDesktop/1_desktop_bento.png";
+import desktopMulticityImg from "@/assets/alfaHomeDesktop/2_desktop_multicity.png";
 
 const title = "Alfa Bank - Alfa Travel";
 const years = "2023-2025";
@@ -25,6 +29,11 @@ const imageModulesThird = import.meta.glob<{ default: ImageMetadata }>(
 const sliderImagesFirst = await loadImages(imageModulesFirst);
 const sliderImagesSecond = await loadImages(imageModulesSecond);
 const sliderImagesThird = await loadImages(imageModulesThird);
+
+const imageModulesHome = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/alfaHomeMobile/*.{jpeg,jpg,png,gif}"
+);
+const sliderImagesHome = await loadImages(imageModulesHome);
 ---
 
 <Layout {title} {years} logo={logoImg} titleLink="https://alfabank.ru/travel/">
@@ -226,18 +235,73 @@ const sliderImagesThird = await loadImages(imageModulesThird);
     />
   </div>
   <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
-    Existing homepage slider. Keep it, but add high-res final desktop and mobile
-    screens next to it.
+    Motion and interaction on the homepage.
   </Text>
+
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">The Shipped Homepage</Heading>
+    <Text class="mb-[1.562rem]">
+      The desktop homepage in the two states it ships in: the bento grid with a
+      promo block, and the same page with a multi-city search open.
+    </Text>
+  </ProjectContnetWrapper>
+  <Image
+    src={desktopBentoImg}
+    alt="Alfa Travel desktop homepage with the bento promo grid"
+    width="657"
+    densities={[1, 2]}
+    class="m-auto mb-[25px]"
+  />
+  <Text class="mb-[50px] max-w-[452px] m-auto text-center text-[15px] italic">
+    Desktop homepage. The bento grid came from the bank's main site, so the work
+    was in what could vary inside it.
+  </Text>
+  <Image
+    src={desktopMulticityImg}
+    alt="Alfa Travel desktop homepage with a multi-city search"
+    width="657"
+    densities={[1, 2]}
+    class="m-auto mb-[25px]"
+  />
+  <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
+    The same page with a multi-city route open. The search form grows by a row
+    per flight, and the banner grid reflows around it.
+  </Text>
+
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Mobile</Heading>
+    <Text class="mb-[1.562rem]">
+      The mobile product lived as a webview inside the bank's app, so the
+      homepage had to work as an entry point, a light and a dark theme, and a
+      surface for the Alfa Afisha events guide.
+    </Text>
+  </ProjectContnetWrapper>
+  <div class="mt-[40px] mb-[25px]">
+    <SwiperSlider sliderImages={sliderImagesHome} initialWidth="270px" />
+  </div>
+  <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
+    Entry screen, promo entry, homepage in light and dark, the events guide and
+    a place card.
+  </Text>
+
   <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold">Explorations</Heading>
+    <Text class="mb-[1.562rem]">
+      The search form was the part everyone had an opinion about, so it went
+      through the most versions: tabs against segmented control, a light hero
+      against a dark and a photo one, the form inside a card against the form on
+      the background.
+    </Text>
   </ProjectContnetWrapper>
-  <DraftNote
-    label="Figma has 'Главная_бенто1' and 'Главная_бенто2', 'Главная1/2/3', and a whole section called 'В работе / Идеи / Проверки'. Which of these were real alternatives, what you tried, and why each was dropped. 'Thought process / exploration' is on their checklist as a very good signal, and right now the site shows none of it."
+  <Image
+    src={searchVariantsImg}
+    alt="Five explored versions of the travel search form"
+    width="657"
+    densities={[1, 2]}
+    class="m-auto mb-[25px]"
   />
   <DraftNote
-    image
-    label="Two or three homepage directions side by side, captioned with what each one was trying to solve and why it lost. Not a moodboard — a comparison."
+    label="Which of these five won and why, and what each one was trying to solve. Right now the image shows the exploration but the reasoning is missing, and that reasoning is what they actually score."
   />
 
   {/* ---------- 6. A/B TESTING ---------- */}
