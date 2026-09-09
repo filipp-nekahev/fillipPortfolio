@@ -13,8 +13,9 @@ export interface Props {
   years: string;
   description?: string;
   logo?: ImageMetadata;
+  titleLink?: string;
 }
-const { title, years, description, logo } = Astro.props;
+const { title, years, description, logo, titleLink } = Astro.props;
 ---
 
 <!doctype html>
@@ -37,7 +38,12 @@ const { title, years, description, logo } = Astro.props;
       </div>
       <ProjectContnetWrapper class="pt-[11.373rem]">
         {logo && <Image class="mb-[10px]" src={logo} width="80" alt={title} />}
-        <ProjectHeader title={title} years={years} description={description} />
+        <ProjectHeader
+          title={title}
+          years={years}
+          description={description}
+          titleLink={titleLink}
+        />
       </ProjectContnetWrapper>
       <slot />
     </main>

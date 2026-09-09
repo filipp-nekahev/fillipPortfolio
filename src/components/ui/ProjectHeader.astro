@@ -3,12 +3,38 @@ export interface Props {
   title: string;
   years: string;
   description?: string;
+  titleLink?: string;
 }
-const { title, years, description } = Astro.props;
+const { title, years, description, titleLink } = Astro.props;
 ---
 
 <header class="pb-[1.5625rem]">
-  <h1 class="text-4xl font-semibold mb-[0.625rem]">{title}</h1>
+  <h1 class="text-4xl font-semibold mb-[0.625rem]">
+    {title}{
+      titleLink && (
+        <a
+          href={titleLink}
+          target="_blank"
+          rel="noopener"
+          class="inline-block align-middle ml-[10px] opacity-40 transition-opacity hover:opacity-100"
+          aria-label={`${title}, open the live product`}
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 12 12"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M11.6994 9.8415L9.83043 9.85194V3.32594L1.63378 11.5226L0.276367 10.1652L8.47303 1.96854L1.95225 1.97376L1.95747 0.0994873L11.6994 0.0994877V9.8415Z"
+              fill="currentColor"
+            />
+          </svg>
+        </a>
+      )
+    }
+  </h1>
   <p class="text-lg text-[var(--color-text)]">{years}</p>
   {description && <p class="text-xl font-semibold">{description}</p>}
 </header>
