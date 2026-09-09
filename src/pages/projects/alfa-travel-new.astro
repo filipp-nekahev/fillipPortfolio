@@ -222,7 +222,7 @@ const sliderImagesHomeDesktop = await loadImages(imageModulesHomeDesktop);
     </Text>
   </ProjectContnetWrapper>
   <div class="mt-[40px] mb-[100px]">
-    <SwiperSlider sliderImages={sliderImagesHomeDesktop} initialWidth="595px" />
+    <SwiperSlider sliderImages={sliderImagesHomeDesktop} initialWidth="300px" />
   </div>
 
   <ProjectContnetWrapper>
@@ -234,7 +234,11 @@ const sliderImagesHomeDesktop = await loadImages(imageModulesHomeDesktop);
     </Text>
   </ProjectContnetWrapper>
   <div class="mt-[40px] mb-[25px]">
-    <SwiperSlider sliderImages={sliderImagesHomeMobile} initialWidth="375px" />
+    <SwiperSlider
+      sliderImages={sliderImagesHomeMobile}
+      initialWidth="224px"
+      video={true}
+    />
   </div>
   <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
     Entry screen, promo entry, homepage in light and dark, the events guide and
