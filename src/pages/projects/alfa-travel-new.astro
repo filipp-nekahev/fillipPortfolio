@@ -71,8 +71,8 @@ const sliderImagesHomeExplore = await loadImages(imageModulesHomeExplore);
       </li>
     </ul>
     <Text class="mb-[1.562rem]">
-      This case looks closely at two of them, refunds and exchanges and the
-      homepage redesign, because they show the constraints I had to work with.
+      This case looks closely at two of them, the homepage redesign and refunds
+      and exchanges, because they show the constraints I had to work with.
     </Text>
 
     {/* ---------- 3. PLATFORM HISTORY ---------- */}
@@ -91,6 +91,87 @@ const sliderImagesHomeExplore = await loadImages(imageModulesHomeExplore);
       arrived.
     </Text>
   </ProjectContnetWrapper>
+
+  {/* ---------- 5. DEEP DIVE: HOMEPAGE ---------- */}
+  <ProjectContnetWrapper>
+    <Heading class="mt-[100px] mb-[10px] text-[28px]" level={2} weight="semibold"
+      >Homepage Redesign</Heading
+    >
+    <Text class="mb-[1.562rem]">
+      Most customers live in the bank's mobile app, where Alfa Travel runs as a
+      webview, so the mobile homepage is the main one. Desktop is a second entry
+      point on the website.
+    </Text>
+    <Text class="mb-[1.562rem]">
+      I started with calls to the heads of the travel business, a competitor
+      analysis and a reference library of travel homepages from Russia and
+      abroad. The bento grid came from the bank's main site, and I agreed every
+      step with its designers.
+    </Text>
+    <Text class="mb-[1.562rem]">
+      The page had to carry banners, because promos and partnerships bring
+      revenue, so I prepared grid options for different numbers of them. Around
+      that I added popular hotels and popular destinations, and later the
+      events guide, tied to where the customer is searching or where they live.
+    </Text>
+    <Heading level={2} size="xl" weight="semibold">Craft</Heading>
+    <Text class="mb-[1.562rem]">
+      The homepage is the one piece that is almost not on the design system.
+      The hard requirements were short: the bank's buttons, inputs and
+      typeface, the bento grid at least in part so the page matches the bank's
+      main site, and a list of what had to be on the page, the banners
+      included. Everything else on the page is my own visual work.
+    </Text>
+    <Heading level={2} size="xl" weight="semibold">Sign-off</Heading>
+    <Text class="mb-[1.562rem]">
+      Alfa is a large corporation, so nothing shipped on one person's decision.
+      Each piece went through several rounds of sign-off: inside the travel
+      department, then with the design team and my team lead, who ran several
+      designers. For the important work, like the homepage, it also went to
+      the business side and up to C-level.
+    </Text>
+    <Text class="mb-[1.562rem]">
+      That is where most of the trade-offs came from. The result had to work
+      for all of them, not only for me, and some choices on the page are the
+      ones that could pass rather than the ones I would draw with a free hand.
+    </Text>
+  </ProjectContnetWrapper>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Mobile</Heading>
+  </ProjectContnetWrapper>
+  <div class="mt-[40px] mb-[25px]">
+    <SwiperSlider
+      sliderImages={sliderImagesHomeMobile}
+      initialWidth="224px"
+      video={true}
+    />
+  </div>
+  <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
+    Entry screen, promo entry, homepage in light and dark, the events guide and
+    a place card.
+  </Text>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Desktop</Heading>
+  </ProjectContnetWrapper>
+  <div class="mt-[40px] mb-[100px]">
+    <SwiperSlider sliderImages={sliderImagesHomeDesktop} initialWidth="300px" />
+  </div>
+
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Explorations</Heading>
+    <Text class="mb-[1.562rem]">
+      The search form was the part everyone had an opinion about, so it went
+      through the most versions: tabs against segmented control, a light hero
+      against a dark and a photo one, the form inside a card against the form on
+      the background, and then another ten versions tried on the full page.
+    </Text>
+  </ProjectContnetWrapper>
+  <div class="mt-[40px] mb-[25px]">
+    <SwiperSlider sliderImages={sliderImagesHomeExplore} initialWidth="305px" />
+  </div>
+  <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
+    Five versions of the search form, then ten more tried on the full page.
+  </Text>
 
   {/* ---------- 4. DEEP DIVE: REFUNDS & EXCHANGES ---------- */}
   <ProjectContnetWrapper>
@@ -185,87 +266,6 @@ const sliderImagesHomeExplore = await loadImages(imageModulesHomeExplore);
       one I would make on my own, and it works.
     </Text>
   </ProjectContnetWrapper>
-
-  {/* ---------- 5. DEEP DIVE: HOMEPAGE ---------- */}
-  <ProjectContnetWrapper>
-    <Heading class="mt-[100px] mb-[10px] text-[28px]" level={2} weight="semibold"
-      >Homepage Redesign</Heading
-    >
-    <Text class="mb-[1.562rem]">
-      Most customers live in the bank's mobile app, where Alfa Travel runs as a
-      webview, so the mobile homepage is the main one. Desktop is a second entry
-      point on the website.
-    </Text>
-    <Text class="mb-[1.562rem]">
-      I started with calls to the heads of the travel business, a competitor
-      analysis and a reference library of travel homepages from Russia and
-      abroad. The bento grid came from the bank's main site, and I agreed every
-      step with its designers.
-    </Text>
-    <Text class="mb-[1.562rem]">
-      The page had to carry banners, because promos and partnerships bring
-      revenue, so I prepared grid options for different numbers of them. Around
-      that I added popular hotels and popular destinations, and later the
-      events guide, tied to where the customer is searching or where they live.
-    </Text>
-    <Heading level={2} size="xl" weight="semibold">Craft</Heading>
-    <Text class="mb-[1.562rem]">
-      The homepage is the one piece that is almost not on the design system.
-      The hard requirements were short: the bank's buttons, inputs and
-      typeface, the bento grid at least in part so the page matches the bank's
-      main site, and a list of what had to be on the page, the banners
-      included. Everything else on the page is my own visual work.
-    </Text>
-    <Heading level={2} size="xl" weight="semibold">Sign-off</Heading>
-    <Text class="mb-[1.562rem]">
-      Alfa is a large corporation, so nothing shipped on one person's decision.
-      Each piece went through several rounds of sign-off: inside the travel
-      department, then with the design team and my team lead, who ran several
-      designers. For the important work, like the homepage, it also went to
-      the business side and up to C-level.
-    </Text>
-    <Text class="mb-[1.562rem]">
-      That is where most of the trade-offs came from. The result had to work
-      for all of them, not only for me, and some choices on the page are the
-      ones that could pass rather than the ones I would draw with a free hand.
-    </Text>
-  </ProjectContnetWrapper>
-  <ProjectContnetWrapper>
-    <Heading level={2} size="xl" weight="semibold">Mobile</Heading>
-  </ProjectContnetWrapper>
-  <div class="mt-[40px] mb-[25px]">
-    <SwiperSlider
-      sliderImages={sliderImagesHomeMobile}
-      initialWidth="224px"
-      video={true}
-    />
-  </div>
-  <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
-    Entry screen, promo entry, homepage in light and dark, the events guide and
-    a place card.
-  </Text>
-  <ProjectContnetWrapper>
-    <Heading level={2} size="xl" weight="semibold">Desktop</Heading>
-  </ProjectContnetWrapper>
-  <div class="mt-[40px] mb-[100px]">
-    <SwiperSlider sliderImages={sliderImagesHomeDesktop} initialWidth="300px" />
-  </div>
-
-  <ProjectContnetWrapper>
-    <Heading level={2} size="xl" weight="semibold">Explorations</Heading>
-    <Text class="mb-[1.562rem]">
-      The search form was the part everyone had an opinion about, so it went
-      through the most versions: tabs against segmented control, a light hero
-      against a dark and a photo one, the form inside a card against the form on
-      the background, and then another ten versions tried on the full page.
-    </Text>
-  </ProjectContnetWrapper>
-  <div class="mt-[40px] mb-[25px]">
-    <SwiperSlider sliderImages={sliderImagesHomeExplore} initialWidth="305px" />
-  </div>
-  <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
-    Five versions of the search form, then ten more tried on the full page.
-  </Text>
 
   {/* ---------- 8. OTHER WORK ---------- */}
   <ProjectContnetWrapper>
