@@ -151,32 +151,21 @@ const sliderImagesHomeDesktop = await loadImages(imageModulesHomeDesktop);
     alt="The full refund flow: every screen and branch, connected with arrows"
   />
   <ProjectContnetWrapper>
-    <Heading level={2} size="xl" weight="semibold"
-      >Edge Cases & States</Heading
-    >
+    <Heading level={2} size="xl" weight="semibold">Exchange</Heading>
     <Text class="mb-[1.562rem]">
-      A refund has many more error states than happy paths. The flow covers a
-      non-refundable fare, an expired refund window, a rejected request, a
-      refund the airline cannot process, a partial refund on a ticket with
-      several segments, and the case where the user does not accept the amount
-      they are offered.
+      An exchange is harder than a refund, because the customer has to say
+      exactly what they want to replace. A booking can have several flights
+      and connections, and the customer may change only one leg, only the part
+      before or after a connection, or the whole route. It can be for one
+      passenger or several.
+    </Text>
+    <Text class="mb-[1.562rem]">
+      That is where the corner cases live. A child cannot be separated from the
+      adult they fly with, so a change for the adult has to carry the child
+      with it. The main route is what you see below; the branches around it
+      handle the rest.
     </Text>
   </ProjectContnetWrapper>
-  <DraftNote
-    label="Confirm this list matches reality, and explain the 'Отказ от вырученной суммы' case — I could not work out what it means from the screens alone. Also: which of these states caused the most argument in review?"
-  />
-  <DraftNote
-    image
-    label="A row of 3–4 close-ups of the hardest states side by side (non-refundable fare, rejected, refund impossible, expired window), each captioned with the rule behind it. This is the 'edge cases and validation states' evidence they ask for — it should read as a deliberate set, not leftovers."
-  />
-  <ProjectContnetWrapper>
-    <Heading level={2} size="xl" weight="semibold"
-      >Exchange & Price Difference</Heading
-    >
-  </ProjectContnetWrapper>
-  <DraftNote
-    label="How the exchange flow handles a new ticket that costs more or less than the original: the top-up payment, the acquiring step, what happens when the difference goes the other way. The Figma exchange section has 37 desktop frames, so there is plenty to show."
-  />
   <FlowMap
     src={exchangeMapImg}
     fullHref="/flows/exchange_map_full.webp"
