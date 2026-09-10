@@ -5,7 +5,6 @@ import Heading from "@/components/ui/Heading.astro";
 import Text from "@/components/ui/Text.astro";
 import ProjectContnetWrapper from "@/components/ui/ProjectContnetWrapper.astro";
 import SwiperSlider from "@/components/ui/SwiperSlider.astro";
-import DraftNote from "@/components/ui/DraftNote.astro";
 import FlowMap from "@/components/ui/FlowMap.astro";
 import { loadImages } from "@/utils/loadImages";
 
@@ -172,14 +171,6 @@ const sliderImagesHomeDesktop = await loadImages(imageModulesHomeDesktop);
     alt="The full ticket exchange flow: every screen and branch, connected with arrows"
   />
   <ProjectContnetWrapper>
-    <Heading level={2} size="xl" weight="semibold"
-      >Decisions & Trade-offs</Heading
-    >
-  </ProjectContnetWrapper>
-  <DraftNote
-    label="The most valuable section on the page, and it has to be honest. You said you are not fully happy with the result but it works, and that it took many iterations and sign-offs. Write that down: what you wanted, what the constraints forced, what you would do differently now. A designer who names a compromise reads as senior; one who presents everything as a clean win does not."
-  />
-  <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold">Outcome</Heading>
     <Text class="mb-[1.562rem]">
       Most refund and exchange cases now close through the self-service flow.
@@ -187,9 +178,6 @@ const sliderImagesHomeDesktop = await loadImages(imageModulesHomeDesktop);
       a conversation. Support requests about tickets dropped by <b>74.1%</b>.
     </Text>
   </ProjectContnetWrapper>
-  <DraftNote
-    label="Anything else measurable here: adoption, share of refunds handled without support, time to complete a refund, error rate. One number is thin for a section this size."
-  />
 
   {/* ---------- 5. DEEP DIVE: HOMEPAGE ---------- */}
   <ProjectContnetWrapper>
@@ -197,51 +185,25 @@ const sliderImagesHomeDesktop = await loadImages(imageModulesHomeDesktop);
       >Homepage Redesign</Heading
     >
     <Text class="mb-[1.562rem]">
-      The homepage redesign started with people, not screens. I had calls with
-      the heads of the travel business to collect their wishes and expectations,
-      and I talked to the designer of the bank's main homepage and stayed in
-      touch with them at every stage. In parallel I ran a competitor analysis
-      and built a reference library of homepages from popular travel services,
-      in Russia and abroad, partly through Mobbin.
+      Most customers live in the bank's mobile app, where Alfa Travel runs as a
+      webview, so the mobile homepage is the main one. Desktop is a second entry
+      point on the website.
     </Text>
-    <Heading level={2} size="xl" weight="semibold"
-      >Designing Inside a Fixed Layout</Heading
-    >
     <Text class="mb-[1.562rem]">
-      The bento layout was not my choice. The bank's main homepage already used
-      it, so travel had to follow it to keep the ecosystem consistent, and I
-      agreed every step with the designers of the main site. My work was to find
-      what could change inside that grid. The business team kept asking for
-      promo banners, so instead of one fixed layout I prepared several grid
-      options for different numbers of banners.
+      I started with calls to the heads of the travel business, a competitor
+      analysis and a reference library of travel homepages from Russia and
+      abroad. The bento grid came from the bank's main site, and I agreed every
+      step with its designers.
     </Text>
-    <Text class="mb-[25px]">
-      The main idea was to make the homepage more alive with travel
-      recommendations: "Popular Destinations," "Popular Hotels," and "Popular
-      Holidays." Later we added an integration with Alfa Afisha, a service with
-      events across Russia. I showed intermediate versions to stakeholders all
-      the time, and we ran design reviews with the design team.
+    <Text class="mb-[1.562rem]">
+      The page had to carry banners, because promos and partnerships bring
+      revenue, so I prepared grid options for different numbers of them. Around
+      that I added popular hotels and popular destinations, and later the
+      events guide, tied to where the customer is searching or where they live.
     </Text>
   </ProjectContnetWrapper>
-  <ProjectContnetWrapper>
-    <Heading level={2} size="xl" weight="semibold">Desktop</Heading>
-    <Text class="mb-[1.562rem]">
-      The desktop homepage in the two states it ships in: the bento grid with a
-      promo block, and the same page with a multi-city search open. The form
-      grows by a row per flight and the banner grid reflows around it.
-    </Text>
-  </ProjectContnetWrapper>
-  <div class="mt-[40px] mb-[100px]">
-    <SwiperSlider sliderImages={sliderImagesHomeDesktop} initialWidth="300px" />
-  </div>
-
   <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold">Mobile</Heading>
-    <Text class="mb-[1.562rem]">
-      The mobile product lived as a webview inside the bank's app, so the
-      homepage had to work as an entry point, in a light and a dark theme, and
-      as a surface for the Alfa Afisha events guide.
-    </Text>
   </ProjectContnetWrapper>
   <div class="mt-[40px] mb-[25px]">
     <SwiperSlider
@@ -254,6 +216,12 @@ const sliderImagesHomeDesktop = await loadImages(imageModulesHomeDesktop);
     Entry screen, promo entry, homepage in light and dark, the events guide and
     a place card.
   </Text>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Desktop</Heading>
+  </ProjectContnetWrapper>
+  <div class="mt-[40px] mb-[100px]">
+    <SwiperSlider sliderImages={sliderImagesHomeDesktop} initialWidth="300px" />
+  </div>
 
   <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold">Explorations</Heading>
@@ -267,32 +235,9 @@ const sliderImagesHomeDesktop = await loadImages(imageModulesHomeDesktop);
   <Image
     src={searchVariantsImg}
     alt="Five explored versions of the travel search form"
-    width="657"
+    width="330"
     densities={[1, 2]}
-    class="m-auto mb-[25px]"
-  />
-  <DraftNote
-    label="Which of these five won and why, and what each one was trying to solve. Right now the image shows the exploration but the reasoning is missing, and that reasoning is what they actually score."
-  />
-
-  {/* ---------- 6. A/B TESTING ---------- */}
-  <ProjectContnetWrapper>
-    <Heading class="mt-[100px] mb-[10px] text-[28px]" level={2} weight="semibold"
-      >A/B Testing</Heading
-    >
-  </ProjectContnetWrapper>
-  <DraftNote
-    label="Two or three tests, each as: hypothesis, variant A vs variant B, the metric, the result in numbers, and what you shipped. Their letter names skipping the data-driven testing process as a typical reason portfolios fail this stage, so this section carries real weight. Screens of both variants would make it much stronger."
-  />
-
-  {/* ---------- 7. DESIGN SYSTEM ---------- */}
-  <ProjectContnetWrapper>
-    <Heading class="mt-[100px] mb-[10px] text-[28px]" level={2} weight="semibold"
-      >Working Within the Bank's Design System</Heading
-    >
-  </ProjectContnetWrapper>
-  <DraftNote
-    label="Where the bank's components ran out and what you built: the refund state cards, the amount breakdown, the flight picker in the exchange flow, the search history block. One concrete example of stretching or breaking the system, and the reasoning. Revolut warns directly that leaning on a design system without showing personal craft is a common pitfall — this section is the answer to that."
+    class="m-auto mb-[100px]"
   />
 
   {/* ---------- 8. OTHER WORK ---------- */}
@@ -307,11 +252,11 @@ const sliderImagesHomeDesktop = await loadImages(imageModulesHomeDesktop);
       hotels, trains and holidays. That included multi-city routes, search
       history and passenger validation.
     </Text>
+    <Text class="mb-[1.562rem]">
+      I also ran A/B tests on the steps that bring revenue directly: the choice
+      of cabin class and the ancillaries.
+    </Text>
   </ProjectContnetWrapper>
-  <DraftNote
-    image
-    label="Final screens across hotels, search and the personal account, one height, same treatment as the homepage sliders."
-  />
 
   {/* ---------- 9. MENTORING ---------- */}
   <ProjectContnetWrapper>
