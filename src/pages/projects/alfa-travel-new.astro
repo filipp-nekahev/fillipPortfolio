@@ -12,6 +12,7 @@ import { loadImages } from "@/utils/loadImages";
 import logoImg from "@/assets/logo/alfalogo-min.png";
 import searchVariantsImg from "@/assets/alfaHomeDecor/search_form_variants.png";
 import refundFlowUrl from "@/assets/alfaFlow/refund_flow.svg?url";
+import refundVoluntaryMapImg from "@/assets/alfaFlow/refund_voluntary_map.webp";
 import refundMapImg from "@/assets/alfaFlow/refund_map.webp";
 import exchangeMapImg from "@/assets/alfaFlow/exchange_map.webp";
 
@@ -51,21 +52,23 @@ const sliderImagesHomeDesktop = await loadImages(imageModulesHomeDesktop);
     </Text>
     <Text class="mb-[1.562rem]">Over two years I shipped:</Text>
     <ul
-      class="mb-[1.562rem] list-disc pl-[20px] text-[1.062rem] leading-[1.6] marker:text-[#9a9a9a]"
+      class="mb-[1.562rem] list-none pl-0 text-[1.062rem] leading-[1.6]"
     >
-      <li>Self-service ticket refunds and exchanges, desktop and mobile</li>
-      <li>The travel homepage redesign and its recommendation blocks</li>
-      <li>The hotel booking flow, designed from scratch</li>
+      <li>🔁 Self-service ticket refunds and exchanges, desktop and mobile</li>
+      <li>🏠 The travel homepage redesign and its recommendation blocks</li>
+      <li>🏨 The hotel booking flow, designed from scratch</li>
+      <li>✈️ Flight search and booking, rebuilt on the bank's components</li>
+      <li>🔍 Search across all four products: flights, hotels, trains, holidays</li>
       <li>
-        Flight search and booking, rebuilt on the bank's components
+        👤 The personal account where users manage trips and tickets, extended
+        and rebuilt on components
       </li>
-      <li>Search across all four products: flights, hotels, trains, holidays</li>
+      <li>🧳 Ancillaries and the smaller fixes across the booking funnel</li>
+      <li>🧪 A/B tests on key steps of the booking funnel</li>
       <li>
-        The personal account where users manage trips and tickets, extended and
-        rebuilt on components
+        🔎 Competitor analysis and a reference library of travel homepages, in
+        Russia and abroad
       </li>
-      <li>Ancillaries and the smaller fixes across the booking funnel</li>
-      <li>A/B tests on key steps of the booking funnel</li>
     </ul>
     <Text class="mb-[1.562rem]">
       This case looks closely at two of them, refunds and exchanges and the
@@ -134,14 +137,20 @@ const sliderImagesHomeDesktop = await loadImages(imageModulesHomeDesktop);
   <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold">Every Screen</Heading>
     <Text class="mb-[1.562rem]">
-      The refund as it was designed and built, with every screen and every
-      branch in place.
+      Both refund flows as they were designed and built, with every screen and
+      every branch in place. First the voluntary refund, then the involuntary
+      one with its reasons and supporting documents.
     </Text>
   </ProjectContnetWrapper>
   <FlowMap
+    src={refundVoluntaryMapImg}
+    fullHref="/flows/refund_voluntary_map_full.webp"
+    alt="The full voluntary refund flow: every screen and branch, connected with arrows"
+  />
+  <FlowMap
     src={refundMapImg}
     fullHref="/flows/refund_map_full.webp"
-    alt="The full refund flow: every screen and branch, connected with arrows"
+    alt="The full involuntary refund flow: every screen and branch, connected with arrows"
   />
   <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold"
@@ -202,11 +211,11 @@ const sliderImagesHomeDesktop = await loadImages(imageModulesHomeDesktop);
     >
     <Text class="mb-[1.562rem]">
       The homepage redesign started with people, not screens. I had calls with
-      the heads of the travel business to collect their wishes and expectations.
-      I also talked to the designer of the bank's main homepage and stayed in
-      touch with them at every stage. For references I collected screenshots of
-      homepages from major services in Russia and worldwide, partly through
-      Mobbin.
+      the heads of the travel business to collect their wishes and expectations,
+      and I talked to the designer of the bank's main homepage and stayed in
+      touch with them at every stage. In parallel I ran a competitor analysis
+      and built a reference library of homepages from popular travel services,
+      in Russia and abroad, partly through Mobbin.
     </Text>
     <Heading level={2} size="xl" weight="semibold"
       >Designing Inside a Fixed Layout</Heading
