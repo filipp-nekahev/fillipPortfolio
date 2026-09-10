@@ -1,177 +1,296 @@
 ---
-import { Image } from "astro:assets";
 import Layout from "@/layouts/Project.astro";
 import Heading from "@/components/ui/Heading.astro";
 import Text from "@/components/ui/Text.astro";
 import ProjectContnetWrapper from "@/components/ui/ProjectContnetWrapper.astro";
 import SwiperSlider from "@/components/ui/SwiperSlider.astro";
+import FlowMap from "@/components/ui/FlowMap.astro";
 import { loadImages } from "@/utils/loadImages";
 
-import detail1Img from "@/assets/alfaDecor/4.png";
-import detail2Img from "@/assets/alfaDecor/5.png";
 import logoImg from "@/assets/logo/alfalogo-min.png";
+import refundFlowUrl from "@/assets/alfaFlow/refund_flow.svg?url";
+import refundVoluntaryMapImg from "@/assets/alfaFlow/refund_voluntary_map.webp";
+import exchangeMapImg from "@/assets/alfaFlow/exchange_map.webp";
 
 const title = "Alfa Bank - Alfa Travel";
 const years = "2023-2025";
 
-const imageModulesFirst = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/alfa1/*.{jpeg,jpg,png,gif}"
+const imageModulesHomeMobile = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/alfaHomeMobile/*.{jpeg,jpg,png,gif}"
 );
-const imageModulesSecond = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/alfa2/*.{jpeg,jpg,png,gif}"
+const imageModulesHomeDesktop = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/alfaHomeDesktop/*.{jpeg,jpg,png,gif}"
 );
-const imageModulesThird = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/alfa3/*.{jpeg,jpg,png,gif}"
+const imageModulesHomeExplore = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/alfaHomeExplore/*.{jpeg,jpg,png,gif}"
 );
 
-const sliderImagesFirst = await loadImages(imageModulesFirst);
-const sliderImagesSecond = await loadImages(imageModulesSecond);
-const sliderImagesThird = await loadImages(imageModulesThird);
+const sliderImagesHomeMobile = await loadImages(imageModulesHomeMobile);
+const sliderImagesHomeDesktop = await loadImages(imageModulesHomeDesktop);
+const sliderImagesHomeExplore = await loadImages(imageModulesHomeExplore);
 ---
 
-<Layout {title} {years} logo={logoImg}>
+<Layout {title} {years} logo={logoImg} titleLink="https://alfabank.ru/travel/">
+  {/* ---------- 1. CONTEXT ---------- */}
   <ProjectContnetWrapper>
     <Text>
-      Alfa-Bank is Russia's largest private bank, providing financial services
-      to over 22 million customers through 672+ branches nationwide. As a
-      universal bank, it offers comprehensive banking operations including
-      retail, corporate banking, investment services, and digital solutions with
-      approximately 25,000 employees.</Text
-    >
-    <Text class="mb-[1.562rem]"
-      >Alfa Travel is the bank's integrated travel booking platform, providing
-      comprehensive travel services including flights, hotels, train tickets,
-      and vacation packages. The platform leverages the bank's ecosystem
-      approach, allowing customers to utilize bonus points and rewards across
-      all banking services while seamlessly booking and paying for travel
-      through their existing banking relationship.</Text
-    >
-    <Heading level={2} size="xl" weight="semibold">How It Started</Heading>
-    <Text class="mb-[1.562rem]">
-      I joined the travel department as its first designer. Before that, the
-      design was done by a designer from the partner company, since flight
-      sales worked through the partner's API. Part of the flow was a white
-      label, part was drawn by the partner's designer. When the product started
-      to grow, it had to be brought up to the quality level of a large bank.
+      Alfa-Bank is the largest private bank in Russia. Alfa Travel is its
+      travel platform: flights, hotels, trains and holidays, booked and paid
+      for inside the customer's bank account.
     </Text>
-    <Heading level={2} size="xl" weight="semibold">Why Me</Heading>
     <Text class="mb-[1.562rem]">
-      I have a lot of experience in travel: I worked at OneTwoTrip, designed a
-      train ticket app for former colleagues, made a website for a new airline
-      and an in-flight entertainment service. I also run my own travel side
-      project with 50k MAU.
+      I was the travel department's first designer and its only one for two
+      years, working on desktop and on the mobile webview inside the bank's app.
     </Text>
+
+    {/* ---------- 2. ROLE & SCOPE ---------- */}
     <Heading level={2} size="xl" weight="semibold">My Role</Heading>
     <Text class="mb-[1.562rem]">
-      Sole designer in the travel department, working within Alfa Bank's
-      design system across flight bookings, hotel reservations, train tickets,
-      and vacation packages.
+      Sole designer for the travel department. I owned flights, hotels, trains
+      and holidays from research and flows to final UI and handoff, on both
+      desktop and mobile.
     </Text>
-    <Heading level={2} size="xl" weight="semibold">First Steps</Heading>
+    <Text class="mb-[1.562rem]">Over two years I shipped:</Text>
+    <ul
+      class="mb-[1.562rem] list-none pl-0 text-[1.062rem] leading-[1.6]"
+    >
+      <li>🔁 Self-service ticket refunds and exchanges, desktop and mobile</li>
+      <li>🏠 The travel homepage redesign and its recommendation blocks</li>
+      <li>🏨 The hotel booking flow, designed from scratch</li>
+      <li>✈️ Flight search and booking, rebuilt on the bank's components</li>
+      <li>🔍 Search across all four products: flights, hotels, trains, holidays</li>
+      <li>
+        👤 The personal account where users manage trips and tickets, extended
+        and rebuilt on components
+      </li>
+      <li>🧳 Ancillaries and the smaller fixes across the booking funnel</li>
+      <li>🧪 A/B tests on key steps of the booking funnel</li>
+      <li>
+        🔎 Competitor analysis and a reference library of travel homepages, in
+        Russia and abroad
+      </li>
+    </ul>
     <Text class="mb-[1.562rem]">
-      I started with research on the current state of the travel industry in
-      Russia and worldwide. Then I began moving the site to new components,
-      since the old ones were outdated, and in parallel made small interface
-      fixes wherever I saw problems.
+      This case looks closely at two of them, the homepage redesign and refunds
+      and exchanges, because they show the constraints I had to work with.
     </Text>
-    <Heading
-      class="mt-[100px] mb-[10px] text-[28px]"
-      level={2}
-      weight="semibold">A Few Key Projects & Solutions</Heading
-    >
+
+    {/* ---------- 3. PLATFORM HISTORY ---------- */}
     <Heading level={2} size="xl" weight="semibold"
-      >Homepage Redesign & User Engagement</Heading
+      >The Platform I Inherited</Heading
     >
-    <Text class="mb-[1.562rem]"
-      >The homepage redesign started with people, not screens. I had calls with
-      the heads of the travel business to collect their wishes and
-      expectations. I also talked to the designer of the bank's main homepage
-      and stayed in touch with them at every stage. For references I collected
-      screenshots of homepages from major services in Russia and worldwide,
-      partly through Mobbin.</Text
-    >
-    <Text class="mb-[25px]"
-      >The main idea was to make the homepage more alive with travel
-      recommendations: "Popular Destinations," "Popular Hotels," and "Popular
-      Tours." Later we added an integration with Alfa Afisha, a service with
-      events across Russia. The business team also asked for several promo
-      banners. Since the design was a bento box, I prepared different grid
-      layouts for different numbers of banners. I showed intermediate versions
-      to stakeholders all the time, and we ran design reviews with the design
-      team.</Text
-    >
+    <Text class="mb-[1.562rem]">
+      Alfa Travel started as another travel company's white label, repainted in
+      the bank's style. As it grew, the bank wanted a product of its own, and
+      that is when I was hired: to rebuild it on Alfa Bank's components, which
+      was a hard requirement, on top of the partner's API.
+    </Text>
+    <Text class="mb-[1.562rem]">
+      That gave us control and more work at once. Every screen was now ours to
+      draw and had to fit the design system, and desktop barely existed when I
+      arrived.
+    </Text>
   </ProjectContnetWrapper>
-  <div class="mt-[40px] mb-[100px]">
+
+  {/* ---------- 5. DEEP DIVE: HOMEPAGE ---------- */}
+  <ProjectContnetWrapper>
+    <Heading class="mt-[100px] mb-[10px] text-[28px]" level={2} weight="semibold"
+      >Homepage Redesign</Heading
+    >
+    <Text class="mb-[1.562rem]">
+      Most customers live in the bank's mobile app, where Alfa Travel runs as a
+      webview, so the mobile homepage is the main one. Desktop is a second entry
+      point on the website.
+    </Text>
+    <Text class="mb-[1.562rem]">
+      I started with calls to the heads of the travel business, a competitor
+      analysis and a reference library of travel homepages from Russia and
+      abroad. The bento grid came from the bank's main site, and I agreed every
+      step with its designers.
+    </Text>
+    <Text class="mb-[1.562rem]">
+      The page had to carry banners, because promos and partnerships bring
+      revenue, so I prepared grid options for different numbers of them. Around
+      that I added popular hotels and popular destinations, and later the
+      events guide, tied to where the customer is searching or where they live.
+    </Text>
+    <Heading level={2} size="xl" weight="semibold">Craft</Heading>
+    <Text class="mb-[1.562rem]">
+      The homepage is the one piece that is almost not on the design system.
+      The hard requirements were short: the bank's buttons, inputs and
+      typeface, the bento grid at least in part so the page matches the bank's
+      main site, and a list of what had to be on the page, the banners
+      included. Everything else on the page is my own visual work.
+    </Text>
+    <Heading level={2} size="xl" weight="semibold">Sign-off</Heading>
+    <Text class="mb-[1.562rem]">
+      Alfa is a large corporation, so nothing shipped on one person's decision.
+      Each piece went through several rounds of sign-off: inside the travel
+      department, then with the design team and my team lead, who ran several
+      designers. For the important work, like the homepage, it also went to
+      the business side and up to C-level.
+    </Text>
+    <Text class="mb-[1.562rem]">
+      That is where most of the trade-offs came from. The result had to work
+      for all of them, not only for me, and some choices on the page are the
+      ones that could pass rather than the ones I would draw with a free hand.
+    </Text>
+  </ProjectContnetWrapper>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Mobile</Heading>
+  </ProjectContnetWrapper>
+  <div class="mt-[40px] mb-[25px]">
     <SwiperSlider
-      sliderImages={sliderImagesFirst}
-      initialWidth="267px"
+      sliderImages={sliderImagesHomeMobile}
+      initialWidth="224px"
       video={true}
     />
   </div>
+  <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
+    Entry screen, promo entry, homepage in light and dark, the events guide and
+    a place card.
+  </Text>
   <ProjectContnetWrapper>
-    <Heading level={2} size="xl" weight="semibold"
-      >Hotels & Personal Account</Heading
-    >
-    <Text class="mb-[1.562rem]">
-      I designed the hotels booking flow from scratch and kept improving the
-      personal account, where users manage their trips and tickets.
-    </Text>
-    <Heading level={2} size="xl" weight="semibold"
-      >Automated Ticket Services</Heading
-    >
-    <Text class="mb-[1.562rem]">
-      Developed self-service ticket refund and exchange system with automated
-      price difference calculations, eliminating the need for customer support
-      intervention. This solution reduced support inquiries for ticket-related
-      issues by <b>74.1%</b>, significantly improving operational efficiency
-      while providing users with instant ticket management capabilities.
-    </Text>
+    <Heading level={2} size="xl" weight="semibold">Desktop</Heading>
   </ProjectContnetWrapper>
   <div class="mt-[40px] mb-[100px]">
-    <SwiperSlider sliderImages={sliderImagesSecond} initialWidth="270px" />
+    <SwiperSlider sliderImages={sliderImagesHomeDesktop} initialWidth="300px" />
   </div>
-  <div class="mt-[40px] mb-[100px]">
-    <SwiperSlider sliderImages={sliderImagesThird} initialWidth="270px" />
-  </div>
-  <div
-    class="mt-[40px] mb-[100px] flex items-start gap-[40px] overflow-x-auto overflow-visible scroll-smooth snap-x snap-mandatory lg:snap-none no-scrollbar
-      px-[var(--container-padding)] scroll-px-[var(--container-padding)] lg:px-[var(--offset-left)] lg:scroll-px-0 lg:pb-0"
-    style=`--offset-left: calc(50vw - (1200px/2) + 270px + 20px)`
-    tabindex="0"
-    role="region"
-    aria-label="Media carousel"
-  >
-    <Image
-      src={detail1Img}
-      width={detail1Img.width / 2}
-      class="max-w-[none]"
-      alt="Decorative detail image"
-    />
-  </div>
-  <div
-    class="mt-[40px] mb-[100px] flex items-start gap-[40px] overflow-x-auto overflow-visible scroll-smooth snap-x snap-mandatory lg:snap-none no-scrollbar
-      px-[var(--container-padding)] scroll-px-[var(--container-padding)] lg:px-[var(--offset-left)] lg:scroll-px-0 lg:pb-0"
-    style=`--offset-left: calc(50vw - (1200px/2) + 270px + 20px)`
-    tabindex="0"
-    role="region"
-    aria-label="Media carousel"
-  >
-    <Image
-      src={detail2Img}
-      width={detail2Img.width / 2}
-      class="max-w-[none]"
-      alt="Decorative detail image"
-    />
-  </div>
+
   <ProjectContnetWrapper>
-    <Heading level={2} size="xl" weight="semibold"
-      >A/B Tests and Mentoring</Heading
+    <Heading level={2} size="xl" weight="semibold">Explorations</Heading>
+    <Text class="mb-[1.562rem]">
+      The search form was the part everyone had an opinion about, so it went
+      through the most versions: tabs against segmented control, a light hero
+      against a dark and a photo one, the form inside a card against the form on
+      the background, and then another ten versions tried on the full page.
+    </Text>
+  </ProjectContnetWrapper>
+  <div class="mt-[40px] mb-[25px]">
+    <SwiperSlider sliderImages={sliderImagesHomeExplore} initialWidth="305px" />
+  </div>
+  <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
+    Five versions of the search form, then ten more tried on the full page.
+  </Text>
+
+  {/* ---------- 4. DEEP DIVE: REFUNDS & EXCHANGES ---------- */}
+  <ProjectContnetWrapper>
+    <Heading class="mt-[100px] mb-[10px] text-[28px]" level={2} weight="semibold"
+      >Refunds & Exchanges</Heading
     >
+    <Heading level={2} size="xl" weight="semibold">The Problem</Heading>
+    <Text class="mb-[1.562rem]">
+      As the product grew, so did the number of requests to support. Refunds
+      and exchanges were handled by people, and support could not keep up.
+      Customers waited a long time for an answer, and with travel that hurts:
+      a delayed reply about a flight is not a small thing for the person
+      waiting.
+    </Text>
+    <Heading level={2} size="xl" weight="semibold">The Approach</Heading>
+    <Text class="mb-[1.562rem]">
+      We built a self-service flow inside the personal account. The customer
+      picks the ticket, states the reason, selects the passengers and attaches
+      the documents themselves. From there the request is either checked
+      automatically or handed to support as a ready task, with no back and
+      forth to find out what the customer wants.
+    </Text>
+    <Text class="mb-[1.562rem]">
+      The visual work here is small. It is built on the bank's design system,
+      and most of the effort went into the logic: what happens at each step,
+      where the flow waits for the airline, where it waits for the customer,
+      and where it ends.
+    </Text>
+    <Heading level={2} size="xl" weight="semibold">How It Works</Heading>
+  </ProjectContnetWrapper>
+  <div
+    class="mt-[40px] mb-[25px] overflow-x-auto scroll-smooth no-scrollbar
+      px-[var(--container-padding)] lg:px-[var(--offset-left)]"
+    style=`--offset-left: calc(50vw - (1200px/2))`
+    tabindex="0"
+    role="region"
+    aria-label="Ticket refund flow diagram"
+  >
+    <img
+      src={refundFlowUrl}
+      alt="The ticket refund flow from start to finish, with the two points where the journey can end"
+      class="max-w-[none] h-[458px]"
+    />
+  </div>
+  <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
+    The refund journey end to end. Two of the steps can close it: the airline
+    refusing, and the customer declining the quote or letting the timer expire.
+  </Text>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">The Full Flow</Heading>
+    <Text class="mb-[1.562rem]">
+      The diagram above is the short version. Below is the same refund flow
+      screen by screen, connected the way it works in the product.
+    </Text>
+  </ProjectContnetWrapper>
+  <FlowMap
+    src={refundVoluntaryMapImg}
+    fullHref="/flows/refund_voluntary_map_full.webp"
+    alt="The full refund flow: every screen and branch, connected with arrows"
+  />
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Exchange</Heading>
+    <Text class="mb-[1.562rem]">
+      An exchange is harder than a refund, because the customer has to say
+      exactly what they want to replace. A booking can have several flights
+      and connections, and the customer may change only one leg, only the part
+      before or after a connection, or the whole route. It can be for one
+      passenger or several.
+    </Text>
+    <Text class="mb-[1.562rem]">
+      That is where the corner cases live. A child cannot be separated from the
+      adult they fly with, so a change for the adult has to carry the child
+      with it. The main route is what you see below; the branches around it
+      handle the rest.
+    </Text>
+  </ProjectContnetWrapper>
+  <FlowMap
+    src={exchangeMapImg}
+    fullHref="/flows/exchange_map_full.webp"
+    alt="The full ticket exchange flow: every screen and branch, connected with arrows"
+  />
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Outcome</Heading>
+    <Text class="mb-[1.562rem]">
+      Most refund and exchange cases now close through the self-service flow.
+      The corner cases still reach support, but as a prepared task rather than
+      a conversation. Support requests about tickets dropped by <b>74.1%</b>.
+    </Text>
+    <Text class="mb-[1.562rem]">
+      The flow went through many iterations and rounds of sign-off. What
+      shipped is the version that could pass, not every choice in it is the
+      one I would make on my own, and it works.
+    </Text>
+  </ProjectContnetWrapper>
+
+  {/* ---------- 8. OTHER WORK ---------- */}
+  <ProjectContnetWrapper>
+    <Heading class="mt-[100px] mb-[10px] text-[28px]" level={2} weight="semibold"
+      >Also Shipped</Heading
+    >
+    <Text class="mb-[1.562rem]">
+      Next to the two projects above, I designed the hotel booking flow from
+      scratch, kept improving the personal account where people manage their
+      trips and tickets, and worked on search for all four products: flights,
+      hotels, trains and holidays. That included multi-city routes, search
+      history and passenger validation.
+    </Text>
+    <Text class="mb-[1.562rem]">
+      I also ran A/B tests on the steps that bring revenue directly: the choice
+      of cabin class and the ancillaries.
+    </Text>
+  </ProjectContnetWrapper>
+
+  {/* ---------- 9. MENTORING ---------- */}
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Mentoring</Heading>
     <Text class="mb-[50px]">
-      I ran A/B tests on the important steps of the booking funnel to improve
-      business metrics. When a middle designer joined the team, I onboarded
-      them: distributed tasks and helped them understand the project and the
-      design system.
+      When a middle designer joined the team, I onboarded them: distributed
+      tasks and helped them understand the project and the design system.
     </Text>
   </ProjectContnetWrapper>
 </Layout>
