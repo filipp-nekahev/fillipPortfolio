@@ -10,6 +10,7 @@ import { loadImages } from "@/utils/loadImages";
 
 import logoImg from "@/assets/logo/alfalogo-min.png";
 import searchVariantsImg from "@/assets/alfaHomeDecor/search_form_variants.png";
+import refundFlowUrl from "@/assets/alfaFlow/refund_flow.svg?url";
 
 const title = "Alfa Bank - Alfa Travel";
 const years = "2023-2025";
@@ -109,10 +110,24 @@ const sliderImagesHomeDesktop = await loadImages(imageModulesHomeDesktop);
   <DraftNote
     label="Why voluntary and forced refunds were split into separate flows — the key structural decision here. What each one demands from the user (a reason, documents, proof), and what you considered before landing on the split."
   />
-  <DraftNote
-    image
-    label="Full flow map, exported wide from Figma and shown full-bleed with horizontal scroll (same pattern as the decorative carousels on the current page). One image for the voluntary refund: 36 mobile frames with arrows and branches. This is the single most important image on the page — it shows an end-to-end journey at a glance."
-  />
+  <div
+    class="mt-[40px] mb-[25px] overflow-x-auto scroll-smooth no-scrollbar
+      px-[var(--container-padding)] lg:px-[var(--offset-left)]"
+    style=`--offset-left: calc(50vw - (1200px/2))`
+    tabindex="0"
+    role="region"
+    aria-label="Ticket refund flow diagram"
+  >
+    <img
+      src={refundFlowUrl}
+      alt="The ticket refund flow: a fork into a voluntary and an involuntary refund, the shared steps, and the two points where the journey can end"
+      class="max-w-[none] h-[458px]"
+    />
+  </div>
+  <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
+    The refund journey end to end. Two of the steps can close it: the airline
+    refusing, and the customer declining the quote or letting the timer expire.
+  </Text>
   <DraftNote
     image
     label="Slider of 6-8 key refund screens: request, confirm, amount breakdown, in progress, completed. Export them at one height, like the homepage sliders."
