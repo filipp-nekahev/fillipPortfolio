@@ -23,7 +23,7 @@ const imageModules = import.meta.glob<{ default: ImageMetadata }>(
 const sliderImages = await loadImages(imageModules);
 ---
 
-<Layout {title} {years} {description} {logo}>
+<Layout {title} {years} {description} {logo} titleLink="https://fillwise.ai">
   <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold">Problem Statement</Heading>
     <Text class="mb-[1.562rem]"
