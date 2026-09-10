@@ -1,0 +1,41 @@
+---
+export interface Props {
+  src: ImageMetadata;
+  fullHref: string;
+  alt: string;
+  height?: string;
+}
+const { src, fullHref, alt, height = "700px" } = Astro.props;
+---
+
+<div
+  class="mt-[40px] mb-[10px] overflow-x-auto scroll-smooth no-scrollbar
+    px-[var(--container-padding)] lg:px-[var(--offset-left)]"
+  style=`--offset-left: calc(50vw - (1200px/2))`
+  tabindex="0"
+  role="region"
+  aria-label={alt}
+>
+  <a href={fullHref} target="_blank" rel="noopener" class="block w-max">
+    <img
+      src={src.src}
+      width={src.width}
+      height={src.height}
+      alt={alt}
+      loading="lazy"
+      decoding="async"
+      class="max-w-[none] w-auto"
+      style={`height: ${height}`}
+    />
+  </a>
+</div>
+<p
+  class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic text-[#8a8a8a]"
+>
+  Scroll sideways to follow the flow, or <a
+    href={fullHref}
+    target="_blank"
+    rel="noopener"
+    class="underline">open it full size</a
+  > to read the screens.
+</p>

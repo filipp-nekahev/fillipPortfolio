@@ -6,11 +6,14 @@ import Text from "@/components/ui/Text.astro";
 import ProjectContnetWrapper from "@/components/ui/ProjectContnetWrapper.astro";
 import SwiperSlider from "@/components/ui/SwiperSlider.astro";
 import DraftNote from "@/components/ui/DraftNote.astro";
+import FlowMap from "@/components/ui/FlowMap.astro";
 import { loadImages } from "@/utils/loadImages";
 
 import logoImg from "@/assets/logo/alfalogo-min.png";
 import searchVariantsImg from "@/assets/alfaHomeDecor/search_form_variants.png";
 import refundFlowUrl from "@/assets/alfaFlow/refund_flow.svg?url";
+import refundMapImg from "@/assets/alfaFlow/refund_map.webp";
+import exchangeMapImg from "@/assets/alfaFlow/exchange_map.webp";
 
 const title = "Alfa Bank - Alfa Travel";
 const years = "2023-2025";
@@ -128,9 +131,17 @@ const sliderImagesHomeDesktop = await loadImages(imageModulesHomeDesktop);
     The refund journey end to end. Two of the steps can close it: the airline
     refusing, and the customer declining the quote or letting the timer expire.
   </Text>
-  <DraftNote
-    image
-    label="Slider of 6-8 key refund screens: request, confirm, amount breakdown, in progress, completed. Export them at one height, like the homepage sliders."
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Every Screen</Heading>
+    <Text class="mb-[1.562rem]">
+      The refund as it was designed and built, with every screen and every
+      branch in place.
+    </Text>
+  </ProjectContnetWrapper>
+  <FlowMap
+    src={refundMapImg}
+    fullHref="/flows/refund_map_full.webp"
+    alt="The full refund flow: every screen and branch, connected with arrows"
   />
   <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold"
@@ -159,9 +170,10 @@ const sliderImagesHomeDesktop = await loadImages(imageModulesHomeDesktop);
   <DraftNote
     label="How the exchange flow handles a new ticket that costs more or less than the original: the top-up payment, the acquiring step, what happens when the difference goes the other way. The Figma exchange section has 37 desktop frames, so there is plenty to show."
   />
-  <DraftNote
-    image
-    label="The exchange flow map, same wide full-bleed treatment as the refund one, plus the top-up / payment screens."
+  <FlowMap
+    src={exchangeMapImg}
+    fullHref="/flows/exchange_map_full.webp"
+    alt="The full ticket exchange flow: every screen and branch, connected with arrows"
   />
   <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold"
