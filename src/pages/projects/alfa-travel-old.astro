@@ -1,0 +1,177 @@
+---
+import { Image } from "astro:assets";
+import Layout from "@/layouts/Project.astro";
+import Heading from "@/components/ui/Heading.astro";
+import Text from "@/components/ui/Text.astro";
+import ProjectContnetWrapper from "@/components/ui/ProjectContnetWrapper.astro";
+import SwiperSlider from "@/components/ui/SwiperSlider.astro";
+import { loadImages } from "@/utils/loadImages";
+
+import detail1Img from "@/assets/alfaDecor/4.png";
+import detail2Img from "@/assets/alfaDecor/5.png";
+import logoImg from "@/assets/logo/alfalogo-min.png";
+
+const title = "Alfa Bank - Alfa Travel";
+const years = "2023-2025";
+
+const imageModulesFirst = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/alfa1/*.{jpeg,jpg,png,gif}"
+);
+const imageModulesSecond = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/alfa2/*.{jpeg,jpg,png,gif}"
+);
+const imageModulesThird = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/alfa3/*.{jpeg,jpg,png,gif}"
+);
+
+const sliderImagesFirst = await loadImages(imageModulesFirst);
+const sliderImagesSecond = await loadImages(imageModulesSecond);
+const sliderImagesThird = await loadImages(imageModulesThird);
+---
+
+<Layout {title} {years} logo={logoImg}>
+  <ProjectContnetWrapper>
+    <Text>
+      Alfa-Bank is Russia's largest private bank, providing financial services
+      to over 22 million customers through 672+ branches nationwide. As a
+      universal bank, it offers comprehensive banking operations including
+      retail, corporate banking, investment services, and digital solutions with
+      approximately 25,000 employees.</Text
+    >
+    <Text class="mb-[1.562rem]"
+      >Alfa Travel is the bank's integrated travel booking platform, providing
+      comprehensive travel services including flights, hotels, train tickets,
+      and vacation packages. The platform leverages the bank's ecosystem
+      approach, allowing customers to utilize bonus points and rewards across
+      all banking services while seamlessly booking and paying for travel
+      through their existing banking relationship.</Text
+    >
+    <Heading level={2} size="xl" weight="semibold">How It Started</Heading>
+    <Text class="mb-[1.562rem]">
+      I joined the travel department as its first designer. Before that, the
+      design was done by a designer from the partner company, since flight
+      sales worked through the partner's API. Part of the flow was a white
+      label, part was drawn by the partner's designer. When the product started
+      to grow, it had to be brought up to the quality level of a large bank.
+    </Text>
+    <Heading level={2} size="xl" weight="semibold">Why Me</Heading>
+    <Text class="mb-[1.562rem]">
+      I have a lot of experience in travel: I worked at OneTwoTrip, designed a
+      train ticket app for former colleagues, made a website for a new airline
+      and an in-flight entertainment service. I also run my own travel side
+      project with 50k MAU.
+    </Text>
+    <Heading level={2} size="xl" weight="semibold">My Role</Heading>
+    <Text class="mb-[1.562rem]">
+      Sole designer in the travel department, working within Alfa Bank's
+      design system across flight bookings, hotel reservations, train tickets,
+      and vacation packages.
+    </Text>
+    <Heading level={2} size="xl" weight="semibold">First Steps</Heading>
+    <Text class="mb-[1.562rem]">
+      I started with research on the current state of the travel industry in
+      Russia and worldwide. Then I began moving the site to new components,
+      since the old ones were outdated, and in parallel made small interface
+      fixes wherever I saw problems.
+    </Text>
+    <Heading
+      class="mt-[100px] mb-[10px] text-[28px]"
+      level={2}
+      weight="semibold">A Few Key Projects & Solutions</Heading
+    >
+    <Heading level={2} size="xl" weight="semibold"
+      >Homepage Redesign & User Engagement</Heading
+    >
+    <Text class="mb-[1.562rem]"
+      >The homepage redesign started with people, not screens. I had calls with
+      the heads of the travel business to collect their wishes and
+      expectations. I also talked to the designer of the bank's main homepage
+      and stayed in touch with them at every stage. For references I collected
+      screenshots of homepages from major services in Russia and worldwide,
+      partly through Mobbin.</Text
+    >
+    <Text class="mb-[25px]"
+      >The main idea was to make the homepage more alive with travel
+      recommendations: "Popular Destinations," "Popular Hotels," and "Popular
+      Tours." Later we added an integration with Alfa Afisha, a service with
+      events across Russia. The business team also asked for several promo
+      banners. Since the design was a bento box, I prepared different grid
+      layouts for different numbers of banners. I showed intermediate versions
+      to stakeholders all the time, and we ran design reviews with the design
+      team.</Text
+    >
+  </ProjectContnetWrapper>
+  <div class="mt-[40px] mb-[100px]">
+    <SwiperSlider
+      sliderImages={sliderImagesFirst}
+      initialWidth="267px"
+      video={true}
+    />
+  </div>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold"
+      >Hotels & Personal Account</Heading
+    >
+    <Text class="mb-[1.562rem]">
+      I designed the hotels booking flow from scratch and kept improving the
+      personal account, where users manage their trips and tickets.
+    </Text>
+    <Heading level={2} size="xl" weight="semibold"
+      >Automated Ticket Services</Heading
+    >
+    <Text class="mb-[1.562rem]">
+      Developed self-service ticket refund and exchange system with automated
+      price difference calculations, eliminating the need for customer support
+      intervention. This solution reduced support inquiries for ticket-related
+      issues by <b>74.1%</b>, significantly improving operational efficiency
+      while providing users with instant ticket management capabilities.
+    </Text>
+  </ProjectContnetWrapper>
+  <div class="mt-[40px] mb-[100px]">
+    <SwiperSlider sliderImages={sliderImagesSecond} initialWidth="270px" />
+  </div>
+  <div class="mt-[40px] mb-[100px]">
+    <SwiperSlider sliderImages={sliderImagesThird} initialWidth="270px" />
+  </div>
+  <div
+    class="mt-[40px] mb-[100px] flex items-start gap-[40px] overflow-x-auto overflow-visible scroll-smooth snap-x snap-mandatory lg:snap-none no-scrollbar
+      px-[var(--container-padding)] scroll-px-[var(--container-padding)] lg:px-[var(--offset-left)] lg:scroll-px-0 lg:pb-0"
+    style=`--offset-left: calc(50vw - (1200px/2) + 270px + 20px)`
+    tabindex="0"
+    role="region"
+    aria-label="Media carousel"
+  >
+    <Image
+      src={detail1Img}
+      width={detail1Img.width / 2}
+      class="max-w-[none]"
+      alt="Decorative detail image"
+    />
+  </div>
+  <div
+    class="mt-[40px] mb-[100px] flex items-start gap-[40px] overflow-x-auto overflow-visible scroll-smooth snap-x snap-mandatory lg:snap-none no-scrollbar
+      px-[var(--container-padding)] scroll-px-[var(--container-padding)] lg:px-[var(--offset-left)] lg:scroll-px-0 lg:pb-0"
+    style=`--offset-left: calc(50vw - (1200px/2) + 270px + 20px)`
+    tabindex="0"
+    role="region"
+    aria-label="Media carousel"
+  >
+    <Image
+      src={detail2Img}
+      width={detail2Img.width / 2}
+      class="max-w-[none]"
+      alt="Decorative detail image"
+    />
+  </div>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold"
+      >A/B Tests and Mentoring</Heading
+    >
+    <Text class="mb-[50px]">
+      I ran A/B tests on the important steps of the booking funnel to improve
+      business metrics. When a middle designer joined the team, I onboarded
+      them: distributed tasks and helped them understand the project and the
+      design system.
+    </Text>
+  </ProjectContnetWrapper>
+</Layout>
