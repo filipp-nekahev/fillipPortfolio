@@ -13,7 +13,6 @@ import logoImg from "@/assets/logo/alfalogo-min.png";
 import searchVariantsImg from "@/assets/alfaHomeDecor/search_form_variants.png";
 import refundFlowUrl from "@/assets/alfaFlow/refund_flow.svg?url";
 import refundVoluntaryMapImg from "@/assets/alfaFlow/refund_voluntary_map.webp";
-import refundMapImg from "@/assets/alfaFlow/refund_map.webp";
 import exchangeMapImg from "@/assets/alfaFlow/exchange_map.webp";
 
 const title = "Alfa Bank - Alfa Travel";
@@ -98,24 +97,29 @@ const sliderImagesHomeDesktop = await loadImages(imageModulesHomeDesktop);
       >Refunds & Exchanges</Heading
     >
     <Heading level={2} size="xl" weight="semibold">The Problem</Heading>
+    <Text class="mb-[1.562rem]">
+      As the product grew, so did the number of requests to support. Refunds
+      and exchanges were handled by people, and support could not keep up.
+      Customers waited a long time for an answer, and with travel that hurts:
+      a delayed reply about a flight is not a small thing for the person
+      waiting.
+    </Text>
+    <Heading level={2} size="xl" weight="semibold">The Approach</Heading>
+    <Text class="mb-[1.562rem]">
+      We built a self-service flow inside the personal account. The customer
+      picks the ticket, states the reason, selects the passengers and attaches
+      the documents themselves. From there the request is either checked
+      automatically or handed to support as a ready task, with no back and
+      forth to find out what the customer wants.
+    </Text>
+    <Text class="mb-[1.562rem]">
+      The visual work here is small. It is built on the bank's design system,
+      and most of the effort went into the logic: what happens at each step,
+      where the flow waits for the airline, where it waits for the customer,
+      and where it ends.
+    </Text>
+    <Heading level={2} size="xl" weight="semibold">How It Works</Heading>
   </ProjectContnetWrapper>
-  <DraftNote
-    label="What happened before: the user had to contact support, how long it took, where the request came from (business, support load, complaints), and the scale of the problem."
-  />
-  <ProjectContnetWrapper>
-    <Heading level={2} size="xl" weight="semibold">Constraints</Heading>
-  </ProjectContnetWrapper>
-  <DraftNote
-    label="What boxed the design in: fare rules, airline policies, the partner API, legal and compliance sign-off, the bank's design system. Which of these was the hardest to get through, and what it cost the design."
-  />
-  <ProjectContnetWrapper>
-    <Heading level={2} size="xl" weight="semibold"
-      >Two Flows, Not One</Heading
-    >
-  </ProjectContnetWrapper>
-  <DraftNote
-    label="Why voluntary and forced refunds were split into separate flows — the key structural decision here. What each one demands from the user (a reason, documents, proof), and what you considered before landing on the split."
-  />
   <div
     class="mt-[40px] mb-[25px] overflow-x-auto scroll-smooth no-scrollbar
       px-[var(--container-padding)] lg:px-[var(--offset-left)]"
@@ -126,7 +130,7 @@ const sliderImagesHomeDesktop = await loadImages(imageModulesHomeDesktop);
   >
     <img
       src={refundFlowUrl}
-      alt="The ticket refund flow: a fork into a voluntary and an involuntary refund, the shared steps, and the two points where the journey can end"
+      alt="The ticket refund flow from start to finish, with the two points where the journey can end"
       class="max-w-[none] h-[458px]"
     />
   </div>
@@ -137,20 +141,14 @@ const sliderImagesHomeDesktop = await loadImages(imageModulesHomeDesktop);
   <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold">Every Screen</Heading>
     <Text class="mb-[1.562rem]">
-      Both refund flows as they were designed and built, with every screen and
-      every branch in place. First the voluntary refund, then the involuntary
-      one with its reasons and supporting documents.
+      The refund as it was designed and built, with every screen and every
+      branch in place.
     </Text>
   </ProjectContnetWrapper>
   <FlowMap
     src={refundVoluntaryMapImg}
     fullHref="/flows/refund_voluntary_map_full.webp"
-    alt="The full voluntary refund flow: every screen and branch, connected with arrows"
-  />
-  <FlowMap
-    src={refundMapImg}
-    fullHref="/flows/refund_map_full.webp"
-    alt="The full involuntary refund flow: every screen and branch, connected with arrows"
+    alt="The full refund flow: every screen and branch, connected with arrows"
   />
   <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold"
@@ -195,9 +193,9 @@ const sliderImagesHomeDesktop = await loadImages(imageModulesHomeDesktop);
   <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold">Outcome</Heading>
     <Text class="mb-[1.562rem]">
-      Self-service refunds and exchanges with automatic price difference
-      calculation meant people no longer had to go through support. Support
-      requests about tickets dropped by <b>74.1%</b>.
+      Most refund and exchange cases now close through the self-service flow.
+      The corner cases still reach support, but as a prepared task rather than
+      a conversation. Support requests about tickets dropped by <b>74.1%</b>.
     </Text>
   </ProjectContnetWrapper>
   <DraftNote
