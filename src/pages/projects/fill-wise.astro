@@ -126,11 +126,23 @@ const sliderImages = await loadImages(imageModules);
       for extension verification. For a small side project that was not worth
       it. PDF form filling made it into production.</Text
     >
+    <Text class="mb-[1.562rem]"
+      >PDF filling now also works for documents without form fields. The
+      extension sends an image of the page and works out from the layout which
+      empty block belongs to which label, then matches the user's text to it.</Text
+    >
+    <Text class="mb-[1.562rem]"
+      >Later I added a cache for sites people fill in again and again. Once a
+      form has been filled at least once, the mapping is saved and the next fill
+      is almost free, with no repeat trips to the AI. FillWise also has an API
+      now, and an MCP connection is planned.</Text
+    >
     <Heading level={2} size="xl" weight="semibold">Landing Page</Heading>
     <Text class="mb-[1.562rem]"
-      >I made the first version of the current landing page with Figma AI,
-      improved it by hand, then passed the design to Claude through the Figma
-      MCP and shipped the result to production at <a
+      >The extension itself was designed in Figma. The landing page was not: I
+      generated the first version with Figma AI, passed it to Claude Code
+      through the Figma MCP, and then refined it by feeding in references. It
+      shipped to production at <a
         href="https://fillwise.ai"
         target="_blank"
         rel="noopener"
@@ -175,8 +187,8 @@ const sliderImages = await loadImages(imageModules);
     >
     <Heading level={2} size="xl" weight="semibold">What's Next</Heading>
     <Text
-      >Soon FillWise will be free or almost free, and PDF filling will also
-      work for documents without form fields inside.</Text
+      >Soon FillWise will be free or almost free, and the MCP connection will
+      let other AI tools fill forms through it.</Text
     >
   </ProjectContnetWrapper>
 </Layout>
