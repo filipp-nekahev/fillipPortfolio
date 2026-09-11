@@ -142,8 +142,10 @@ const sliderImagesHomeExplore = await loadImages(imageModulesHomeExplore);
   <div class="mt-[40px] mb-[25px]">
     <SwiperSlider
       sliderImages={sliderImagesHomeMobile}
-      initialWidth="224px"
+      initialWidth="375px"
       video={true}
+      videoWidth="375px"
+      scale={1}
     />
   </div>
   <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
@@ -154,7 +156,7 @@ const sliderImagesHomeExplore = await loadImages(imageModulesHomeExplore);
     <Heading level={2} size="xl" weight="semibold">Desktop</Heading>
   </ProjectContnetWrapper>
   <div class="mt-[40px] mb-[100px]">
-    <SwiperSlider sliderImages={sliderImagesHomeDesktop} initialWidth="300px" />
+    <SwiperSlider sliderImages={sliderImagesHomeDesktop} initialWidth="600px" scale={1} />
   </div>
 
   <ProjectContnetWrapper>
@@ -167,7 +169,7 @@ const sliderImagesHomeExplore = await loadImages(imageModulesHomeExplore);
     </Text>
   </ProjectContnetWrapper>
   <div class="mt-[40px] mb-[25px]">
-    <SwiperSlider sliderImages={sliderImagesHomeExplore} initialWidth="305px" />
+    <SwiperSlider sliderImages={sliderImagesHomeExplore} initialWidth="610px" scale={1} />
   </div>
   <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
     Five versions of the search form, then ten more tried on the full page.
@@ -213,7 +215,7 @@ const sliderImagesHomeExplore = await loadImages(imageModulesHomeExplore);
     <img
       src={refundFlowUrl}
       alt="The ticket refund flow from start to finish, with the two points where the journey can end"
-      class="max-w-[none] h-[458px]"
+      class="max-w-[none] h-[520px]"
     />
   </div>
   <Text class="mb-[100px] max-w-[452px] m-auto text-center text-[15px] italic">
@@ -230,6 +232,7 @@ const sliderImagesHomeExplore = await loadImages(imageModulesHomeExplore);
   <FlowMap
     src={refundVoluntaryMapImg}
     fullHref="/flows/refund_voluntary_map_full.webp"
+    height="1900px"
     alt="The full refund flow: every screen and branch, connected with arrows"
   />
   <ProjectContnetWrapper>
@@ -251,6 +254,7 @@ const sliderImagesHomeExplore = await loadImages(imageModulesHomeExplore);
   <FlowMap
     src={exchangeMapImg}
     fullHref="/flows/exchange_map_full.webp"
+    height="1900px"
     alt="The full ticket exchange flow: every screen and branch, connected with arrows"
   />
   <ProjectContnetWrapper>
