@@ -5,9 +5,11 @@ export interface Props {
   sliderImages: ImageMetadata[];
   initialWidth: string;
   video?: boolean;
+  scale?: number;
+  videoWidth?: string;
 }
 
-const { sliderImages, initialWidth, video=false } = Astro.props;
+const { sliderImages, initialWidth, video=false, scale=0.5, videoWidth="224px" } = Astro.props;
 ---
 
 <div
@@ -25,7 +27,7 @@ const { sliderImages, initialWidth, video=false } = Astro.props;
   playsinline
   preload="auto"
   poster="/video/hero-cover.png"
-  class="max-w-[224px]"
+  style=`max-width: ${videoWidth}`
   >
     <source src="/video/output.mp4" type="video/mp4">
     <source src="/video/output.webm" type="video/webm">
@@ -36,9 +38,9 @@ const { sliderImages, initialWidth, video=false } = Astro.props;
       sliderImages.map((image) => (
         <div class="snap-center">
         <Image
-          style=`max-width: ${image.width / 2}px`
+          style=`max-width: ${image.width * scale}px`
           src={image}
-          width={image.width / 2}
+          width={Math.round(image.width * scale)}
           densities={[1, 2]}
           alt=""
         />
