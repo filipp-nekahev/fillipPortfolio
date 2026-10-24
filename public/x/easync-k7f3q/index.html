@@ -183,7 +183,7 @@
   .himg .cb{position:absolute;top:12px;left:12px;opacity:0;transition:opacity .1s}
   .hcard:hover .cb,.hgrid.selecting .cb{opacity:1}
   .trend{position:absolute;top:12px;right:12px;font-size:12px;font-weight:600;border-radius:10px;padding:3px 8px;display:inline-flex;align-items:center;gap:3px;background:#f3f4f6;color:#374151}
-  .trend.up{background:var(--hot-bg);color:var(--hot)}
+  .trend.up{background:#ecfdf5;color:var(--green)}
   .trend svg{width:12px;height:12px}
   .hbody{padding:14px 16px 16px;display:flex;flex-direction:column;gap:9px;flex:1}
   .hsrc{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--muted)}
@@ -193,7 +193,7 @@
   .sig svg{width:14px;height:14px;color:var(--hot)}
   .comp{display:inline-flex;align-items:center;gap:5px;color:var(--muted)}
   .dot{width:7px;height:7px;border-radius:50%;display:inline-block}
-  .dot.Low{background:#22c55e}.dot.Medium{background:#f59e0b}.dot.High{background:#ef4444}
+  .dot.Low{background:#22c55e}.dot.Medium,.dot.High{background:#9ca3af}
   .money{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px dashed var(--border);padding-top:10px;margin-top:auto}
   .money small{display:block;color:var(--muted);font-size:12px;margin-bottom:2px}
   .money .profit{color:var(--green);font-weight:700;font-size:20px}
@@ -657,7 +657,7 @@ function openDr(id){
       <div class="why"><b><svg class="i"><use href="#flame"/></svg>Why it’s hot</b>${p.sold} sold on eBay in the last 7 days, ${p.trend}% more than the week before. ${p.sellers} sellers list it, so competition is ${p.comp.toLowerCase()}.</div>
       <div class="stats">
         <div class="st"><small>Sold on eBay · 7 days</small><b>${p.sold}</b></div>
-        <div class="st"><small>Trend vs last week</small><b style="color:var(--hot)">+${p.trend}%</b></div>
+        <div class="st"><small>Trend vs last week</small><b style="color:var(--green)">+${p.trend}%</b></div>
         <div class="st"><small>Competition</small><b><i class="dot ${p.comp}"></i> ${p.comp} · ${p.sellers} sellers</b></div>
         <div class="st"><small>Rating on ${srcName}</small><b>★ ${p.rating} <span style="color:var(--muted);font-weight:400">(${p.reviews.toLocaleString('en-US')})</span></b></div>
       </div>
