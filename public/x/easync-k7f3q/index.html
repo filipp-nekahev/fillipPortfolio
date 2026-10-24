@@ -22,7 +22,9 @@
 
   .app{display:flex;min-height:100vh}
   /* sidebar */
-  .side{width:290px;flex:none;background:#fff;border-right:1px solid var(--border);display:flex;flex-direction:column;padding:16px 10px 12px;position:sticky;top:0;height:100vh;overflow:auto}
+  .side{width:290px;flex:none;background:#fff;border-right:1px solid var(--border);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow:hidden}
+  .side-top{flex:1;min-height:0;overflow:auto;padding:16px 10px 16px}
+  .side-bottom{flex:none;background:#fff;padding:8px 10px 12px;position:relative;box-shadow:0 -12px 20px -12px rgba(0,0,0,.12)}
   .acc{display:flex;align-items:center;gap:12px;padding:4px 10px 16px}
   .acc .logo{width:46px;height:46px;border-radius:9px;background:conic-gradient(#e53238 0 25%,#0064d2 0 50%,#86b817 0 75%,#f5af02 0);display:grid;place-items:center;color:#fff;font-size:11px;font-weight:600}
   .acc b{display:block;font-weight:600}
@@ -165,6 +167,7 @@
 
 <div class="app">
   <aside class="side">
+    <div class="side-top">
     <div class="acc">
       <div class="logo">ebay</div>
       <div><b>gldem81</b><span>United States</span></div>
@@ -184,7 +187,10 @@
       <a><svg class="i"><use href="#sliders"/></svg>Store Settings<svg class="i chev"><use href="#right"/></svg></a>
       <a><svg class="i"><use href="#crate"/></svg>Fulfillment Methods<svg class="i chev"><use href="#down"/></svg></a>
       <div class="sub"><a>Fulfillment Accounts</a></div>
-      <div class="gap"></div>
+    </nav>
+    </div>
+    <div class="side-bottom">
+    <nav class="nav">
       <a><svg class="i"><use href="#cart"/></svg>FBE Orders</a>
       <a><svg class="i"><use href="#crate"/></svg>FBE Accounts</a>
       <a><svg class="i"><use href="#card"/></svg>Subscription</a>
@@ -192,6 +198,7 @@
     </nav>
     <div class="acct"><span class="ebay"><i>e</i><i>b</i><i>a</i><i>y</i></span><span style="background:#7f54b3;color:#fff;border-radius:3px;padding:0 3px;font-weight:700;font-size:11px">Woo</span><div><small>account</small><b>Default</b></div><svg class="i" style="margin-left:auto;width:16px"><use href="#right"/></svg></div>
     <div class="user"><div><b>Gleb Demchuk</b><span>demchuk.gleb@easync.io ⚠️</span></div><svg class="i dots"><use href="#dots"/></svg></div>
+    </div>
   </aside>
 
   <main>
