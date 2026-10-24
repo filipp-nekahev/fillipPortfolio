@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Easync — Hot Items prototype</title>
+<title>Easync · Hot Items prototype</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -272,6 +272,7 @@
   .tour-dots i.on{background:var(--navy)}
   .tour-btn{position:fixed;left:310px;bottom:24px;z-index:30;height:40px;padding:0 16px 0 12px;border-radius:20px;border:1px solid var(--border);background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08);font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px;color:#111}
   .tour-btn:hover{background:var(--hover)}
+  body.touring .tour-btn{display:none}
   .tour-btn i{width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-style:normal;display:grid;place-items:center;font-size:13px}
   @media (max-width:1200px){.mini-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
   @media (max-width:900px){.side{display:none}.grid4,.stores{grid-template-columns:1fr 1fr}main{padding:24px 16px}.tour-btn{left:16px}.bulk,.toast{left:50%}.hi-head{flex-direction:column}.search{width:100%}}
@@ -653,7 +654,7 @@ function openDr(id){
       <h2>${p.title}</h2>
       <a href="#" onclick="return false" style="font-size:14px;color:var(--primary);text-decoration:none;display:inline-flex;gap:4px;align-items:center;margin-top:6px">View on ${srcName}<svg class="i" style="width:14px"><use href="#ext"/></svg></a>
       <div class="dr-img">${img(p)}</div>
-      <div class="why"><b><svg class="i"><use href="#flame"/></svg>Why it’s hot</b>${p.sold} sold on eBay in the last 7 days, ${p.trend}% more than the week before. ${p.sellers} sellers list it — ${p.comp.toLowerCase()} competition.</div>
+      <div class="why"><b><svg class="i"><use href="#flame"/></svg>Why it’s hot</b>${p.sold} sold on eBay in the last 7 days, ${p.trend}% more than the week before. ${p.sellers} sellers list it, so competition is ${p.comp.toLowerCase()}.</div>
       <div class="stats">
         <div class="st"><small>Sold on eBay · 7 days</small><b>${p.sold}</b></div>
         <div class="st"><small>Trend vs last week</small><b style="color:var(--hot)">+${p.trend}%</b></div>
@@ -726,23 +727,23 @@ addEventListener('scroll',()=>tipEl.classList.remove('show'),true);
 /* ---------- tour for the reviewer (RU) ---------- */
 const firstFree=()=>hotList().list.filter(p=>!inDrafts(p.id)&&!isListed(p.id));
 const TOUR=[
-  {page:'home', t:'Прототип Hot Items для Easync', d:'Интерфейс повторяет текущий Easync по скриншотам из задания, всё кликабельно. За минуту покажу, где что и почему так. Товары и цифры условные: алгоритм подбора вне задачи.'},
-  {page:'home', sel:'.nav a[data-r=hot]', place:'right', t:'Вход 1: пункт в меню', d:'Hot Items — отдельный раздел сразу под Home. Метка New, чтобы раздел заметили после релиза.'},
-  {page:'home', sel:'.hot-home', place:'bottom', t:'Вход 2: блок на главной', d:'У нового пользователя главная из одних нулей. Здесь сразу видно, с чего начать, и товар можно добавить в черновики прямо отсюда.'},
-  {page:'home', sel:'.btn-add', place:'right', t:'Вход 3: модалка Add product', d:'В модалке добавления по ссылке появилась строка «Not sure what to sell? Browse Hot Items» — для тех, кто пришёл добавить товар, но не знает какой.'},
-  {page:'hot', sel:'#chips', place:'bottom', t:'Подборки', d:'Вместо одной длинной ленты — готовые подборки: растут продажи, высокая прибыль, мало конкурентов, дешёвая закупка. Похоже устроено у Zendrop. Ниже поиск, фильтры и сортировка.'},
-  {page:'hot', sel:'.hcard', place:'right', t:'Карточка товара', d:'Карточка отвечает на вопрос «почему это стоит продавать»: продажи на eBay за 7 дней, рост, конкуренция и прибыль после комиссий eBay. Наведите на любую цифру — появится подсказка.'},
-  {page:'hot', sel:'.hcard .btn-sm', place:'right', t:'Добавить в один клик', d:'Товар сразу попадает в черновики: без Amazon, копирования ссылки и экрана Batch Preview — цену и прибыль пользователь уже видел на карточке. Ошибся — Undo в уведомлении. Кнопка меняется на «In drafts».'},
-  {page:'hot', sel:'#bulk', place:'top', before:()=>{firstFree().slice(0,3).forEach(p=>S.sel.add(p.id));renderHot()}, after:()=>clearSel(), t:'Несколько товаров сразу', d:'Отмеченные товары добавляются одной кнопкой. Это сценарий из брифа: набрать пачку в черновики, чтобы потом опубликовать на eBay разом.'},
-  {page:'hot', sel:'#drawer', place:'left', before:()=>openDr(hotList().list[0].id), after:()=>closeDr(), t:'Детали товара', d:'Клик по фото или названию открывает панель: почему товар «горячий» и из чего складывается прибыль. Отсюда тоже можно добавить в черновики.'},
-  {page:'hot', sel:'.nav a[data-r=drafts]', place:'right', t:'Черновики', d:'Счётчик показывает, сколько товаров ждёт публикации. В Drafts видно, какие пришли из Hot Items, и их можно опубликовать пачкой. Экран Drafts я дорисовал сам: на скриншотах его не было.'},
-  {page:'hot', t:'Открытые вопросы', d:'Какие сигналы для Hot Items есть на самом деле: продажи пользователей Easync, данные eBay, ручной отбор? Привязаны ли черновики к магазину? От ответов зависит, что честно показывать на карточке. Тур можно открыть снова кнопкой внизу слева.'},
+  {page:'home', t:'Привет! Это прототип Hot Items', d:'Я собрал интерфейс по скриншотам из задания, чтобы было похоже на настоящий Easync, и тут всё можно потыкать. За минуту покажу, что я придумал и почему так. Товары и цифры выдуманные, алгоритм подбора я не трогал, он вне задачи.'},
+  {page:'home', sel:'.nav a[data-r=hot]', place:'right', t:'Отсюда заходят в Hot Items', d:'Сделал отдельный пункт в меню, сразу под Home. Повесил метку New, чтобы после релиза его точно заметили.'},
+  {page:'home', sel:'.hot-home', place:'bottom', t:'Второй вход, на главной', d:'У нового пользователя на главной одни нули, и непонятно, с чего начать. Поэтому вынес сюда несколько горячих товаров. Их можно сразу кинуть в черновики, не уходя с главной.'},
+  {page:'home', sel:'.btn-add', place:'right', t:'Третий вход, в Add product', d:'Если открыть Add product, под полем для ссылок есть строчка «Not sure what to sell?». Это для тех, кто пришёл добавить товар, но пока не знает какой.'},
+  {page:'hot', sel:'#chips', place:'bottom', t:'Подборки', d:'Одна длинная лента быстро надоедает, поэтому разбил товары на подборки: что растёт, где прибыль выше, где мало конкурентов, что дёшево попробовать. Идею подсмотрел у Zendrop. Ниже обычные поиск, фильтры и сортировка.'},
+  {page:'hot', sel:'.hcard', place:'right', t:'Карточка', d:'Тут я хотел, чтобы карточка сразу отвечала, зачем этот товар продавать. Поэтому на ней продажи на eBay за неделю, рост, конкуренция и прибыль уже за вычетом комиссии eBay. Если навести на любую цифру, появится подсказка.'},
+  {page:'hot', sel:'.hcard .btn-sm', place:'right', t:'Добавить в один клик', d:'Одна кнопка, и товар уже в черновиках. Без похода на Amazon, копирования ссылки и экрана Batch Preview: товары и так отобраны, а цену с прибылью человек уже видел на карточке. Если промахнулся, в уведомлении есть Undo.'},
+  {page:'hot', sel:'#bulk', place:'top', before:()=>{firstFree().slice(0,3).forEach(p=>S.sel.add(p.id));renderHot()}, after:()=>clearSel(), t:'Можно пачкой', d:'Для примера я отметил три товара. Внизу появляется плашка, и все добавляются одной кнопкой. Это как раз сценарий из брифа: набрать товаров в черновики и потом опубликовать разом.'},
+  {page:'hot', sel:'#drawer', place:'left', before:()=>openDr(hotList().list[0].id), after:()=>closeDr(), t:'Подробнее о товаре', d:'Если кликнуть по фото или названию, открывается панель. Тут объясняю, почему товар горячий, и расписываю, из чего складывается прибыль. Добавить в черновики можно и отсюда.'},
+  {page:'hot', sel:'.nav a[data-r=drafts]', place:'right', t:'Черновики', d:'У Drafts появился счётчик, чтобы было видно, сколько всего набралось. В самих черновиках помечено, что пришло из Hot Items. Экран Drafts я дорисовал сам, на скриншотах его не было, так что тут могу не угадать, как он устроен у вас.'},
+  {page:'hot', t:'Что я бы уточнил', d:'Какие данные для Hot Items у вас реально есть: продажи пользователей Easync, данные eBay, ручной отбор? И черновики привязаны к конкретному магазину или общие? От этого зависит, что честно показывать на карточке. Тур можно открыть ещё раз кнопкой внизу слева.'},
 ];
 const T={on:false,i:0};
-function startTour(){T.on=true;tipEl.classList.remove('show');document.getElementById('tourBlock').classList.add('on');showStep(0)}
+function startTour(){T.on=true;document.body.classList.add('touring');tipEl.classList.remove('show');document.getElementById('tourBlock').classList.add('on');showStep(0)}
 function endTour(){
   const st=TOUR[T.i];st&&st.after&&st.after();
-  T.on=false;['tourBlock'].forEach(id=>document.getElementById(id).classList.remove('on'));
+  T.on=false;document.body.classList.remove('touring');['tourBlock'].forEach(id=>document.getElementById(id).classList.remove('on'));
   document.getElementById('tourHole').style.display='none';document.getElementById('tourPop').style.display='none';
   try{localStorage.setItem('ez_tour_done','1')}catch(e){}
 }
@@ -758,7 +759,7 @@ function placeStep(){
   const last=T.i===TOUR.length-1;
   pop.innerHTML=`<div class="tstep"><span>${T.i+1} / ${TOUR.length}</span><span class="tour-dots">${TOUR.map((_,k)=>`<i class="${k===T.i?'on':''}"></i>`).join('')}</span></div>
     <h4>${st.t}</h4><p>${st.d}</p>
-    <div class="tnav">${last?'':'<button class="tskip" onclick="endTour()">Пропустить</button>'}${T.i?'<button class="tb" onclick="showStep(T.i-1)">Назад</button>':''}<button class="tb pri" onclick="${last?'endTour()':'showStep(T.i+1)'}">${T.i===0?'Начать тур':last?'Смотреть самому':'Дальше'}</button></div>`;
+    <div class="tnav">${last?'':'<button class="tskip" onclick="endTour()">Пропустить</button>'}${T.i?'<button class="tb" onclick="showStep(T.i-1)">Назад</button>':''}<button class="tb pri" onclick="${last?'endTour()':'showStep(T.i+1)'}">${T.i===0?'Поехали':last?'Понятно, посмотрю сам':'Дальше'}</button></div>`;
   let el=st.sel&&document.querySelector(st.sel),r=el&&el.getBoundingClientRect();
   if(el&&r.width&&getComputedStyle(el).position!=='fixed'&&!el.closest('.side')){el.scrollIntoView({block:'center'});r=el.getBoundingClientRect()}
   hole.style.display=pop.style.display='block';
