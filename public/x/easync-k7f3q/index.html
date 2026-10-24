@@ -249,8 +249,9 @@
   .spin{display:inline-block;width:16px;height:16px;border:2px solid #fff;border-right-color:transparent;border-radius:50%;animation:s .7s linear infinite;vertical-align:middle}
   @keyframes s{to{transform:rotate(360deg)}}
   /* tooltip */
-  .tip{position:fixed;z-index:95;max-width:280px;background:#111827;color:#fff;font-size:13px;line-height:1.45;padding:8px 11px;border-radius:6px;pointer-events:none;opacity:0;transition:opacity .08s;white-space:pre-line;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+  .tip{position:fixed;z-index:95;max-width:340px;background:#111827;color:#fff;font-size:13px;line-height:1.45;padding:8px 11px;border-radius:6px;pointer-events:none;opacity:0;transition:opacity .08s;white-space:pre-line;box-shadow:0 4px 14px rgba(0,0,0,.2)}
   .tip.show{opacity:1}
+  .tip-h{font-weight:600}
   [data-tip]:not(button):not(.cb){cursor:help}
   .trend[data-tip],.money [data-tip]{border-bottom:1px dotted transparent}
   .money [data-tip]:hover{border-bottom-color:currentColor}
@@ -517,12 +518,12 @@ const profit = p => +(p.price-p.cost-fee(p)).toFixed(2);
 const $ = n => '$'+n.toFixed(2);
 const prev = p => Math.round(p.sold/(1+p.trend/100));
 const TIP = {
-  trend:p=>`Sales growth on eBay: +${p.trend}% vs the previous week&#10;${p.sold} sold this week, ${prev(p)} the week before`,
-  sold:p=>`${p.sold} units sold on eBay by all sellers in the last 7 days`,
-  comp:p=>`${p.sellers} eBay sellers list this product now&#10;Low: up to 25 · Medium: 26–70 · High: over 70`,
-  src:p=>p.src==='amz'?`Supplier: Amazon US&#10;Delivery to your buyer: about 2 days`:`Supplier: AliExpress&#10;Delivery to your buyer: 7–12 days, so set a longer handling time on eBay`,
-  profit:p=>`What you keep from one sale:&#10;${$(p.price)} eBay price − ${$(p.cost)} supplier − ${$(fee(p))} eBay fees`,
-  price:()=>`Supplier price → price your buyer pays on eBay.&#10;Calculated by your pricing rules`,
+  trend:p=>`Sales growth on eBay:&#10;+${p.trend}% vs the previous week&#10;${p.sold} sold this week, ${prev(p)} the week before`,
+  sold:p=>`Sold on eBay in 7 days:&#10;${p.sold} units by all sellers`,
+  comp:p=>`Competition on eBay:&#10;${p.sellers} sellers list this product now&#10;Low: up to 25 · Medium: 26–70 · High: over 70`,
+  src:p=>p.src==='amz'?`Supplier:&#10;Amazon US&#10;Delivery to your buyer: about 2 days`:`Supplier:&#10;AliExpress&#10;Delivery to your buyer: 7–12 days`,
+  profit:p=>`Estimated profit per sale:&#10;${$(p.price)} eBay price − ${$(p.cost)} supplier&#10;− ${$(fee(p))} eBay fees = ${$(profit(p))}`,
+  price:()=>`Cost → your eBay price:&#10;Supplier price → price your buyer pays&#10;Set by your pricing rules`,
 };
 const ship = p => p.src==='amz' ? 'Amazon US · 2-day' : 'AliExpress · 7–12 days';
 const sb = p => p.src==='amz' ? '<i class="sb amz">a</i>' : '<i class="sb ali">A</i>';
@@ -717,7 +718,11 @@ const tipEl=document.getElementById('tip');
 document.addEventListener('mouseover',e=>{
   const t=e.target.closest&&e.target.closest('[data-tip]');
   if(!t||T.on){tipEl.classList.remove('show');return}
-  tipEl.textContent=t.dataset.tip;tipEl.classList.add('show');
+  const [head,...rest]=t.dataset.tip.split('\n');
+  tipEl.textContent='';
+  if(rest.length&&head.endsWith(':')){const d=document.createElement('div');d.className='tip-h';d.textContent=head;tipEl.append(d,rest.join('\n'))}
+  else tipEl.textContent=t.dataset.tip;
+  tipEl.classList.add('show');
   const r=t.getBoundingClientRect(),w=tipEl.offsetWidth,h=tipEl.offsetHeight;
   let top=r.top-h-8;if(top<8)top=r.bottom+8;
   tipEl.style.top=top+'px';tipEl.style.left=Math.max(8,Math.min(r.left+r.width/2-w/2,innerWidth-w-8))+'px';
