@@ -248,8 +248,33 @@
   .page{display:none}.page.on{display:block}
   .spin{display:inline-block;width:16px;height:16px;border:2px solid #fff;border-right-color:transparent;border-radius:50%;animation:s .7s linear infinite;vertical-align:middle}
   @keyframes s{to{transform:rotate(360deg)}}
+  /* tooltip */
+  .tip{position:fixed;z-index:95;max-width:280px;background:#111827;color:#fff;font-size:13px;line-height:1.45;padding:8px 11px;border-radius:6px;pointer-events:none;opacity:0;transition:opacity .08s;white-space:pre-line;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+  .tip.show{opacity:1}
+  [data-tip]:not(button):not(.cb){cursor:help}
+  .trend[data-tip],.money [data-tip]{border-bottom:1px dotted transparent}
+  .money [data-tip]:hover{border-bottom-color:currentColor}
+
+  /* reviewer tour */
+  .tour-block{position:fixed;inset:0;z-index:80;display:none}
+  .tour-block.on{display:block}
+  .tour-hole{position:fixed;z-index:81;border-radius:10px;box-shadow:0 0 0 9999px rgba(17,24,39,.6);pointer-events:none;transition:all .25s ease;display:none}
+  .tour-pop{position:fixed;z-index:82;width:390px;max-width:calc(100vw - 32px);background:#fff;border-radius:12px;padding:20px 22px 16px;box-shadow:0 20px 50px rgba(0,0,0,.3);display:none;transition:top .25s ease,left .25s ease}
+  .tour-pop .tstep{font-size:12px;color:var(--muted);font-weight:500;margin-bottom:6px;display:flex;justify-content:space-between}
+  .tour-pop h4{margin:0 0 8px;font-size:18px}
+  .tour-pop p{margin:0;font-size:14.5px;line-height:1.55;color:#374151}
+  .tour-pop .tnav{display:flex;align-items:center;gap:8px;margin-top:18px}
+  .tour-pop .tskip{background:none;border:0;color:var(--muted);padding:0;margin-right:auto;font-size:14px}
+  .tour-pop .tb{height:38px;padding:0 16px;border-radius:6px;font-size:14px;font-weight:500;border:1px solid var(--border);background:#fff;color:#111}
+  .tour-pop .tb.pri{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .tour-dots{display:flex;gap:4px;align-items:center}
+  .tour-dots i{width:6px;height:6px;border-radius:50%;background:#d1d5db}
+  .tour-dots i.on{background:var(--navy)}
+  .tour-btn{position:fixed;left:310px;bottom:24px;z-index:30;height:40px;padding:0 16px 0 12px;border-radius:20px;border:1px solid var(--border);background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08);font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px;color:#111}
+  .tour-btn:hover{background:var(--hover)}
+  .tour-btn i{width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-style:normal;display:grid;place-items:center;font-size:13px}
   @media (max-width:1200px){.mini-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-  @media (max-width:900px){.side{display:none}.grid4,.stores{grid-template-columns:1fr 1fr}main{padding:24px 16px}.bulk,.toast{left:50%}.hi-head{flex-direction:column}.search{width:100%}}
+  @media (max-width:900px){.side{display:none}.grid4,.stores{grid-template-columns:1fr 1fr}main{padding:24px 16px}.tour-btn{left:16px}.bulk,.toast{left:50%}.hi-head{flex-direction:column}.search{width:100%}}
 </style>
 </head>
 <body>
@@ -372,7 +397,7 @@
           <h1><svg class="i"><use href="#flame"/></svg>Hot Items</h1>
           <div class="hi-sub">Products that sell well on eBay right now. Updated daily.</div>
         </div>
-        <button class="pub-to">Add to drafts of <b>gldem81</b><svg class="i" style="width:18px"><use href="#down"/></svg></button>
+        <button class="pub-to" data-tip="Drafts are saved to this store.&#10;Switch the store to fill another one">Add to drafts of <b>gldem81</b><svg class="i" style="width:18px"><use href="#down"/></svg></button>
       </div>
       <div class="chips" id="chips"></div>
       <div class="filters">
@@ -387,7 +412,7 @@
           <option value="sold">Sort: Most sold</option><option value="profit">Sort: Highest profit</option><option value="trend">Sort: Fastest growing</option>
         </select>
       </div>
-      <div class="meta"><span id="hotMeta"></span><span>Prices follow your <a href="#">pricing rules</a> · eBay fees included</span></div>
+      <div class="meta"><span id="hotMeta"></span><span>Prices follow your <a href="#" onclick="return false" data-tip="Your markup settings from Store Settings.&#10;They turn supplier price into your eBay price">pricing rules</a> · eBay fees included</span></div>
       <div class="hgrid" id="hotGrid"></div>
     </section>
 
@@ -458,6 +483,11 @@
 <div class="bulk" id="bulk"><span id="bulkN">0 selected</span><button class="lnk" onclick="clearSel()">Clear</button><button class="go" onclick="addSelected()">Add to drafts</button></div>
 <div class="toast" id="toast"></div>
 <div class="chat"><svg class="i"><use href="#chat"/></svg></div>
+<button class="tour-btn" onclick="startTour()"><i>?</i>Как устроен прототип</button>
+<div class="tour-block" id="tourBlock"></div>
+<div class="tour-hole" id="tourHole"></div>
+<div class="tour-pop" id="tourPop"></div>
+<div class="tip" id="tip"></div>
 
 <script>
 const IMG_BASE = location.protocol==='file:' ? 'img/' : '/x/easync-k7f3q/img/';
@@ -484,16 +514,25 @@ const HOT = [
 const fee = p => +(p.price*0.1325+0.30).toFixed(2);
 const profit = p => +(p.price-p.cost-fee(p)).toFixed(2);
 const $ = n => '$'+n.toFixed(2);
+const prev = p => Math.round(p.sold/(1+p.trend/100));
+const TIP = {
+  trend:p=>`Sales growth on eBay: +${p.trend}% vs the previous week&#10;${p.sold} sold this week, ${prev(p)} the week before`,
+  sold:p=>`${p.sold} units sold on eBay by all sellers in the last 7 days`,
+  comp:p=>`${p.sellers} eBay sellers list this product now&#10;Low: up to 25 · Medium: 26–70 · High: over 70`,
+  src:p=>p.src==='amz'?`Supplier: Amazon US&#10;Delivery to your buyer: about 2 days`:`Supplier: AliExpress&#10;Delivery to your buyer: 7–12 days, so set a longer handling time on eBay`,
+  profit:p=>`What you keep from one sale:&#10;${$(p.price)} eBay price − ${$(p.cost)} supplier − ${$(fee(p))} eBay fees`,
+  price:()=>`Supplier price → price your buyer pays on eBay.&#10;Calculated by your pricing rules`,
+};
 const ship = p => p.src==='amz' ? 'Amazon US · 2-day' : 'AliExpress · 7–12 days';
 const sb = p => p.src==='amz' ? '<i class="sb amz">a</i>' : '<i class="sb ali">A</i>';
 const img = (p,cls='') => p.img ? `<img src="${IMG_BASE}${p.img}.webp" alt="" class="${cls}">` : IMG;
 
 const CHIPS = [
-  {k:'all', t:'All', f:()=>true},
-  {k:'trend', t:'Trending this week', f:p=>p.trend>=30},
-  {k:'profit', t:'Profit over $10', f:p=>profit(p)>=10},
-  {k:'low', t:'Low competition', f:p=>p.comp==='Low'},
-  {k:'cheap', t:'Cost under $10', f:p=>p.cost<10},
+  {k:'all', t:'All', tip:'All hot items for your store', f:()=>true},
+  {k:'trend', t:'Trending this week', tip:'eBay sales grew 30% or more vs last week', f:p=>p.trend>=30},
+  {k:'profit', t:'Profit over $10', tip:'Estimated profit after eBay fees is $10 or more', f:p=>profit(p)>=10},
+  {k:'low', t:'Low competition', tip:'25 or fewer eBay sellers list it', f:p=>p.comp==='Low'},
+  {k:'cheap', t:'Cost under $10', tip:'Supplier price below $10: cheap to test', f:p=>p.cost<10},
 ];
 
 const S = {batch:[], drafts:[], listings:[], sel:new Set(), chip:'all', last:[], dr:null};
@@ -555,7 +594,7 @@ function setChip(k){S.chip=k;renderHot()}
 
 function hotBtn(p,small){
   if(isListed(p.id))return `<button class="btn-sm listed"><svg class="i"><use href="#check"/></svg>Listed on eBay</button>`;
-  if(inDrafts(p.id))return `<button class="btn-sm done" onclick="location.hash='drafts'"><svg class="i"><use href="#check"/></svg>In drafts · View</button>`;
+  if(inDrafts(p.id))return `<button class="btn-sm done" data-tip="Already in drafts. Click to open Drafts" onclick="location.hash='drafts'"><svg class="i"><use href="#check"/></svg>In drafts · View</button>`;
   return `<button class="btn-sm ${small?'ghost':''}" onclick="addHot([${p.id}])"><svg class="i"><use href="#plus"/></svg>Add to drafts</button>`;
 }
 function hotList(){
@@ -567,7 +606,7 @@ function hotList(){
 }
 function renderHot(){
   const {base,list}=hotList();
-  document.getElementById('chips').innerHTML=CHIPS.map(c=>`<button class="chip ${S.chip===c.k?'on':''}" onclick="setChip('${c.k}')">${c.t} <small>${base.filter(c.f).length}</small></button>`).join('');
+  document.getElementById('chips').innerHTML=CHIPS.map(c=>`<button class="chip ${S.chip===c.k?'on':''}" data-tip="${c.tip}" onclick="setChip('${c.k}')">${c.t} <small>${base.filter(c.f).length}</small></button>`).join('');
   const added=list.filter(p=>inDrafts(p.id)).length;
   document.getElementById('hotMeta').textContent=`${list.length} items`+(added?` · ${added} in drafts`:'');
   const g=document.getElementById('hotGrid');
@@ -576,15 +615,15 @@ function renderHot(){
     const lock=inDrafts(p.id)||isListed(p.id), picked=S.sel.has(p.id);
     return `<div class="hcard ${picked?'picked':''}">
       <div class="himg" onclick="openDr(${p.id})">${img(p)}
-        <span class="trend ${p.trend>=30?'up':''}"><svg class="i"><use href="#trend"/></svg>+${p.trend}%</span>
-        ${lock?'':`<span class="cb ${picked?'on':''}" onclick="event.stopPropagation();toggleSel(${p.id})"></span>`}
+        <span class="trend ${p.trend>=30?'up':''}" data-tip="${TIP.trend(p)}"><svg class="i"><use href="#trend"/></svg>+${p.trend}%</span>
+        ${lock?'':`<span class="cb ${picked?'on':''}" data-tip="Select to add several items at once" onclick="event.stopPropagation();toggleSel(${p.id})"></span>`}
       </div>
       <div class="hbody">
-        <div class="hsrc">${sb(p)}${ship(p)}</div>
+        <div class="hsrc"><span class="hsrc" data-tip="${TIP.src(p)}">${sb(p)}${ship(p)}</span></div>
         <div class="htitle" onclick="openDr(${p.id})">${p.title}</div>
-        <div class="sig"><svg class="i"><use href="#flame"/></svg><b>${p.sold}</b> sold on eBay · 7 days</div>
-        <div class="sig comp"><i class="dot ${p.comp}"></i>${p.comp} competition · ${p.sellers} sellers</div>
-        <div class="money"><div><small>Est. profit</small><span class="profit">${$(profit(p))}</span></div><div class="pr"><small>Cost → your eBay price</small>${$(p.cost)} → <b>${$(p.price)}</b></div></div>
+        <div class="sig"><span class="sig" data-tip="${TIP.sold(p)}"><svg class="i"><use href="#flame"/></svg><b>${p.sold}</b> sold on eBay · 7 days</span></div>
+        <div class="sig comp"><span class="sig comp" data-tip="${TIP.comp(p)}"><i class="dot ${p.comp}"></i>${p.comp} competition · ${p.sellers} sellers</span></div>
+        <div class="money"><div data-tip="${TIP.profit(p)}"><small>Est. profit</small><span class="profit">${$(profit(p))}</span></div><div class="pr" data-tip="${TIP.price()}"><small>Cost → your eBay price</small>${$(p.cost)} → <b>${$(p.price)}</b></div></div>
         ${hotBtn(p)}
       </div></div>`}).join('')
   :`<div class="empty" style="grid-column:1/-1">No items match these filters. <a href="#" onclick="resetF();return false">Reset filters</a></div>`;
@@ -600,7 +639,7 @@ function renderHomeHot(){
   document.getElementById('homeHot').innerHTML=top.map(p=>`<div class="mini">
     <div class="mimg" onclick="openDr(${p.id})">${img(p)}</div>
     <div class="mt" onclick="openDr(${p.id})" title="${p.title}">${p.title}</div>
-    <div class="mp"><b>${$(profit(p))} profit</b> · ${p.sold} sold / 7d</div>
+    <div class="mp"><b data-tip="${TIP.profit(p)}">${$(profit(p))} profit</b> · <span data-tip="${TIP.sold(p)}">${p.sold} sold / 7d</span></div>
     ${hotBtn(p,true)}</div>`).join('');
   document.getElementById('seeAll').firstChild.textContent=`See all ${HOT.length} `;
 }
@@ -640,7 +679,7 @@ function closeDr(){S.dr=null;document.getElementById('drawer').classList.remove(
 function renderDrafts(){
   const tb=document.getElementById('draftRows');
   document.getElementById('draftAll').classList.remove('on');
-  tb.innerHTML=S.drafts.length?S.drafts.map(p=>`<tr><td style="padding-left:22px"><span class="cb" data-id="${p.id}" onclick="this.classList.toggle('on')"></span></td><td><div class="thumb">${img(p)}</div></td><td><a class="title-link">${p.title}</a></td><td>${srcCell(p)}</td><td>${$(p.price)}</td><td>${p.origin==='hot'?'<span class="badge hot"><svg class="i"><use href="#flame"/></svg>Hot Items</span>':'<span class="badge grey">URL / ID</span>'}</td><td style="color:var(--muted)">${p.added.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}</td></tr>`).join('')
+  tb.innerHTML=S.drafts.length?S.drafts.map(p=>`<tr><td style="padding-left:22px"><span class="cb" data-id="${p.id}" onclick="this.classList.toggle('on')"></span></td><td><div class="thumb">${img(p)}</div></td><td><a class="title-link">${p.title}</a></td><td>${srcCell(p)}</td><td>${$(p.price)}</td><td>${p.origin==='hot'?'<span class="badge hot" data-tip="Added from Hot Items"><svg class="i"><use href="#flame"/></svg>Hot Items</span>':'<span class="badge grey">URL / ID</span>'}</td><td style="color:var(--muted)">${p.added.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}</td></tr>`).join('')
   :`<tr><td colspan="7" class="empty">No drafts yet. Add products from <a href="#hot">Hot Items</a> or with <b>Add product</b>.</td></tr>`;
 }
 function toggleAll(el){el.classList.toggle('on');document.querySelectorAll('#draftRows .cb').forEach(c=>c.classList.toggle('on',el.classList.contains('on')))}
@@ -672,8 +711,78 @@ function route(){
   document.querySelectorAll('.nav a[data-r]').forEach(a=>a.classList.toggle('on',a.dataset.r===r));
   closeDr();render();window.scrollTo(0,0);
 }
-addEventListener('keydown',e=>{if(e.key==='Escape'){closeDr();closeModal()}});
+/* ---------- tooltips ---------- */
+const tipEl=document.getElementById('tip');
+document.addEventListener('mouseover',e=>{
+  const t=e.target.closest&&e.target.closest('[data-tip]');
+  if(!t||T.on){tipEl.classList.remove('show');return}
+  tipEl.textContent=t.dataset.tip;tipEl.classList.add('show');
+  const r=t.getBoundingClientRect(),w=tipEl.offsetWidth,h=tipEl.offsetHeight;
+  let top=r.top-h-8;if(top<8)top=r.bottom+8;
+  tipEl.style.top=top+'px';tipEl.style.left=Math.max(8,Math.min(r.left+r.width/2-w/2,innerWidth-w-8))+'px';
+});
+addEventListener('scroll',()=>tipEl.classList.remove('show'),true);
+
+/* ---------- tour for the reviewer (RU) ---------- */
+const firstFree=()=>hotList().list.filter(p=>!inDrafts(p.id)&&!isListed(p.id));
+const TOUR=[
+  {page:'home', t:'Прототип Hot Items для Easync', d:'Интерфейс повторяет текущий Easync по скриншотам из задания, всё кликабельно. За минуту покажу, где что и почему так. Товары и цифры условные: алгоритм подбора вне задачи.'},
+  {page:'home', sel:'.nav a[data-r=hot]', place:'right', t:'Вход 1: пункт в меню', d:'Hot Items — отдельный раздел сразу под Home. Метка New, чтобы раздел заметили после релиза.'},
+  {page:'home', sel:'.hot-home', place:'bottom', t:'Вход 2: блок на главной', d:'У нового пользователя главная из одних нулей. Здесь сразу видно, с чего начать, и товар можно добавить в черновики прямо отсюда.'},
+  {page:'home', sel:'.btn-add', place:'right', t:'Вход 3: модалка Add product', d:'В модалке добавления по ссылке появилась строка «Not sure what to sell? Browse Hot Items» — для тех, кто пришёл добавить товар, но не знает какой.'},
+  {page:'hot', sel:'#chips', place:'bottom', t:'Подборки', d:'Вместо одной длинной ленты — готовые подборки: растут продажи, высокая прибыль, мало конкурентов, дешёвая закупка. Похоже устроено у Zendrop. Ниже поиск, фильтры и сортировка.'},
+  {page:'hot', sel:'.hcard', place:'right', t:'Карточка товара', d:'Карточка отвечает на вопрос «почему это стоит продавать»: продажи на eBay за 7 дней, рост, конкуренция и прибыль после комиссий eBay. Наведите на любую цифру — появится подсказка.'},
+  {page:'hot', sel:'.hcard .btn-sm', place:'right', t:'Добавить в один клик', d:'Товар сразу попадает в черновики: без Amazon, копирования ссылки и экрана Batch Preview — цену и прибыль пользователь уже видел на карточке. Ошибся — Undo в уведомлении. Кнопка меняется на «In drafts».'},
+  {page:'hot', sel:'#bulk', place:'top', before:()=>{firstFree().slice(0,3).forEach(p=>S.sel.add(p.id));renderHot()}, after:()=>clearSel(), t:'Несколько товаров сразу', d:'Отмеченные товары добавляются одной кнопкой. Это сценарий из брифа: набрать пачку в черновики, чтобы потом опубликовать на eBay разом.'},
+  {page:'hot', sel:'#drawer', place:'left', before:()=>openDr(hotList().list[0].id), after:()=>closeDr(), t:'Детали товара', d:'Клик по фото или названию открывает панель: почему товар «горячий» и из чего складывается прибыль. Отсюда тоже можно добавить в черновики.'},
+  {page:'hot', sel:'.nav a[data-r=drafts]', place:'right', t:'Черновики', d:'Счётчик показывает, сколько товаров ждёт публикации. В Drafts видно, какие пришли из Hot Items, и их можно опубликовать пачкой. Экран Drafts я дорисовал сам: на скриншотах его не было.'},
+  {page:'hot', t:'Открытые вопросы', d:'Какие сигналы для Hot Items есть на самом деле: продажи пользователей Easync, данные eBay, ручной отбор? Привязаны ли черновики к магазину? От ответов зависит, что честно показывать на карточке. Тур можно открыть снова кнопкой внизу слева.'},
+];
+const T={on:false,i:0};
+function startTour(){T.on=true;tipEl.classList.remove('show');document.getElementById('tourBlock').classList.add('on');showStep(0)}
+function endTour(){
+  const st=TOUR[T.i];st&&st.after&&st.after();
+  T.on=false;['tourBlock'].forEach(id=>document.getElementById(id).classList.remove('on'));
+  document.getElementById('tourHole').style.display='none';document.getElementById('tourPop').style.display='none';
+  try{localStorage.setItem('ez_tour_done','1')}catch(e){}
+}
+function showStep(i){
+  const prevSt=TOUR[T.i];if(prevSt&&prevSt.after&&i!==T.i)prevSt.after();
+  T.i=i;const st=TOUR[i];
+  const go=()=>{st.before&&st.before();setTimeout(placeStep,st.before?320:60)};
+  if((location.hash||'#home').slice(1)!==st.page){location.hash=st.page;setTimeout(go,120)}else go();
+}
+function placeStep(){
+  if(!T.on)return;
+  const st=TOUR[T.i],hole=document.getElementById('tourHole'),pop=document.getElementById('tourPop');
+  const last=T.i===TOUR.length-1;
+  pop.innerHTML=`<div class="tstep"><span>${T.i+1} / ${TOUR.length}</span><span class="tour-dots">${TOUR.map((_,k)=>`<i class="${k===T.i?'on':''}"></i>`).join('')}</span></div>
+    <h4>${st.t}</h4><p>${st.d}</p>
+    <div class="tnav">${last?'':'<button class="tskip" onclick="endTour()">Пропустить</button>'}${T.i?'<button class="tb" onclick="showStep(T.i-1)">Назад</button>':''}<button class="tb pri" onclick="${last?'endTour()':'showStep(T.i+1)'}">${T.i===0?'Начать тур':last?'Смотреть самому':'Дальше'}</button></div>`;
+  let el=st.sel&&document.querySelector(st.sel),r=el&&el.getBoundingClientRect();
+  if(el&&r.width&&getComputedStyle(el).position!=='fixed'&&!el.closest('.side')){el.scrollIntoView({block:'center'});r=el.getBoundingClientRect()}
+  hole.style.display=pop.style.display='block';
+  const pw=pop.offsetWidth,ph=pop.offsetHeight,vw=innerWidth,vh=innerHeight,cl=(v,a,b)=>Math.max(a,Math.min(v,b));
+  if(!el||!r.width){
+    Object.assign(hole.style,{top:vh/2+'px',left:vw/2+'px',width:'0px',height:'0px'});
+    pop.style.left=(vw-pw)/2+'px';pop.style.top=(vh-ph)/2+'px';return;
+  }
+  const pad=6;Object.assign(hole.style,{top:r.top-pad+'px',left:r.left-pad+'px',width:r.width+pad*2+'px',height:r.height+pad*2+'px'});
+  let x,y;
+  if(st.place==='right'){x=r.right+18;y=r.top}
+  else if(st.place==='left'){x=r.left-pw-18;y=r.top+40}
+  else if(st.place==='top'){x=r.left+r.width/2-pw/2;y=r.top-ph-18}
+  else {x=r.left;y=r.bottom+18}
+  if(x+pw>vw-16&&st.place==='right'){x=r.left;y=r.bottom+18}
+  pop.style.left=cl(x,16,vw-pw-16)+'px';pop.style.top=cl(y,16,vh-ph-16)+'px';
+}
+addEventListener('resize',()=>T.on&&placeStep());
+addEventListener('keydown',e=>{
+  if(T.on){if(e.key==='Escape')endTour();else if(e.key==='ArrowRight'&&T.i<TOUR.length-1)showStep(T.i+1);else if(e.key==='ArrowLeft'&&T.i>0)showStep(T.i-1);return}
+  if(e.key==='Escape'){closeDr();closeModal()}
+});
 addEventListener('hashchange',route);route();
+try{if(!localStorage.getItem('ez_tour_done'))setTimeout(startTour,500)}catch(e){setTimeout(startTour,500)}
 </script>
 </body>
 </html>
