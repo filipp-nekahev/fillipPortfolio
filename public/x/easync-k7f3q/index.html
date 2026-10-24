@@ -177,11 +177,8 @@
   .hgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px;padding-bottom:80px}
   .hcard{background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 3px rgba(0,0,0,.05);transition:box-shadow .15s}
   .hcard:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
-  .hcard.picked{outline:2px solid var(--primary);outline-offset:-1px}
   .himg{position:relative;height:190px;background:#fff;display:grid;place-items:center;cursor:pointer;border-bottom:1px solid var(--border)}
   .himg img{max-width:72%;max-height:156px;object-fit:contain}
-  .himg .cb{position:absolute;top:12px;left:12px;opacity:0;transition:opacity .1s}
-  .hcard:hover .cb,.hgrid.selecting .cb{opacity:1}
   .trend{position:absolute;top:12px;right:12px;font-size:12px;font-weight:600;border-radius:10px;padding:3px 8px;display:inline-flex;align-items:center;gap:3px;background:#f3f4f6;color:#374151}
   .trend.up{background:#ecfdf5;color:var(--green)}
   .trend svg{width:12px;height:12px}
@@ -207,11 +204,6 @@
   .btn-sm.listed{background:#f3f4f6;border-color:#f3f4f6;color:var(--muted);cursor:default}
   .btn-sm svg{width:16px;height:16px;stroke-width:2.2}
 
-  /* bulk bar */
-  .bulk{position:fixed;left:calc(50% + 145px);bottom:24px;transform:translate(-50%,140px);transition:transform .2s;background:#111827;color:#fff;border-radius:10px;padding:8px 8px 8px 20px;display:flex;align-items:center;gap:16px;z-index:40;box-shadow:0 10px 30px rgba(0,0,0,.25)}
-  .bulk.show{transform:translate(-50%,0)}
-  .bulk .lnk{background:none;border:0;color:#9db8ff;padding:0}
-  .bulk .go{height:40px;border:0;border-radius:6px;background:#fff;color:#111;font-weight:600;padding:0 16px}
 
   /* drawer */
   .dr-ov{position:fixed;inset:0;background:rgba(17,24,39,.35);opacity:0;pointer-events:none;transition:opacity .2s;z-index:55}
@@ -276,7 +268,7 @@
   body.touring .tour-btn{display:none}
   .tour-btn i{width:22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-style:normal;display:grid;place-items:center;font-size:13px}
   @media (max-width:1200px){.mini-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-  @media (max-width:900px){.side{display:none}.grid4,.stores{grid-template-columns:1fr 1fr}main{padding:24px 16px}.tour-btn{left:16px}.bulk,.toast{left:50%}.hi-head{flex-direction:column}.search{width:100%}}
+  @media (max-width:900px){.side{display:none}.grid4,.stores{grid-template-columns:1fr 1fr}main{padding:24px 16px}.tour-btn{left:16px}.toast{left:50%}.hi-head{flex-direction:column}.search{width:100%}}
 </style>
 </head>
 <body>
@@ -482,7 +474,6 @@
 <div class="dr-ov" id="drOv" onclick="closeDr()"></div>
 <aside class="drawer" id="drawer"></aside>
 
-<div class="bulk" id="bulk"><span id="bulkN">0 selected</span><button class="lnk" onclick="clearSel()">Clear</button><button class="go" onclick="addSelected()">Add to drafts</button></div>
 <div class="toast" id="toast"></div>
 <div class="chat"><svg class="i"><use href="#chat"/></svg></div>
 <button class="tour-btn" onclick="startTour()"><i>?</i>Как устроен прототип</button>
@@ -537,7 +528,7 @@ const CHIPS = [
   {k:'cheap', t:'Cost under $10', tip:'Supplier price below $10: cheap to test', f:p=>p.cost<10},
 ];
 
-const S = {batch:[], drafts:[], listings:[], sel:new Set(), chip:'all', last:[], dr:null};
+const S = {batch:[], drafts:[], listings:[], chip:'all', last:[], dr:null};
 const words=['frosty','wispy','calm','bold','misty','quiet'], nouns=['river','tree','field','cloud','stone'];
 const rnd=a=>a[Math.floor(Math.random()*a.length)];
 
@@ -583,15 +574,12 @@ function addHot(ids){
   ids=ids.filter(id=>!inDrafts(id)&&!isListed(id));
   if(!ids.length)return;
   ids.forEach((id,i)=>{const p=HOT.find(h=>h.id===id);S.drafts.push({id:Date.now()+i,hotId:id,img:p.img,title:p.title,src:p.src,sid:p.sid,price:p.price,origin:'hot',added:new Date()})});
-  S.last=ids;ids.forEach(id=>S.sel.delete(id));
+  S.last=ids;
   render();
   const what=ids.length===1?'Added to drafts':`${ids.length} items added to drafts`;
   toast(`${what}<a onclick="undo()">Undo</a><a href="#drafts">View drafts</a>`);
 }
 function undo(){S.drafts=S.drafts.filter(d=>!S.last.includes(d.hotId));S.last=[];render();document.getElementById('toast').classList.remove('show')}
-function toggleSel(id){S.sel.has(id)?S.sel.delete(id):S.sel.add(id);renderHot()}
-function clearSel(){S.sel.clear();renderHot()}
-function addSelected(){addHot([...S.sel])}
 function setChip(k){S.chip=k;renderHot()}
 
 function hotBtn(p,small){
@@ -612,13 +600,10 @@ function renderHot(){
   const added=list.filter(p=>inDrafts(p.id)).length;
   document.getElementById('hotMeta').textContent=`${list.length} items`+(added?` · ${added} in drafts`:'');
   const g=document.getElementById('hotGrid');
-  g.classList.toggle('selecting',S.sel.size>0);
   g.innerHTML=list.length?list.map(p=>{
-    const lock=inDrafts(p.id)||isListed(p.id), picked=S.sel.has(p.id);
-    return `<div class="hcard ${picked?'picked':''}">
+    return `<div class="hcard">
       <div class="himg" onclick="openDr(${p.id})">${img(p)}
         <span class="trend ${p.trend>=30?'up':''}" data-tip="${TIP.trend(p)}"><svg class="i"><use href="#trend"/></svg>+${p.trend}%</span>
-        ${lock?'':`<span class="cb ${picked?'on':''}" data-tip="Select to add several items at once" onclick="event.stopPropagation();toggleSel(${p.id})"></span>`}
       </div>
       <div class="hbody">
         <div class="hsrc"><span class="hsrc" data-tip="${TIP.src(p)}">${sb(p)}${ship(p)}</span></div>
@@ -629,10 +614,6 @@ function renderHot(){
         ${hotBtn(p)}
       </div></div>`}).join('')
   :`<div class="empty" style="grid-column:1/-1">No items match these filters. <a href="#" onclick="resetF();return false">Reset filters</a></div>`;
-  const bulk=document.getElementById('bulk'),onHot=(location.hash||'#home')==='#hot';
-  bulk.classList.toggle('show',onHot&&S.sel.size>0);
-  document.getElementById('bulkN').textContent=`${S.sel.size} selected`;
-  bulk.querySelector('.go').textContent=`Add ${S.sel.size} to drafts`;
 }
 function resetF(){['q','fCat','fSrc'].forEach(i=>document.getElementById(i).value='');S.chip='all';renderHot()}
 
@@ -703,7 +684,6 @@ function render(){
   ({home:renderHomeHot,hot:renderHot,batch:renderBatch,drafts:renderDrafts}[r]||(()=>{}))();
   renderListings();
   document.getElementById('draftCount').textContent=S.drafts.length||'';
-  if(r!=='hot')document.getElementById('bulk').classList.remove('show');
   if(S.dr)openDr(S.dr);
 }
 function route(){
@@ -730,19 +710,17 @@ document.addEventListener('mouseover',e=>{
 addEventListener('scroll',()=>tipEl.classList.remove('show'),true);
 
 /* ---------- tour for the reviewer (RU) ---------- */
-const firstFree=()=>hotList().list.filter(p=>!inDrafts(p.id)&&!isListed(p.id));
 const TOUR=[
-  {page:'home', t:'Привет! Это прототип Hot Items', d:'Я собрал интерфейс по скриншотам из задания, чтобы было похоже на настоящий Easync, и тут всё можно потыкать. За минуту покажу, что я придумал и почему так. Товары и цифры выдуманные, алгоритм подбора я не трогал, он вне задачи.'},
-  {page:'home', sel:'.nav a[data-r=hot]', place:'right', t:'Отсюда заходят в Hot Items', d:'Сделал отдельный пункт в меню, сразу под Home. Повесил метку New, чтобы после релиза его точно заметили.'},
-  {page:'home', sel:'.hot-home', place:'bottom', t:'Второй вход, на главной', d:'У нового пользователя на главной одни нули, и непонятно, с чего начать. Поэтому вынес сюда несколько горячих товаров. Их можно сразу кинуть в черновики, не уходя с главной.'},
-  {page:'home', sel:'.btn-add', place:'right', t:'Третий вход, в Add product', d:'Если открыть Add product, под полем для ссылок есть строчка «Not sure what to sell?». Это для тех, кто пришёл добавить товар, но пока не знает какой.'},
-  {page:'hot', sel:'#chips', place:'bottom', t:'Подборки', d:'Одна длинная лента быстро надоедает, поэтому разбил товары на подборки: что растёт, где прибыль выше, где мало конкурентов, что дёшево попробовать. Идею подсмотрел у Zendrop. Ниже обычные поиск, фильтры и сортировка.'},
-  {page:'hot', sel:'.hcard', place:'right', t:'Карточка', d:'Тут я хотел, чтобы карточка сразу отвечала, зачем этот товар продавать. Поэтому на ней продажи на eBay за неделю, рост, конкуренция и прибыль уже за вычетом комиссии eBay. Если навести на любую цифру, появится подсказка.'},
-  {page:'hot', sel:'.hcard .btn-sm', place:'right', t:'Добавить в один клик', d:'Одна кнопка, и товар уже в черновиках. Без похода на Amazon, копирования ссылки и экрана Batch Preview: товары и так отобраны, а цену с прибылью человек уже видел на карточке. Если промахнулся, в уведомлении есть Undo.'},
-  {page:'hot', sel:'#bulk', place:'top', before:()=>{firstFree().slice(0,3).forEach(p=>S.sel.add(p.id));renderHot()}, after:()=>clearSel(), t:'Можно пачкой', d:'Для примера я отметил три товара. Внизу появляется плашка, и все добавляются одной кнопкой. Это как раз сценарий из брифа: набрать товаров в черновики и потом опубликовать разом.'},
-  {page:'hot', sel:'#drawer', place:'left', before:()=>openDr(hotList().list[0].id), after:()=>closeDr(), t:'Подробнее о товаре', d:'Если кликнуть по фото или названию, открывается панель. Тут объясняю, почему товар горячий, и расписываю, из чего складывается прибыль. Добавить в черновики можно и отсюда.'},
-  {page:'hot', sel:'.nav a[data-r=drafts]', place:'right', t:'Черновики', d:'У Drafts появился счётчик, чтобы было видно, сколько всего набралось. В самих черновиках помечено, что пришло из Hot Items. Сам раздел Drafts у вас есть, но скриншота экрана в задании не было, поэтому я нарисовал его по аналогии с Batch Preview. Как он выглядит на самом деле, я не знаю.'},
-  {page:'hot', t:'Что я бы уточнил', d:'Какие данные для Hot Items у вас реально есть: продажи пользователей Easync, данные eBay, ручной отбор? И черновики привязаны к конкретному магазину или общие? От этого зависит, что честно показывать на карточке. Тур можно открыть ещё раз кнопкой внизу слева.'},
+  {page:'home', t:'Привет! Это прототип Hot Items', d:'Интерфейс собрал по скриншотам из задания, всё кликабельно. Товары и цифры выдуманные.'},
+  {page:'home', sel:'.nav a[data-r=hot]', place:'right', t:'Вход из меню', d:'Отдельный пункт сразу под Home. Метка New, чтобы заметили.'},
+  {page:'home', sel:'.hot-home', place:'bottom', t:'Вход с главной', d:'У нового пользователя тут одни нули. Сразу показываю, с чего начать.'},
+  {page:'home', sel:'.btn-add', place:'right', t:'Вход из Add product', d:'Под полем для ссылок строчка «Not sure what to sell?» для тех, кто не знает, что добавить.'},
+  {page:'hot', sel:'#chips', place:'bottom', t:'Подборки', d:'Вместо одной длинной ленты: что растёт, где прибыль выше, где мало конкурентов, что дёшево попробовать. Подсмотрел у Zendrop.'},
+  {page:'hot', sel:'.hcard', place:'right', t:'Карточка', d:'Сразу видно, зачем продавать: продажи на eBay, рост, конкуренция и прибыль после комиссий. На цифрах есть подсказки.'},
+  {page:'hot', sel:'.hcard .btn-sm', place:'right', t:'Один клик', d:'Товар сразу в черновиках, без Amazon и Batch Preview. Если передумал, есть Undo.'},
+  {page:'hot', sel:'#drawer', place:'left', before:()=>openDr(hotList().list[0].id), after:()=>closeDr(), t:'Подробнее', d:'Клик по фото или названию: почему товар горячий и как считается прибыль.'},
+  {page:'hot', sel:'.nav a[data-r=drafts]', place:'right', t:'Черновики', d:'Счётчик и пометка «Hot Items». Отсюда товары публикуют пачкой. Экран Drafts сделал по аналогии с Batch Preview, настоящий я не видел.'},
+  {page:'hot', t:'Что я бы уточнил', d:'Какие данные для Hot Items у вас есть: продажи пользователей Easync, данные eBay, ручной отбор? Черновики привязаны к магазину или общие?'},
 ];
 const T={on:false,i:0};
 function startTour(){T.on=true;document.body.classList.add('touring');tipEl.classList.remove('show');document.getElementById('tourBlock').classList.add('on');showStep(0)}
