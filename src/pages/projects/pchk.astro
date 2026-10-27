@@ -1,0 +1,155 @@
+---
+import Layout from "@/layouts/Project.astro";
+import Heading from "@/components/ui/Heading.astro";
+import Text from "@/components/ui/Text.astro";
+import ProjectContnetWrapper from "@/components/ui/ProjectContnetWrapper.astro";
+import SwiperSlider from "@/components/ui/SwiperSlider.astro";
+import { loadImages } from "@/utils/loadImages";
+
+const title = "Chicken Curry Dungeons";
+const years = "Side Project 2026";
+const description = "A browser card roguelike based on a D&D YouTube show";
+
+const imageModules = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/pchk/*.{jpeg,jpg,png,gif}"
+);
+
+const sliderImages = await loadImages(imageModules);
+
+const stats = [
+  { value: 278, label: "players" },
+  { value: 1869, label: "finished runs" },
+  { value: 800, prefix: "~", label: "hours played" },
+  { value: 25, suffix: "+", label: "acts in one run by the most dedicated players" },
+];
+---
+
+<Layout {title} {years} {description} titleLink="https://pchk.games">
+  <video
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    poster="/video/pchk/promo-poster.jpg"
+    width="657"
+    aria-label="Chicken Curry Dungeons gameplay: heroes, fights and bosses"
+    class="m-auto mt-[25px] mb-[25px]"
+  >
+    <source src="/video/pchk/promo.webm" type="video/webm" />
+    <source src="/video/pchk/promo.mp4" type="video/mp4" />
+  </video>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">What It Is</Heading>
+    <Text class="mb-[1.562rem]"
+      >A deck-building roguelike in the spirit of Slay the Spire, set in the
+      world of «Podzemelya Chicken Curry», a YouTube show where guests play D&D.
+      Free, no ads, works on desktop and mobile. I launched it in July 2026 and
+      have been developing it for 3.5 months. It's an unofficial fan
+      project.</Text
+    >
+
+    <Heading level={2} size="xl" weight="semibold">My Role</Heading>
+    <Text class="mb-[1.562rem]"
+      >I'm the producer and game designer. I studied Slay the Spire, broke down
+      its core mechanics, and built a lore base from the show's subtitles and
+      viewer comments: enemies, artifacts, events. The code is written by an AI
+      agent (Claude Code) under my direction, and the art is generated in
+      Higgsfield. Lore characters are drawn strictly from frames of the show,
+      and I regenerated art again and again until it matched.</Text
+    >
+
+    <Heading level={2} size="xl" weight="semibold">What's Inside</Heading>
+    <ul class="list-disc list-inside space-y-1 text-[var(--color-text)]">
+      <li>4 heroes, each with its own play style</li>
+      <li>337 cards, 59 enemies and bosses, 136 relics</li>
+      <li>
+        Daily challenges and weekly tournaments with an online leaderboard.
+        Fights are seeded, so every player gets the same battle and the
+        competition is fair.
+      </li>
+      <li>
+        Mini-games inside events: survival by the campfire, a carriage chase,
+        camp defense
+      </li>
+    </ul>
+  </ProjectContnetWrapper>
+  <div class="mt-[60px] mb-[50px]">
+    <SwiperSlider {sliderImages} initialWidth="280px" scale={0.3} />
+  </div>
+  <ProjectContnetWrapper>
+    <Heading level={2} size="xl" weight="semibold">Results</Heading>
+    <div class="grid grid-cols-2 gap-x-6 gap-y-8 mt-[1.25rem] mb-[2rem]">
+      {
+        stats.map((s) => (
+          <div>
+            <p
+              class="text-[2.375rem] font-semibold leading-none tabular-nums"
+              data-count={s.value}
+              data-prefix={s.prefix ?? ""}
+              data-suffix={s.suffix ?? ""}
+            >
+              {(s.prefix ?? "") + s.value.toLocaleString("en-US") + (s.suffix ?? "")}
+            </p>
+            <p class="mt-2 text-[15px] text-[var(--color-description)]">
+              {s.label}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+    <ul class="list-disc list-inside space-y-1 text-[var(--color-text)]">
+      <li>
+        More than half of the players played 2+ runs; one in three new players
+        came back on another day
+      </li>
+      <li>
+        After one Telegram blogger's post, weekly activity grew 5 to 8 times:
+        432 runs from 86 players
+      </li>
+      <li>
+        Players message me with feedback on their own; one found the game
+        through Gemini search
+      </li>
+    </ul>
+  </ProjectContnetWrapper>
+</Layout>
+
+<script>
+  // Цифры в «Results» прокручиваются как счётчик, когда блок попадает в экран.
+  function initCounters() {
+    const els = document.querySelectorAll<HTMLElement>("[data-count]");
+    if (!els.length) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const format = (el: HTMLElement, n: number) =>
+      (el.dataset.prefix ?? "") +
+      Math.round(n).toLocaleString("en-US") +
+      (el.dataset.suffix ?? "");
+    const run = (el: HTMLElement) => {
+      const target = Number(el.dataset.count);
+      const start = performance.now();
+      const duration = 1400;
+      const tick = (now: number) => {
+        const t = Math.min(1, (now - start) / duration);
+        el.textContent = format(el, target * (1 - Math.pow(1 - t, 3)));
+        if (t < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          io.unobserve(e.target);
+          run(e.target as HTMLElement);
+        }
+      },
+      { threshold: 0.6 },
+    );
+    els.forEach((el) => {
+      el.textContent = format(el, 0);
+      io.observe(el);
+    });
+  }
+  document.addEventListener("astro:page-load", initCounters);
+</script>
