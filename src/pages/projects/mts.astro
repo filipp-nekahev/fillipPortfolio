@@ -15,9 +15,9 @@ import workflowImg from "@/assets/mtsDecor/workflow.png";
 import logoImg from "@/assets/mtsDecor/logo.png";
 
 const title = "MTS Digital";
-const years = "2022-2023";
+const years = "2022–2023";
 const description =
-  "MTS - Russia's largest telecommunications company with 100M+ subscribers";
+  "MTS, Russia's largest telecommunications company with 100M+ subscribers";
 
 const imageModulesFirst = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/mts1/*.{jpeg,jpg,png,gif}"
@@ -47,7 +47,7 @@ const sliderImagesThird = await loadImages(imageModulesThird);
       Media planning agencies were spending 2+ weeks manually creating media
       plans in Excel spreadsheets, coordinating across multiple channels (web,
       mobile, TV) without centralized workflow management. The market lacked a
-      comprehensive solution for Russian media landscape.
+      comprehensive solution for the Russian media market.
     </Text>
     <Text class="mb-[1.562rem]">
       At first the whole project looked like a small task: take a huge Excel
@@ -56,13 +56,13 @@ const sliderImagesThird = await loadImages(imageModulesThird);
   </ProjectContnetWrapper>
   <Image
     src={excelImg}
-    alt="The original media plan template in Excel"
+    alt="The original media plan template, an .xls spreadsheet"
     width="657"
     densities={[1, 2]}
     class="m-auto mb-[25px]"
   />
   <Text class="mb-[50px] max-w-[452px] m-auto text-center text-[15px] italic">
-    The starting point: the media plan template in Excel. 99 columns and 242
+    The starting point: the media plan template, an .xls spreadsheet. 99 columns and 242
     rows.
   </Text>
   <ProjectContnetWrapper>
@@ -99,7 +99,7 @@ const sliderImagesThird = await loadImages(imageModulesThird);
     <Text class="mb-[1.562rem]">
       These calls showed that the task was much bigger than moving a table to
       the web: plans go through approvals at different stages, planners wanted
-      to launch internet ads right from the platform, and they wanted to see
+      to launch online ads right from the platform, and they wanted to see
       analytics in the same place. The interviews also revealed two key user
       groups: primary planners managing end-to-end campaigns, and collaborative
       teams requiring approval workflows with version control constraints.
@@ -109,8 +109,7 @@ const sliderImagesThird = await loadImages(imageModulesThird);
       >Product Strategy Decision</Heading
     >
     <Text class="mb-[25px]">
-      Given that clients were already using Excel-based workflows, we chose an
-      MLP approach over basic MVP to reduce migration friction and deliver
+      Given that clients were already using Excel-based workflows, we chose a Minimum Lovable Product (MLP) approach instead of a basic MVP to reduce migration friction and deliver
       immediate value.
     </Text>
   </ProjectContnetWrapper>
@@ -127,10 +126,8 @@ const sliderImagesThird = await loadImages(imageModulesThird);
   <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold">UI Design</Heading>
     <Text class="mb-[60px]"
-      >After the initial stages, I consistently conducted interviews with
-      potential users. As a result, over the course of a year, the product was
-      nearly fully designed, with the primary user flow comprising approximately
-      60 frames and an additional 300 frames for various states.</Text
+      >After the initial stages, I kept interviewing potential users. As a result, over the course of a year, the product was
+      nearly fully designed, with the main user flow at about 60 screens, plus 300 more for various states.</Text
     >
   </ProjectContnetWrapper>
   <Image
@@ -158,9 +155,9 @@ const sliderImagesThird = await loadImages(imageModulesThird);
     Campaign Approval Workflow
   </Text>
   <ProjectContnetWrapper>
-    <Heading level={2} size="xl" weight="semibold">Plan vs Fact</Heading>
+    <Heading level={2} size="xl" weight="semibold">Plan vs. Actual</Heading>
     <Text class="mb-[1.562rem]">
-      Another stage we brought into the platform is the plan-fact report. You
+      Another stage we brought into the platform is the plan vs. actual report. You
       plan one thing and get another, so planners tracked the difference in a
       separate Excel report with 286 columns. In the platform this became a
       report with detailed analytics.
@@ -168,13 +165,13 @@ const sliderImagesThird = await loadImages(imageModulesThird);
   </ProjectContnetWrapper>
   <Image
     src={planfactImg}
-    alt="The original plan-fact report in Excel"
+    alt="The original plan vs. actual report, an .xls spreadsheet"
     width="657"
     densities={[1, 2]}
     class="m-auto mb-[25px]"
   />
   <Text class="mb-[50px] max-w-[452px] m-auto text-center text-[15px] italic">
-    The plan-fact report in Excel. 286 columns.
+    The plan vs. actual report, an .xls spreadsheet. 286 columns.
   </Text>
   <div class="mt-[100px] mb-[25px]">
     <SwiperSlider sliderImages={sliderImagesSecond} initialWidth="275px" />
@@ -188,11 +185,9 @@ const sliderImagesThird = await loadImages(imageModulesThird);
   <ProjectContnetWrapper>
     <Heading level={2} size="xl" weight="semibold">From Digital to TV</Heading>
     <Text class="mb-[60px]">
-      Once all of this worked for internet advertising, we asked: why not do
-      the same for TV? Nothing like that existed in Russia at that time. With
-      the team we built TV ad planning with the option to pick and buy a
-      specific ad block, plus the same flexible automatic budget distribution
-      as for internet ads.
+      Once all of this worked for online advertising, we asked: why not do
+      the same for TV? Nothing like that existed in Russia at that time. With the team, we built TV ad planning with the option to pick and buy a specific slot in a commercial break, plus the same flexible automatic budget allocation
+      as for online ads.
     </Text>
   </ProjectContnetWrapper>
   <div class="mb-[50px]">
